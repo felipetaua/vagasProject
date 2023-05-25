@@ -27,4 +27,5 @@ Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. 
 <li>Contribuições para aprimorar o sistema de vagas são bem-vindas! Se você tiver alguma sugestão, correção de bugs ou desejar adicionar novos recursos, fique à vontade para enviar um pull request.
   <h2>Licença</h2>
 <li>O sistema de vagas é um software de código aberto licenciado sob a MIT License. Sinta-se livre para usar, modificar e distribuir o sistema de acordo com os termos da licença.</li>
-![Captura de Tela](./imagens/readme.png)
+<h2>Home Page</h2>
+<img src='./imagens/readme.png'>
