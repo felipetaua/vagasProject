@@ -15,7 +15,7 @@ Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. 
   <h2>Como Instalar</h2>
 <li>Clone o repositório do sistema de vagas em sua máquina local.
 <li>Configure as informações de acesso ao banco de dados no arquivo config.php.
-<li>Importe o script SQL fornecido no arquivo database.sql para criar a estrutura do banco de dados.
+<li>Importe o script SQL fornecido no arquivo jobs.sql para criar a estrutura do banco de dados.
 <li>Certifique-se de que o servidor web está configurado corretamente para executar arquivos PHP.
 <li>Abra o sistema de vagas em seu navegador e comece a utilizar para gerenciar o processo de recrutamento!
   <h2>Tecnologias Utilizadas</h2>
