@@ -1,0 +1,106 @@
+/* Styles for profissao.php */
+
+body {
+    background:#033f63;
+    color: white;
+}
+
+.main-container {
+    margin: 30px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.main-container h1 {
+    margin-bottom: 20px;
+}
+
+.profession-form {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.profession-form label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.profession-form select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    font-size: 1em;
+}
+
+.profession-form input[type=submit] {
+    background-color: white;
+    color: #033f63;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.profession-form input[type=submit]:hover {
+    background-color: #e2e6ea;
+}
+
+.update-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+}
+
+.separator {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 40px 0;
+}
+
+#toggle-add-form-btn {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#toggle-add-form-btn:hover {
+    background-color: white;
+    color: #033f63;
+}
+
+.hidden {
+    display: none;
+}
+
+#add-profession-container {
+    margin-top: 20px;
+}
+
+#add-profession-container .profession-form {
+    padding-top: 20px;
+}
+
+#add-profession-container input[type=text] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    font-size: 1em;
+}

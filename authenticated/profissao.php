@@ -1,255 +1,139 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="icon" type="image/png" href="..\imagens\Logo.svg"/>
-<link rel="stylesheet" href="../css/home.css">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <title>Cadastro de Profissão</title>
-</head>
-<body>
 <?php 
 session_start();
 
-// Dados de conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
-
-// Conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
+// Use a conexão centralizada e segura
+require_once __DIR__ . '/db_connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION["user_id"])) {
-  header("Location: ..\login.php");
+  header("Location: ../login.php");
   exit;
 }
 
-$id_do_usuario = $_SESSION["user_id"];
+$userId = $_SESSION["user_id"];
+$updateMessage = '';
 
-// Busca os dados do usuário no banco de dados
-$sql = "SELECT * FROM `cadastro` WHERE id = $id_do_usuario and foto is not null";
-$result = $conn->query($sql);
+// Processa o formulário quando ele é enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Lógica para ATUALIZAR a profissão do usuário
+    if (isset($_POST["submit"])) {
+        $id_profissao = $_POST["id_profissao"];
 
-// Exibe o formulário para atualização do cadastro
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+        // Valida se o id da profissão é um número
+        if (is_numeric($id_profissao)) {
+            // Atualiza o cadastro do usuário de forma segura com prepared statements
+            $sql = "UPDATE cadastro SET id_profissao = ? WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            // "ii" significa que estamos passando dois inteiros (integer)
+            $stmt->bind_param("ii", $id_profissao, $userId);
+            
+            if ($stmt->execute()) {
+                $updateMessage = "Profissão atualizada com sucesso!";
+            } else {
+                $updateMessage = "Erro ao atualizar a profissão: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            $updateMessage = "Erro: Profissão inválida selecionada.";
+        }
+    }
 
-echo "<header style='background:white; margin-top:-10px; padding:5px;'>
-    <ul>
-        <a href='../authenticated/home.php'> <li>
-            <img src='..\imagens\Logo.svg' alt=''class='logo'> JOBS IN CARIRI
-        </li></a> 
-        <a href='../authenticated/profissionais.php'><li>
-           Profissionais
-        </li></a>
-        <a href='../authenticated/cadastroVagas.php'> <li>Cadastrar vaga</li></a>
-        <a href='../authenticated/ultimasVagas.php'><li>Ultimas vagas</li></a>
-        <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
-        <div class='dropdown'> 
-        <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
-        <div style='display:flex; flex-direction:column; align-items:center;'>
-          <img src='uploads/$row[foto]' style='width:50px; height:50px; border-radius:100%;'>  
-          </div>    
-  <li class='dropdown-btn'>$row[nome]</li>
-  <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
-  </div>
-  <ul class='dropdown-menu'>
-  <a href='perfil.php'><li>Editar perfil</li></a>
-  <a href='#'> <li>Ranking</li></a>
-  <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
-  <a href='#'><li>Contratos</li></a>
-  <a href='#'> <li>Chat</li></a>
-  <a href='curriculo.php'> <li>Currículo</li></a>
-  <a href='./logout.php'><li>Sair</li></a>
-  </ul>
-</div>
+    // Lógica para CRIAR uma nova profissão
+    if (isset($_POST["create_profession"])) {
+        $new_profession_name = trim($_POST["new_profession_name"]);
 
+        if (!empty($new_profession_name)) {
+            // Verifica se a profissão já existe para evitar duplicatas
+            $stmt_check = $conn->prepare("SELECT id FROM profissao WHERE nome = ?");
+            $stmt_check->bind_param("s", $new_profession_name);
+            $stmt_check->execute();
+            $stmt_check->store_result();
 
-    </ul>
-</header>";
-
-     }
-      
-
+            if ($stmt_check->num_rows == 0) {
+                $stmt_insert = $conn->prepare("INSERT INTO profissao (nome) VALUES (?)");
+                $stmt_insert->bind_param("s", $new_profession_name);
+                if ($stmt_insert->execute()) {
+                    $updateMessage = "Nova profissão '" . htmlspecialchars($new_profession_name) . "' adicionada com sucesso!";
+                } else {
+                    $updateMessage = "Erro ao adicionar nova profissão: " . $stmt_insert->error;
+                }
+                $stmt_insert->close();
+            } else {
+                $updateMessage = "Erro: A profissão '" . htmlspecialchars($new_profession_name) . "' já existe.";
+            }
+            $stmt_check->close();
+        } else {
+            $updateMessage = "Erro: O nome da nova profissão não pode ser vazio.";
+        }
+    }
 }
 
-  else{
-
-    echo "<header style='background:white; margin-top:-10px; padding:5px; '>
-      <ul>
-          <a href='../authenticated/home.php'> <li>
-              <img src='..\imagens\Logo.svg' alt=''class='logo'> JOBS IN CARIRI
-          </li></a> 
-          <a href='../authenticated/profissionais.php'><li>
-           Profissionais
-        </li></a>
-        <a href='../authenticated/cadastroVagas.php'> <li>Cadastrar vaga</li></a>
-        <a href='../authenticated/ultimasVagas.php'><li>Ultimas vagas</li></a>
-        <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
-          <div class='dropdown'> 
-          <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
-            <img src='https://placehold.co/500x400' style='width:50px; height:50px; border-radius:100%;'>        
-    <li class='dropdown-btn'>Perfil</li>
-    <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
-    </div>
-    <ul class='dropdown-menu'>
-    <a href='perfil.php'><li>Editar perfil</li></a>
-    <a href='#'> <li>Ranking</li></a>
-    <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
-    <a href='#'><li>Contratos</li></a>
-    <a href='#'> <li>Chat</li></a>
-    <a href='#'> <li>Curriculo</li></a>
-    <a href='./logout.php'><li>Sair</li></a>
-    </ul>
-  </div>
-  
-  
-      </ul>
-  </header>";
-  
-  }
+// Busca a lista de profissões para preencher o dropdown
+$professions = [];
+$sql_professions = "SELECT id, nome FROM profissao ORDER BY nome ASC";
+$result_professions = $conn->query($sql_professions);
+if ($result_professions->num_rows > 0) {
+    while ($row = $result_professions->fetch_assoc()) {
+        $professions[] = $row;
+    }
+}
 
 ?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <link rel="icon" type="image/png" href="/sistemaDeVagas/imagens/Logo.svg"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/sistemaDeVagas/css/home.css">
+  <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
+  <link rel="stylesheet" href="/sistemaDeVagas/css/profissao.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <title>Cadastro de Profissão</title>
+</head>
+<body>
+  <?php 
+  // Inclui o cabeçalho reutilizável
+  require_once __DIR__ . '/templates/header.php';
+  ?>
     
-  <h1>Cadastro de Profissão</h1>
-  <form method="post">
-    <label for="id_profissao">Selecione a profissão:</label>
-    <select name="id_profissao">
-    <?php
+  <main class="main-container">
+    <h1>Cadastro de Profissão</h1>
+    <form method="post" action="profissao.php" class="profession-form">
+      <label for="id_profissao">Selecione a sua profissão:</label>
+      <select name="id_profissao" id="id_profissao" required>
+        <option value="">-- Escolha uma opção --</option>
+        <?php foreach ($professions as $profession): ?>
+          <option value="<?php echo htmlspecialchars($profession['id']); ?>">
+            <?php echo htmlspecialchars($profession['nome']); ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+      <input type="submit" name="submit" value="Salvar Profissão">
 
+    </form>
 
+    <div class="separator"></div>
 
-      $servername = "localhost";
-      $username = "root";
-      $password = "";
-      $dbname = "jobs";
-      
-      
-      $conn = new mysqli($servername, $username, $password, $dbname);
-      
-      if ($conn->connect_error) {
-          die("Falha na conexão: " . $conn->connect_error);
-      }
+    <button type="button" id="toggle-add-form-btn">Adicionar Nova Profissão</button>
 
-      $sql = "SELECT id, nome FROM profissao";
-      $result = mysqli_query($conn, $sql);
+    <div id="add-profession-container" class="hidden">
+        <form method="post" action="profissao.php" class="profession-form">
+            <label for="new_profession_name">Nome da Nova Profissão:</label>
+            <input type="text" name="new_profession_name" id="new_profession_name" required>
+            <input type="submit" name="create_profession" value="Salvar Nova Profissão">
+        </form>
+    </div>
 
-      while ($row = mysqli_fetch_assoc($result)) {
-        $id = $row["id"];
-        $nome = $row["nome"];
-        echo "<option value=\"$id\">$nome</option>";
-      }
-
-      
-      mysqli_close($conn);
-    ?>
-    </select>
-    <br><br>
-    <input type="submit" name="submit" value="Cadastrar">
-  </form>
+    <?php if (!empty($updateMessage)): ?>
+      <p class="update-message"><?php echo $updateMessage; ?></p>
+    <?php endif; ?>
+  </main>
+  <script>
+    document.getElementById('toggle-add-form-btn').addEventListener('click', function() {
+        var formContainer = document.getElementById('add-profession-container');
+        formContainer.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
-<script>const dropdownBtn = document.querySelector('.dropdown-btn');
-const dropdownMenu = document.querySelector('.dropdown-menu');
-
-dropdownBtn.addEventListener('click', () => {
-  dropdownMenu.classList.toggle('show');
-});
-
-window.addEventListener('click', (event) => {
-  if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-menu')) {
-    dropdownMenu.classList.remove('show');
-  }
-});</script>
-<?php
-
-
-
-
-
-if (isset($_SESSION["user_id"])) {
-  $id_do_usuario = $_SESSION["user_id"];
-}
-
-if (isset($_POST["submit"])) {
-  
-  $id_profissao = $_POST["id_profissao"];
-
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "jobs";
-  
-
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  
-
-  if ($conn->connect_error) {
-      die("Falha na conexão: " . $conn->connect_error);
-  }
-  
-  $sql = "UPDATE cadastro SET id_profissao = $id_profissao WHERE id = $id_do_usuario";
-  if (mysqli_query($conn, $sql)) {
-    echo "Profissão cadastrada com sucesso!";
-    header("Location: home.php");
-    exit(); 
-  } else {
-    echo "Erro ao cadastrar profissão: " . mysqli_error($conn);
-  }
-
- 
-  mysqli_close($conn);
-}
-?>
-
-
-<style>
-
-body {
-  font-family: Arial, sans-serif;
-  color: #333;
-  background:#033f63;
-}
-
-
-h1, form {
-  margin: 30px auto;
-  max-width: 500px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  color:white;
-  
-}
-
-form label{
-  margin:30px;
-}
-
-input[type=submit] {
-  background-color: white;
-  color: #033f63;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
-select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-}
-
-
-</style>
-
