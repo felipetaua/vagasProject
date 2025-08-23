@@ -1,6 +1,27 @@
 
+<?php 
+session_start();
+
+// 1. Conexão com o banco de dados (uma única vez)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobs";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+}
+
+// 2. Verifica se o usuário está logado
+if (!isset($_SESSION["user_id"])) {
+  header("Location: ..\login.php");
+  exit;
+}
+$userId = $_SESSION["user_id"];
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,163 +33,78 @@
     <title>Minhas vagas</title>
 </head>
 <body>
-<?php 
-session_start();
-
-// Dados de conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
-
-// Conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-// Verifica se o usuário está logado
-if (!isset($_SESSION["user_id"])) {
-  header("Location: ..\login.php");
-  exit;
-}
-
-$id_do_usuario = $_SESSION["user_id"];
-
-// Busca os dados do usuário no banco de dados
-$sql = "SELECT * FROM `cadastro` WHERE id = $id_do_usuario and foto is not null";
-$result = $conn->query($sql);
-
-// Exibe o formulário para atualização do cadastro
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-echo "<header style='background:white; margin-top:-10px; padding:5px;'>
-    <ul>
-        <a href='../authenticated/home.php'> <li>
-            <img src='..\imagens\Logo.svg' alt=''class='logo'> JOBS IN CARIRI
-        </li></a> 
-        <a href='../authenticated/profissionais.php'><li>
-           Profissionais
-        </li></a>
-        <a href='../authenticated/cadastroVagas.php'> <li>Cadastrar vaga</li></a>
-        <a href='../authenticated/ultimasVagas.php'><li>Ultimas vagas</li></a>
-        <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
-        <div class='dropdown'> 
-        <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
-        <div style='display:flex; flex-direction:column; align-items:center;'>
-          <img src='uploads/$row[foto]' style='width:50px; height:50px; border-radius:100%;'>  
-          </div>    
-  <li class='dropdown-btn'>$row[nome]</li>
-  <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
-  </div>
-  <ul class='dropdown-menu'>
-  <a href='perfil.php'><li>Editar perfil</li></a>
-  <a href='#'> <li>Ranking</li></a>
-  <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
-  <a href='#'><li>Contratos</li></a>
-  <a href='#'> <li>Chat</li></a>
-  <a href='curriculo.php'> <li>Currículo</li></a>
-  <a href='./logout.php'><li>Sair</li></a>
-  </ul>
-</div>
-
-
-    </ul>
-</header>";
-
-     }
-      
-
-}
-
-  else{
-
-    echo "<header style='background:white; margin-top:-10px;padding:5px; '>
-      <ul>
-          <a href='../authenticated/home.php'> <li>
-              <img src='..\imagens\Logo.svg' alt=''class='logo'> JOBS IN CARIRI
-          </li></a> 
-          <a href='../authenticated/profissionais.php'><li>
-           Profissionais
-        </li></a>
-        <a href='../authenticated/cadastroVagas.php'> <li>Cadastrar vaga</li></a>
-        <a href='../authenticated/ultimasVagas.php'><li>Ultimas vagas</li></a>
-        <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
-          <div class='dropdown'> 
-          <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
-            <img src='https://placehold.co/500x400' style='width:50px; height:50px; border-radius:100%;'>        
-    <li class='dropdown-btn'>Perfil</li>
-    <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
-    </div>
-    <ul class='dropdown-menu'>
-    <a href='perfil.php'><li>Editar perfil</li></a>
-    <a href='#'> <li>Ranking</li></a>
-    <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
-    <a href='#'><li>Contratos</li></a>
-    <a href='#'> <li>Chat</li></a>
-    <a href='#'> <li>Curriculo</li></a>
-    <a href='./logout.php'><li>Sair</li></a>
-    </ul>
-  </div>
-  
-  
-      </ul>
-  </header>";
-  
-  }
-
-?>
-<h1>Vagas publicas por mim</h1>
+    <?php
+    // 3. Busca os dados do usuário para o cabeçalho de forma segura
+    $stmt = $conn->prepare("SELECT nome, foto FROM `cadastro` WHERE id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $resultUser = $stmt->get_result();
+    $user = $resultUser->fetch_assoc();
+    $stmt->close();
+    ?>
+    <header style='background:white; margin-top:-10px; padding:5px;'>
+        <ul>
+            <a href='../authenticated/home.php'> <li>
+                <img src='..\imagens\Logo.svg' alt='Logo Jobs In Cariri' class='logo'> JOBS IN CARIRI
+            </li></a> 
+            <a href='../authenticated/profissionais.php'><li>Profissionais</li></a>
+            <a href='../authenticated/cadastroVagas.php'><li>Cadastrar vaga</li></a>
+            <a href='../authenticated/ultimasVagas.php'><li>Últimas vagas</li></a>
+            <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
+            <div class='dropdown'> 
+                <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
+                    <div style='display:flex; flex-direction:column; align-items:center;'>
+                        <?php if ($user && !empty($user['foto'])): ?>
+                            <img src='uploads/<?php echo htmlspecialchars($user['foto']); ?>' style='width:50px; height:50px; border-radius:100%;'>
+                        <?php else: ?>
+                            <img src='https://placehold.co/50x50' alt='Foto de perfil padrão' style='width:50px; height:50px; border-radius:100%;'>
+                        <?php endif; ?>
+                    </div>    
+                    <li class='dropdown-btn'><?php echo $user ? htmlspecialchars($user['nome']) : 'Perfil'; ?></li>
+                    <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
+                </div>
+                <ul class='dropdown-menu'>
+                    <a href='perfil.php'><li>Editar perfil</li></a>
+                    <a href='#'> <li>Ranking</li></a>
+                    <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
+                    <a href='#'><li>Contratos</li></a>
+                    <a href='#'> <li>Chat</li></a>
+                    <a href='curriculo.php'> <li>Currículo</li></a>
+                    <a href='./logout.php'><li>Sair</li></a>
+                </ul>
+            </div>
+        </ul>
+    </header>
+<h1>Vagas publicadas por mim</h1>
 <section>
 <?php
+// 4. Busca as vagas criadas pelo usuário de forma segura
+$sql = "SELECT id, empresa, cargo FROM vagas WHERE usuario_responsavel = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$resultVagas = $stmt->get_result();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-$idUser = $_SESSION['user_id'];
-
-$sql = "SELECT v.id as id, v.empresa as empresa, i.nome_usuario as nome, v.cargo as cargo, i.id_vaga as id_vaga
-FROM vagas v
-LEFT JOIN inscricoes i
-ON v.usuario_responsavel = i.nome_usuario AND v.usuario_responsavel = $idUser
-where v.usuario_responsavel = $idUser";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+if ($resultVagas->num_rows > 0) {
+    while ($vaga = $resultVagas->fetch_assoc()) {
         echo "<div class='vagas-vinculadas'>";
-        echo "<p>"."Empresa: " . $row["empresa"] . "</p>";
-        echo "<p>"."Cargo: " . $row["cargo"] ."<p>";
-        // Exibir outros detalhes da vaga se necessário
+        echo "<p>Empresa: " . htmlspecialchars($vaga["empresa"]) . "</p>";
+        echo "<p>Cargo: " . htmlspecialchars($vaga["cargo"]) ."</p>";
         
-        echo '<div class="container-ver-usuarios">'.
-        '<button class="btn-open-modal" onclick="openModal(' . $row["id_vaga"] . ')">Inscritos</button>'.
-        '<button class="btn-encerrar-vaga" onclick="deleteVaga(' . $row["id"] . ')">Encerrar vaga</button>'.
-        '</div>';
-    
-    
-
+        echo '<div class="container-ver-usuarios">';
+        // O modal usa o ID da vaga para buscar os inscritos
+        echo '<button class="btn-open-modal" onclick="openModal(' . $vaga["id"] . ')">Inscritos</button>';
+        echo '<button class="btn-encerrar-vaga" onclick="deleteVaga(' . $vaga["id"] . ')">Encerrar vaga</button>';
+        echo '</div>';
         
         echo "</div>";
     }
 } else {
-    echo "Nenhuma vaga encontrada.";
+    echo "<p style='color: white; width: 100%;'>Nenhuma vaga encontrada.</p>";
 }
 
+$stmt->close();
 $conn->close();
-
 ?>
 
 
@@ -322,7 +258,7 @@ body p{
     
     padding: 20px;
     border-radius: 5px;
-    min-width: 800px;
+    min-width: 80%;
 }
 
 .close-btn {
