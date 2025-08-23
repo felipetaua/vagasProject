@@ -1,0 +1,23 @@
+header.main-header {
+    background: white;
+    margin-top: -10px;
+    padding: 5px;
+}
+
+.perfil-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-img > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfil-foto {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
