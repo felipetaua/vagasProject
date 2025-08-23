@@ -12,31 +12,32 @@
 <body>
     <main> 
     <div class="logo">
-        <img src="./imagens/Logo.svg" alt="">
+        <img src="./imagens/Logo.svg" alt="Logo da Jobs In Cariri">
         <p>Jobs In Cariri</p>
         </div>  
-        <form action="validaLogin.php" method="post">
+        <form id="loginForm" action="validaLogin.php" method="post">
     <h1>Login</h1>
     <p>Entre com seu e-mail e sua senha</p>
-    <input type="text" name="email" placeholder="Digite seu email...">
+    <input type="email" name="email" placeholder="Digite seu email..." required>
     <input type="password" name="senha" placeholder="Digite sua senha...">
-    <input type="submit" value="Entrar" onclick="login()">
+    <input type="submit" value="Entrar">
 </form>
   <p class="cadastro-login">Não tem uma conta?<a href="cadastro.php"> Crie aqui!</a></p>
   </main> 
   
-
+  <script>
+    // Adiciona um "ouvinte" de evento ao formulário
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      // Pega os valores dos campos
+      var email = document.getElementsByName("email")[0].value;
+      var senha = document.getElementsByName("senha")[0].value;
+    
+      // Verifica se algum campo está vazio
+      if (email === "" || senha === "") {
+        alert("Por favor, preencha todos os campos!");
+        event.preventDefault(); // Impede o envio do formulário se a validação falhar
+      }
+    });
+  </script>
 </body>
 </html>
-
-<script>
-function login() {
-  var email = document.getElementsByName("email")[0].value;
-  var senha = document.getElementsByName("senha")[0].value;
-
-  if (email == "" || senha == "") {
-    alert("Por favor, preencha todos os campos!");
-    event.preventDefault();
-  }
-}
-</script>
