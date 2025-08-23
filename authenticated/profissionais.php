@@ -15,12 +15,12 @@ $userId = $_SESSION['user_id'];
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <link rel="icon" type="image/png" href="../imagens/Logo.svg"/>
+    <link rel="icon" type="image/png" href="/sistemaDeVagas/imagens/Logo.svg"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/profissionais.css">
+    <link rel="stylesheet" href="/sistemaDeVagas/css/home.css">
+    <link rel="stylesheet" href="/sistemaDeVagas/css/profissionais.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>Profissionais</title>
 </head>
@@ -44,7 +44,7 @@ $userId = $_SESSION['user_id'];
     <main class="professionals-container">
     <?php
     // Lógica de busca segura no banco de dados
-    $sql = "SELECT c.id, c.nome, c.sobrenome, c.foto, p.nome_profissao 
+    $sql = "SELECT c.id, c.nome, c.sobrenome, c.foto, p.nome AS nome_profissao 
             FROM cadastro c 
             LEFT JOIN profissao p ON c.id_profissao = p.id 
             WHERE c.id != ?";
@@ -63,7 +63,7 @@ $userId = $_SESSION['user_id'];
     }
 
     if (!empty($search_profissao)) {
-        $sql .= " AND p.nome_profissao LIKE ?";
+        $sql .= " AND p.nome LIKE ?";
         $searchTermProf = "%" . $search_profissao . "%";
         $params[] = $searchTermProf;
         $types .= "s";
@@ -78,7 +78,7 @@ $userId = $_SESSION['user_id'];
         while ($professional = $result->fetch_assoc()) {
             echo "<div class='professional-card'>";
             
-            $foto = !empty($professional['foto']) ? '../uploads/' . htmlspecialchars($professional['foto']) : 'https://placehold.co/100x100';
+            $foto = !empty($professional['foto']) ? '/sistemaDeVagas/uploads/' . htmlspecialchars($professional['foto']) : 'https://placehold.co/100x100';
             echo "<img src='{$foto}' alt='Foto de " . htmlspecialchars($professional['nome']) . "' class='professional-photo'>";
             
             echo "<div class='professional-info'>";
@@ -90,9 +90,9 @@ $userId = $_SESSION['user_id'];
 
             echo "<div class='professional-actions'>";
             // Este link assume que você tem uma página de perfil público
-            echo "<a href='perfil_publico.php?id=" . $professional['id'] . "' class='btn-action'>Ver Perfil</a>";
+            echo "<a href='/sistemaDeVagas/authenticated/perfil_publico.php?id=" . $professional['id'] . "' class='btn-action'>Ver Perfil</a>";
             // Link para baixar o currículo
-            echo "<a href='baixar_curriculo.php?id=" . $professional['id'] . "' class='btn-action'>Baixar CV</a>";
+            echo "<a href='/sistemaDeVagas/authenticated/baixar_curriculo.php?id=" . $professional['id'] . "' class='btn-action'>Baixar CV</a>";
             echo "</div>";
 
             echo "</div>";
