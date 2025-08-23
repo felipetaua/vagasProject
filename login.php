@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,25 +19,11 @@
     <h1>Login</h1>
     <p>Entre com seu e-mail e sua senha</p>
     <input type="email" name="email" placeholder="Digite seu email..." required>
-    <input type="password" name="senha" placeholder="Digite sua senha...">
+    <input type="password" name="senha" placeholder="Digite sua senha..." required>
     <input type="submit" value="Entrar">
 </form>
   <p class="cadastro-login">Não tem uma conta?<a href="cadastro.php"> Crie aqui!</a></p>
   </main> 
   
-  <script>
-    // Adiciona um "ouvinte" de evento ao formulário
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-      // Pega os valores dos campos
-      var email = document.getElementsByName("email")[0].value;
-      var senha = document.getElementsByName("senha")[0].value;
-    
-      // Verifica se algum campo está vazio
-      if (email === "" || senha === "") {
-        alert("Por favor, preencha todos os campos!");
-        event.preventDefault(); // Impede o envio do formulário se a validação falhar
-      }
-    });
-  </script>
 </body>
 </html>
