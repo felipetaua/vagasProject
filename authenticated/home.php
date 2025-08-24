@@ -15,7 +15,7 @@
 <body>
    
 <?php 
-session_start();
+session_start(); 
 
 // Dados de conexão com o banco de dados
 $servername = "localhost";
@@ -38,8 +38,12 @@ if (!isset($_SESSION["user_id"])) {
 $id_do_usuario = $_SESSION["user_id"];
 
 // Busca os dados do usuário no banco de dados
-$sql = "SELECT * FROM `cadastro` WHERE id = $id_do_usuario and foto is not null";
-$result = $conn->query($sql);
+// Using prepared statements to prevent SQL injection vulnerabilities.
+$sql = "SELECT * FROM `cadastro` WHERE id = ? AND foto IS NOT NULL";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id_do_usuario);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // Exibe o formulário para atualização do cadastro
 if ($result->num_rows > 0) {
@@ -125,23 +129,11 @@ echo "<header>
     <section>
     <h1>Ultimos usuarios</h1>
     <?php 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-
+// Re-using the existing database connection.
 $sql = "SELECT c.id as id, c.foto as foto, c.nome as n1, COALESCE(p.nome, 'Profissão não cadastrada') as n2 FROM `cadastro` c
 left JOIN `profissao` p
-ON c.id_profissao = p.id ";
+ON c.id_profissao = p.id
+ORDER BY c.id DESC"; // Added ORDER BY to show the latest users first, matching the section title.
 
 
 
@@ -185,23 +177,11 @@ $('.btn-baixar').on('click', baixarCurriculo);
 </script>
 <?php
 
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-
-$sql = "SELECT * FROM vagas ORDER BY data_cadastro DESC";
-
+// Re-using the existing database connection.
+// The error "Unknown column 'data_cadastro'" happens because this column doesn't exist in your 'vagas' table.
+// Assuming 'id' is an auto-incrementing primary key, ordering by 'id DESC'
+// is a reliable way to get the most recently created vacancies.
+$sql = "SELECT * FROM vagas ORDER BY id DESC";
 
 $result = $conn->query($sql);
 
@@ -227,10 +207,7 @@ if ($result->num_rows > 0) {
     echo "<div class='not-jobs'>Nenhuma vaga encontrada.</div>";
 }
 
-
-
 $conn->close();
-
 
 ?>
 </section>
@@ -387,4 +364,3 @@ body{
 
 
 </style>
-
