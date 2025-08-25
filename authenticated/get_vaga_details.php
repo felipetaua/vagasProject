@@ -25,13 +25,27 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $vaga = $result->fetch_assoc();
+    // Usando uma estrutura mais organizada e verificando a existência dos campos
     echo "<h3>" . htmlspecialchars($vaga['cargo']) . "</h3>";
-    echo "<p><span>Empresa:</span> " . htmlspecialchars($vaga['empresa']) . "</p>";
-    echo "<p><span>Descrição:</span><br>" . nl2br(htmlspecialchars($vaga['descricao'])) . "</p>";
-    echo "<p><span>Requisitos:</span><br>" . nl2br(htmlspecialchars($vaga['requisitos'])) . "</p>";
-    echo "<p><span>Salário:</span> R$ " . htmlspecialchars(number_format($vaga['salario'], 2, ',', '.')) . "</p>";
-    echo "<p><span>Localização:</span> " . htmlspecialchars($vaga['localizacao']) . "</p>";
-    echo "<p><span>Tipo de Contrato:</span> " . htmlspecialchars($vaga['tipo_contrato']) . "</p>";
+    echo "<p><strong>Empresa:</strong> " . htmlspecialchars($vaga['empresa']) . "</p>";
+    
+    if (!empty($vaga['descricao_empresa'])) {
+        echo "<h4>Sobre a Empresa</h4>";
+        echo "<p>" . nl2br(htmlspecialchars($vaga['descricao_empresa'])) . "</p>";
+    }
+
+    echo "<h4>Atividades do Cargo</h4>";
+    echo "<p>" . nl2br(htmlspecialchars($vaga['descricao'])) . "</p>";
+
+    echo "<h4>Habilidades Requeridas</h4>";
+    echo "<p>" . nl2br(htmlspecialchars($vaga['requisitos'])) . "</p>";
+
+    echo "<h4>Detalhes da Vaga</h4>";
+    echo "<p><strong>Salário:</strong> R$ " . htmlspecialchars(number_format($vaga['salario'], 2, ',', '.')) . "</p>";
+    if (!empty($vaga['beneficios'])) echo "<p><strong>Benefícios:</strong> " . nl2br(htmlspecialchars($vaga['beneficios'])) . "</p>";
+    if (!empty($vaga['carga_horaria'])) echo "<p><strong>Carga Horária:</strong> " . htmlspecialchars($vaga['carga_horaria']) . "</p>";
+    if (!empty($vaga['localizacao'])) echo "<p><strong>Localização:</strong> " . htmlspecialchars($vaga['localizacao']) . "</p>";
+    if (!empty($vaga['email_empresa'])) echo "<p><strong>Contato:</strong> " . htmlspecialchars($vaga['email_empresa']) . "</p>";
 } else {
     echo '<p>Vaga não encontrada.</p>';
 }

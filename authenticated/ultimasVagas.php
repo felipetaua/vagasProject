@@ -151,7 +151,7 @@ $userId = $_SESSION['user_id'];
 }
 
 #modal-body h3 { color: #033f63; }
-#modal-body p { line-height: 1.6; }
+#modal-body p { line-height: 1.6; color: #555; }
 #modal-body span { font-weight: bold; }
 </style>
 
