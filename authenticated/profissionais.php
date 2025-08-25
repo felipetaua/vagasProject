@@ -1,110 +1,132 @@
-<?php 
+<?php
 session_start();
 
-// Use a conexão centralizada com o banco de dados
 require_once __DIR__ . '/db_connection.php';
 
-// Verifica se o usuário está logado
+// --- VERIFICAÇÃO DE LOGIN ---
 if (!isset($_SESSION["user_id"])) {
-  header("Location: ../login.php");
-  exit;
+    header("Location: ../login.php");
+    exit;
 }
 $userId = $_SESSION['user_id'];
-?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <link rel="icon" type="image/png" href="/sistemaDeVagas/imagens/Logo.svg"/>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/sistemaDeVagas/css/home.css">
-    <link rel="stylesheet" href="/sistemaDeVagas/css/profissionais.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Profissionais</title>
-</head>
-<body>
-    <?php 
-    // Inclui o cabeçalho reutilizável
-    require_once __DIR__ . '/templates/header.php';
-    ?>
+// --- LÓGICA DE BUSCA SEGURA ---
+$sql = "SELECT c.id, c.nome, c.sobrenome, c.foto, COALESCE(p.nome, 'Não informada') AS nome_profissao 
+        FROM cadastro c 
+        LEFT JOIN profissao p ON c.id_profissao = p.id 
+        WHERE c.id != ?";
 
-    <div class="page-title">
-        <h1>Encontre Profissionais</h1>
-        <p>Busque por profissionais qualificados</p>
-    </div>
+$params = [$userId];
+$types = "i";
 
-    <form method="get" action="profissionais.php" class="search-form">
-        <input type="text" name="nome" placeholder="Buscar por nome..." value="<?php echo htmlspecialchars($_GET['nome'] ?? ''); ?>">
-        <input type="text" name="profissao" placeholder="Buscar por profissão..." value="<?php echo htmlspecialchars($_GET['profissao'] ?? ''); ?>">
-        <button type="submit">Buscar</button>
-    </form>
+$search_nome = $_GET['nome'] ?? '';
+$search_profissao = $_GET['profissao'] ?? '';
 
-    <main class="professionals-container">
-    <?php
-    // Lógica de busca segura no banco de dados
-    $sql = "SELECT c.id, c.nome, c.sobrenome, c.foto, p.nome AS nome_profissao 
-            FROM cadastro c 
-            LEFT JOIN profissao p ON c.id_profissao = p.id 
-            WHERE c.id != ?";
+if (!empty($search_nome)) {
+    $sql .= " AND (c.nome LIKE ? OR c.sobrenome LIKE ?)";
+    $searchTerm = "%" . $search_nome . "%";
+    array_push($params, $searchTerm, $searchTerm);
+    $types .= "ss";
+}
 
-    $params = [$userId];
-    $types = "i";
+if (!empty($search_profissao)) {
+    $sql .= " AND p.nome LIKE ?";
+    $searchTermProf = "%" . $search_profissao . "%";
+    $params[] = $searchTermProf;
+    $types .= "s";
+}
 
-    $search_nome = $_GET['nome'] ?? '';
-    $search_profissao = $_GET['profissao'] ?? '';
+$sql .= " ORDER BY c.nome"; // Adicionado para ordenar os resultados alfabeticamente
 
-    if (!empty($search_nome)) {
-        $sql .= " AND (c.nome LIKE ? OR c.sobrenome LIKE ?)";
-        $searchTerm = "%" . $search_nome . "%";
-        array_push($params, $searchTerm, $searchTerm);
-        $types .= "ss";
-    }
-
-    if (!empty($search_profissao)) {
-        $sql .= " AND p.nome LIKE ?";
-        $searchTermProf = "%" . $search_profissao . "%";
-        $params[] = $searchTermProf;
-        $types .= "s";
-    }
-
-    $stmt = $conn->prepare($sql);
+$stmt = $conn->prepare($sql);
+if ($stmt) {
     $stmt->bind_param($types, ...$params);
     $stmt->execute();
     $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        while ($professional = $result->fetch_assoc()) {
-            echo "<div class='professional-card'>";
-            
-            $foto = !empty($professional['foto']) ? '/sistemaDeVagas/authenticated/uploads/' . htmlspecialchars($professional['foto']) : 'https://placehold.co/100x100';
-            echo "<img src='{$foto}' alt='Foto de " . htmlspecialchars($professional['nome']) . "' class='professional-photo'>";
-            
-            echo "<div class='professional-info'>";
-            echo "<h3>" . htmlspecialchars($professional['nome'] . ' ' . $professional['sobrenome']) . "</h3>";
-            
-            $profissao = !empty($professional['nome_profissao']) ? htmlspecialchars($professional['nome_profissao']) : 'Profissão não informada';
-            echo "<p>{$profissao}</p>";
-            echo "</div>";
+}
 
-            echo "<div class='professional-actions'>";
-            // Este link assume que você tem uma página de perfil público
-            echo "<a href='/sistemaDeVagas/authenticated/perfil_publico.php?id=" . $professional['id'] . "' class='btn-action'>Ver Perfil</a>";
-            // Link para baixar o currículo
-            echo "<a href='/sistemaDeVagas/authenticated/baixar_curriculo.php?id=" . $professional['id'] . "' class='btn-action'>Baixar CV</a>";
-            echo "</div>";
-
-            echo "</div>";
-        }
-    } else {
-        echo "<p class='not-found'>Nenhum profissional encontrado com os critérios de busca.</p>";
-    }
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontrar Profissionais</title>
     
-    $stmt->close();
-    $conn->close();
-    ?>
+    <link rel="icon" type="image/png" href="/sistemaDeVagas/imagens/Logo.svg"/>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
+    <link rel="stylesheet" href="/sistemaDeVagas/css/profissionais.css">
+</head>
+<body>
+    <?php require_once __DIR__ . '/templates/header.php'; ?>
+
+    <header class="page-header">
+        <h1>Encontre Profissionais</h1>
+        <p>Busque por talentos qualificados para sua equipe</p>
+    </header>
+
+    <section class="search-container">
+        <form method="get" action="profissionais.php" class="search-form">
+            <div class="input-wrapper">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" name="nome" placeholder="Buscar por nome..." value="<?= htmlspecialchars($search_nome); ?>">
+            </div>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-briefcase"></i>
+                <input type="text" name="profissao" placeholder="Buscar por profissão..." value="<?= htmlspecialchars($search_profissao); ?>">
+            </div>
+            <button type="submit" class="search-button">
+                <i class="fa-solid fa-search"></i>
+                <span>Buscar</span>
+            </button>
+        </form>
+    </section>
+
+    <main class="professionals-grid">
+    <?php if (isset($result) && $result->num_rows > 0): ?>
+        <?php while ($professional = $result->fetch_assoc()): ?>
+            <div class="professional-card">
+                <?php 
+                    $foto = !empty($professional['foto']) 
+                        ? '/sistemaDeVagas/authenticated/uploads/' . htmlspecialchars($professional['foto']) 
+                        : '/sistemaDeVagas/imagens/avatar_default.webp'; // Caminho para uma imagem padrão
+                ?>
+                <img src="<?= $foto ?>" alt="Foto de <?= htmlspecialchars($professional['nome']) ?>" class="professional-photo">
+                
+                <div class="professional-info">
+                    <h3><?= htmlspecialchars($professional['nome'] . ' ' . $professional['sobrenome']) ?></h3>
+                    <p><?= htmlspecialchars($professional['nome_profissao']) ?></p>
+                </div>
+
+                <div class="professional-actions">
+                    <a href="/sistemaDeVagas/authenticated/perfil_publico.php?id=<?= $professional['id'] ?>" class="btn-action btn-view">
+                        <i class="fa-solid fa-eye"></i> Ver Perfil
+                    </a>
+                    <a href="/sistemaDeVagas/authenticated/baixar_curriculo.php?id=<?= $professional['id'] ?>" class="btn-action btn-download">
+                        <i class="fa-solid fa-download"></i> Baixar CV
+                    </a>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <div class="not-found">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h2>Nenhum profissional encontrado</h2>
+            <p>Tente refinar seus critérios de busca para encontrar o talento que procura.</p>
+        </div>
+    <?php endif; ?>
     </main>
 
+    <?php
+    if (isset($stmt)) {
+        $stmt->close();
+    }
+    $conn->close();
+    ?>
 </body>
 </html>

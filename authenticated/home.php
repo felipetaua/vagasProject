@@ -44,7 +44,7 @@ $conn->close(); // Fechamos a conexão aqui, pois já buscamos todos os dados.
     <link rel="icon" type="image/png" href="/sistemaDeVagas/imagens/Logo.svg"/>
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/65f22fe718.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
     <link rel="stylesheet" href="/sistemaDeVagas/css/home.css">
