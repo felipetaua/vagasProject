@@ -32,7 +32,7 @@ $userId = $_SESSION['user_id'];
 
     <div class="page-title">
         <h1>Encontre Profissionais</h1>
-        <p>Busque por profissionais qualificados na região do Cariri.</p>
+        <p>Busque por profissionais qualificados</p>
     </div>
 
     <form method="get" action="profissionais.php" class="search-form">

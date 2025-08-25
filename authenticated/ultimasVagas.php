@@ -33,7 +33,7 @@ $userId = $_SESSION['user_id'];
     require_once __DIR__ . '/templates/header.php';
     ?>
 
-    <h1>Jobs in Cariri</h1>
+    <h1>Conheça nossas vagas</h1>
     <p>Vagas</p>
     <form method="get" action="">
         <input type="text" placeholder="Digite a vaga que busca..." name='vagas'>
