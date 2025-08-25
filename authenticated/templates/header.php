@@ -22,7 +22,7 @@ $headerStmt->close();
 <header class="main-header">
     <ul>
         <a href='/sistemaDeVagas/authenticated/home.php'> <li>
-            <img src='/sistemaDeVagas/imagens/Logo.svg' alt='Logo Jobs In Cariri' class='logo'> JOBS IN CARIRI
+            <img src='..\imagens\Logo.svg' alt=''class='logo'> Conexão RH 2.0
         </li></a> 
         <a href='/sistemaDeVagas/authenticated/profissionais.php'><li>Profissionais</li></a>
         <a href='/sistemaDeVagas/authenticated/cadastroVagas.php'><li>Cadastrar vaga</li></a>

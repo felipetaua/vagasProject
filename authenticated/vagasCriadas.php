@@ -45,7 +45,7 @@ $userId = $_SESSION["user_id"];
     <header style='background:white; margin-top:-10px; padding:5px;'>
         <ul>
             <a href='../authenticated/home.php'> <li>
-                <img src='..\imagens\Logo.svg' alt='Logo Jobs In Cariri' class='logo'> JOBS IN CARIRI
+                <img src='..\imagens\Logo.svg' alt=''class='logo'> Conexão RH 2.0
             </li></a> 
             <a href='../authenticated/profissionais.php'><li>Profissionais</li></a>
             <a href='../authenticated/cadastroVagas.php'><li>Cadastrar vaga</li></a>

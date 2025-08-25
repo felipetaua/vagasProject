@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
 echo "<header>
     <ul>
         <a href='../authenticated/home.php'> <li>
-            <img src='..\imagens\Logo.svg' alt=''class='logo'> JOBS IN CARIRI
+            <img src='..\imagens\Logo.svg' alt=''class='logo'> Conexão RH 2.0
         </li></a> 
         <a href='../authenticated/profissionais.php'><li>
            Profissionais
