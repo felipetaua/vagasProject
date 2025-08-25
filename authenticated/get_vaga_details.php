@@ -18,28 +18,37 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $vagaId = (int)$_GET['id'];
 
-$stmt = $conn->prepare("SELECT * FROM vagas WHERE id = ?");
+$sql = "SELECT v.*, c.foto AS foto_usuario 
+        FROM vagas v 
+        LEFT JOIN cadastro c ON v.usuario_responsavel = c.id 
+        WHERE v.id = ?";
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $vagaId);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $vaga = $result->fetch_assoc();
-    // Usando uma estrutura mais organizada e verificando a existência dos campos
-    echo "<h3>" . htmlspecialchars($vaga['cargo']) . "</h3>";
-    echo "<p><strong>Empresa:</strong> " . htmlspecialchars($vaga['empresa']) . "</p>";
+    // Cabeçalho do modal com a foto do usuário/empresa
+    echo "<div class='modal-vaga-header'>";
+    if (!empty($vaga['foto_usuario'])) {
+        echo "<img src='/sistemaDeVagas/authenticated/uploads/" . htmlspecialchars($vaga['foto_usuario']) . "' alt='Logo da Empresa' class='company-logo-modal'>";
+    } else {
+        echo "<img src='https://placehold.co/80x80/EFEFEF/AAAAAA&text=Logo' alt='Logo da Empresa' class='company-logo-modal'>";
+    }
+    echo "<div><h3>" . htmlspecialchars($vaga['cargo']) . "</h3><p><strong>Empresa:</strong> " . htmlspecialchars($vaga['empresa']) . "</p></div></div>";
     
     if (!empty($vaga['descricao_empresa'])) {
         echo "<h4>Sobre a Empresa</h4>";
         echo "<p>" . nl2br(htmlspecialchars($vaga['descricao_empresa'])) . "</p>";
     }
-
+    
     echo "<h4>Atividades do Cargo</h4>";
     echo "<p>" . nl2br(htmlspecialchars($vaga['descricao'])) . "</p>";
-
+    
     echo "<h4>Habilidades Requeridas</h4>";
     echo "<p>" . nl2br(htmlspecialchars($vaga['requisitos'])) . "</p>";
-
+    
     echo "<h4>Detalhes da Vaga</h4>";
     echo "<p><strong>Salário:</strong> R$ " . htmlspecialchars(number_format($vaga['salario'], 2, ',', '.')) . "</p>";
     if (!empty($vaga['beneficios'])) echo "<p><strong>Benefícios:</strong> " . nl2br(htmlspecialchars($vaga['beneficios'])) . "</p>";
