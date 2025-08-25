@@ -2,41 +2,52 @@
 session_start();
 require_once __DIR__ . '/db_connection.php';
 
-// Check if user is logged in
+// Verifica se o usuário está logado
 if (!isset($_SESSION["user_id"])) {
-    header("Location: /sistemaDeVagas/login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and retrieve form data
-    $cargo = trim($_POST['cargo']);
+    // Coleta e sanitiza os dados do formulário
     $empresa = trim($_POST['empresa']);
-    $descricao = trim($_POST['descricao']);
-    $requisitos = trim($_POST['requisitos']);
-    $salario = filter_var($_POST['salario'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $descricao_empresa = trim($_POST['descricao_empresa']);
+    $telefone_empresa = trim($_POST['telefone_empresa']);
+    $email_empresa = filter_var(trim($_POST['email_empresa']), FILTER_SANITIZE_EMAIL);
     $localizacao = trim($_POST['localizacao']);
-    $tipo_contrato = trim($_POST['tipo_contrato']);
-    // The 'beneficios' field from the form is now ignored by the INSERT statement.
-    // $beneficios = trim($_POST['beneficios']);
+    $cargo = trim($_POST['cargo']);
+    $descricao = trim($_POST['descricao']);
+    $carga_horaria = trim($_POST['carga_horaria']);
+    $salario = filter_var($_POST['salario'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $beneficios = trim($_POST['beneficios']);
+    $requisitos = trim($_POST['requisitos']);
+    $usuario_responsavel = $_SESSION['user_id'];
 
-    // Basic validation
-    if (empty($cargo) || empty($empresa) || empty($descricao) || empty($requisitos) || empty($salario) || empty($localizacao) || empty($tipo_contrato)) {
-        $_SESSION['error_message'] = "Todos os campos obrigatórios devem ser preenchidos.";
+    // Validação básica
+    if (empty($empresa) || empty($cargo) || empty($descricao) || empty($salario) || empty($localizacao)) {
+        $_SESSION['error_message'] = "Por favor, preencha todos os campos obrigatórios.";
         header("Location: cadastroVagas.php");
         exit();
     }
 
-    // Prepare an insert statement. The 'beneficios' column has been removed.
-    // This was line 79, which caused the error.
-    $stmt = $conn->prepare("INSERT INTO vagas (cargo, empresa, descricao, requisitos, salario, localizacao, tipo_contrato) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssdss", $cargo, $empresa, $descricao, $requisitos, $salario, $localizacao, $tipo_contrato);
+    // Prepara a query de inserção
+    $sql = "INSERT INTO vagas (empresa, descricao_empresa, telefone_empresa, email_empresa, localizacao, cargo, descricao, carga_horaria, salario, beneficios, requisitos, usuario_responsavel) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Erro ao preparar a query: " . $conn->error);
+    }
+
+    // 's' para string, 'd' para double/decimal, 'i' para integer
+    $stmt->bind_param("ssssssssdssi", $empresa, $descricao_empresa, $telefone_empresa, $email_empresa, $localizacao, $cargo, $descricao, $carga_horaria, $salario, $beneficios, $requisitos, $usuario_responsavel);
 
     if ($stmt->execute()) {
+        $newVagaId = $conn->insert_id;
         $_SESSION['success_message'] = "Vaga cadastrada com sucesso!";
-        header("Location: home.php");
+        header("Location: visualizar_vaga.php?id=" . $newVagaId);
     } else {
-        $_SESSION['error_message'] = "Erro ao cadastrar a vaga: " . $conn->error;
+        $_SESSION['error_message'] = "Erro ao cadastrar a vaga: " . $stmt->error;
         header("Location: cadastroVagas.php");
     }
 
