@@ -60,7 +60,7 @@ if (!$profileUser) {
         <div class="profile-card">
             <div class="profile-header">
                 <?php 
-                $foto = !empty($profileUser['foto']) ? '/sistemaDeVagas/uploads/' . htmlspecialchars($profileUser['foto']) : 'https://placehold.co/150x150';
+                $foto = !empty($profileUser['foto']) ? '/sistemaDeVagas/authenticated/uploads/' . htmlspecialchars($profileUser['foto']) : 'https://placehold.co/150x150';
                 ?>
                 <img src="<?php echo $foto; ?>" alt="Foto de <?php echo htmlspecialchars($profileUser['nome']); ?>" class="profile-photo">
                 <h2><?php echo htmlspecialchars($profileUser['nome'] . ' ' . $profileUser['sobrenome']); ?></h2>
