@@ -257,24 +257,34 @@ body {
 
 .input-wrapper {
     position: relative;
-    flex: 1; /* Ocupa o espaço disponível */
+    flex: 1; 
+}
+
+.input-wrapper {
+    display: flex; 
+    align-items: center; 
+    flex-grow: 1; 
+    min-width: 250px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 12px; 
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-wrapper i {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
     color: #95a5a6;
+    margin-right: 10px; /* Espaçamento entre o ícone e o input */
 }
 
 .input-wrapper input {
-    width: 100vw;
-    padding: 12px 15px 12px 400px; /* Espaço para o ícone */
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 150%;
+    border: none; 
+    border-radius: 0; 
     font-size: 1rem;
     transition: all 0.3s ease;
+    background-color: transparent; 
+    flex-grow: 1; 
 }
 
 .input-wrapper input::-webkit-input-placeholder {
@@ -285,6 +295,21 @@ body {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .input-wrapper {
+        min-width: unset;
+        width: 100%; 
+    }
+    .search-button {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 .search-button {
