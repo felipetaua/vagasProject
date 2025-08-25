@@ -1,82 +1,221 @@
-*{margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto;}
-    
-    header{
-        border-bottom: 1px solid #033F63 ;
-       
-        
-        
-    }
-    
-    a{text-decoration: none;}
-    ul{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin:10px;
-        
-    }
-    
-    li img{
-        width:40px;
-        
-    }
-    
-    li{text-decoration: none;
-    list-style: none;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+}
+
+header{
+  border-bottom: 1px solid #033F63 ;
+}
+
+a{text-decoration: none;}
+
+ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:10px;
+  
+}
+
+li img{
+  width:40px;
+  
+}
+
+li{text-decoration: none;
+list-style: none;
+display: flex;
+align-items: center;
+color:#033F63;
+font-weight: 500;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  
+  
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #033F63;
+  
+  font-size:13px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  max-width:200px;
+  width:100%;
+  display: none;
+  z-index: 1;
+}
+
+.dropdown-menu li {
+  padding: 20px 20px;
+  color:#fff;
+}
+
+.dropdown-menu li:hover {
+  
+  color:#033F63;
+  background-color: #f1f1f1;
+}
+
+.dropdown-menu li a:hover{
+  color:#033F63;
+  
+}
+a{color:white;}
+
+.show {
+  display: block;
+}
+
+
+/* --- GERAL --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    /* padding-top: 80px; Espaço para o header fixo, ajuste se necessário */
+}
+
+/* --- LAYOUT PRINCIPAL --- */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start; /* Alinha as seções no topo */
+}
+
+.content-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    width: 100%;
+    flex: 1; /* Faz com que as duas seções ocupem o espaço igualmente */
+}
+
+.content-section h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* --- LISTA DE CARDS --- */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
     display: flex;
     align-items: center;
-    color:#033F63;
-    font-weight: 500;}
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
 
-    .dropdown {
-        position: relative;
-        display: inline-block;
-      }
-      
-      .dropdown-btn {
-        
-        
-        border: none;
-        cursor: pointer;
-        padding: 10px 20px;
-        font-size: 16px;
-      }
-      
-      .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: #033F63;
-       
-        font-size:13px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        list-style: none;
-        padding: 0;
-        max-width:200px;
-        width:100%;
-        display: none;
-        z-index: 1;
-      }
-      
-      .dropdown-menu li {
-        padding: 20px 20px;
-        color:#fff;
-      }
-      
-      .dropdown-menu li:hover {
-        
-        color:#033F63;
-        background-color: #f1f1f1;
-      }
-      
-      .dropdown-menu li a:hover{
-        color:#033F63;
-       
-      }
-      a{color:white;}
-      .show {
-        display: block;
-      }
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Garante que a imagem não fique distorcida */
+    border: 2px solid #ddd;
+}
+
+.info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-name {
+    font-weight: 500;
+    color: #34495e;
+}
+
+.info-details {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* --- BOTÕES DOS CARDS --- */
+.card-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #2980b9;
+}
+
+.card-button.apply-btn {
+    background-color: #2ecc71;
+}
+.card-button.apply-btn:hover {
+    background-color: #27ae60;
+}
+
+
+/* --- MENSAGEM DE "NÃO ENCONTRADO" --- */
+.no-results {
+    color: #95a5a6;
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+
+/* --- RESPONSIVIDADE PARA TELAS MENORES --- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .content-section {
+        width: auto; /* Ocupa a largura total do container */
+    }
+}
