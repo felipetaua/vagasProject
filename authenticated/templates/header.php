@@ -24,10 +24,10 @@
             </div>
             <ul class='dropdown-menu'>
                 <a href='perfil.php'><li>Editar perfil</li></a>
-                <a href='#'> <li>Ranking</li></a>
+                <a href='#'> <li>Estástisticas</li></a>
                 <a href='/sistemaDeVagas/authenticated/profissao.php'> <li>Profissão</li></a>
                 <a href='#'><li>Contratos</li></a>
-                <a href='#'> <li>Chat</li></a>
+                <a href=''> <li>Chat</li></a>
                 <a href='curriculo.php'> <li>Currículo</li></a>
                 <a href='./logout.php'><li>Sair</li></a>
             </ul>

@@ -78,7 +78,7 @@ $userId = $_SESSION['user_id'];
         while ($professional = $result->fetch_assoc()) {
             echo "<div class='professional-card'>";
             
-            $foto = !empty($professional['foto']) ? '/sistemaDeVagas/uploads/' . htmlspecialchars($professional['foto']) : 'https://placehold.co/100x100';
+            $foto = !empty($professional['foto']) ? '/sistemaDeVagas/authenticated/uploads/' . htmlspecialchars($professional['foto']) : 'https://placehold.co/100x100';
             echo "<img src='{$foto}' alt='Foto de " . htmlspecialchars($professional['nome']) . "' class='professional-photo'>";
             
             echo "<div class='professional-info'>";
