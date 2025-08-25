@@ -24,7 +24,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divulgação de Vaga - Conexão RH 2.0</title>
-    <link rel="stylesheet" href="/sistemaDeVagas/css/home.css">
+    <!-- <link rel="stylesheet" href="/sistemaDeVagas/css/home.css"> -->
     <link rel="stylesheet" href="/sistemaDeVagas/css/forms.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
