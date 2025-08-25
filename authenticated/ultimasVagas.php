@@ -156,18 +156,54 @@ $userId = $_SESSION['user_id'];
 </style>
 
 <script>
-  const dropdownBtn = document.querySelector('.dropdown-btn');
-const dropdownMenu = document.querySelector('.dropdown-menu');
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Lógica do Menu Dropdown (Melhorada) ---
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
 
-dropdownBtn.addEventListener('click', () => {
-  dropdownMenu.classList.toggle('show');
+    if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Impede que o evento de clique na janela feche o menu imediatamente
+            dropdownMenu.classList.toggle('show');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (!dropdownBtn.contains(event.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    }
+
+    // --- Lógica do Modal para Detalhes da Vaga ---
+    const modal = document.getElementById("vagaModal");
+    const modalBody = document.getElementById("modal-body");
+    const closeBtn = document.querySelector(".modal .close-btn");
+    const viewButtons = document.querySelectorAll(".visualizar");
+
+    viewButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const vagaId = this.getAttribute("data-id");
+            modalBody.innerHTML = "<p>Carregando...</p>";
+            modal.style.display = "block";
+
+            fetch(`get_vaga_details.php?id=${vagaId}`)
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                })
+                .catch(error => {
+                    modalBody.innerHTML = "<p>Ocorreu um erro ao carregar os detalhes da vaga.</p>";
+                    console.error('Erro:', error);
+                });
+        });
+    });
+
+    closeBtn.onclick = () => modal.style.display = "none";
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 });
-
-window.addEventListener('click', (event) => {
-  if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-menu')) {
-    dropdownMenu.classList.remove('show');
-  }
-});
-
-
 </script>
