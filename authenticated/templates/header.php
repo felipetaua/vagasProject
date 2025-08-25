@@ -21,9 +21,9 @@ $headerStmt->close();
 <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
 <header class="main-header">
     <ul>
-        <a href='/sistemaDeVagas/authenticated/home.php'> <li>
-            <img src='..\imagens\Logo.svg' alt=''class='logo'> Conexão RH 2.0
-        </li></a> 
+        <a href='/sistemaDeVagas/authenticated/home.php'><li>
+            <img src='/sistemaDeVagas/imagens/Logo.svg' alt='Logo Conexão RH 2.0' class='logo'> Conexão RH 2.0
+        </li></a>
         <a href='/sistemaDeVagas/authenticated/profissionais.php'><li>Profissionais</li></a>
         <a href='/sistemaDeVagas/authenticated/cadastroVagas.php'><li>Cadastrar vaga</li></a>
         <a href='/sistemaDeVagas/authenticated/ultimasVagas.php'><li>Últimas vagas</li></a>
@@ -32,7 +32,7 @@ $headerStmt->close();
             <div class='perfil-img'>
                 <div>
                     <?php if ($headerUser && !empty($headerUser['foto'])): ?>
-                        <img src='/sistemaDeVagas/uploads/<?php echo htmlspecialchars($headerUser['foto']); ?>' class="perfil-foto" alt="Foto de perfil">
+                        <img src='/uploads/$row[foto]' style='width:50px; height:50px; border-radius:100%;'> 
                     <?php else: ?>
                         <img src='https://placehold.co/50x50' class="perfil-foto" alt="Foto de perfil padrão">
                     <?php endif; ?>
