@@ -27,7 +27,7 @@
                 <a href='#'> <li>Estástisticas</li></a>
                 <a href='/sistemaDeVagas/authenticated/profissao.php'> <li>Profissão</li></a>
                 <a href='#'><li>Contratos</li></a>
-                <a href=''> <li>Chat</li></a>
+                <a href='artificial.php'> <li>Inteligencia Artificial</li></a>
                 <a href='curriculo.php'> <li>Currículo</li></a>
                 <a href='./logout.php'><li>Sair</li></a>
             </ul>
