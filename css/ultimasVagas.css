@@ -13,7 +13,6 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
-    padding-top: 70px; /* Espaço para header fixo */
 }
 
 .container {
@@ -202,7 +201,6 @@ body {
 }
 
 
-/* --- MODAL (Copie aqui as suas regras de modal e ajuste) --- */
 .modal {
     display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6);
 }
@@ -231,3 +229,111 @@ body {
     .search-form { flex-direction: column; }
     .search-form .input-wrapper { max-width: 100%; }
 }
+
+/* --- Estilos aprimorados para o modal de detalhes da vaga --- */
+.modal-vaga-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.company-logo-modal {
+    width: 60px; /* Smaller logo for modal */
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.modal-header-text h3 {
+    margin: 0 0 5px 0;
+    color: #022a42;
+    font-size: 1.4em;
+}
+
+.modal-header-text p {
+    margin: 0;
+    color: #555;
+}
+
+.modal-vaga-body {
+    max-height: 60vh; /* Make body scrollable if content is too long */
+    overflow-y: auto;
+    padding-right: 15px; /* Space for scrollbar */
+    margin-right: -15px;
+}
+
+.modal-vaga-body h4 {
+    color: #033f63;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.modal-vaga-body p {
+    line-height: 1.6;
+    color: #444;
+}
+
+.vaga-info-modal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.vaga-info-modal .info-item {
+    font-size: 0.9em;
+}
+
+.vaga-info-modal .info-item strong {
+    display: block;
+    color: #033f63;
+    margin-bottom: 3px;
+}
+
+.modal-vaga-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+.modal-vaga-footer .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+}
+
+.modal-vaga-footer .apply-btn {
+    background-color: #033f63;
+    color: #fff;
+    border: 1px solid #033f63;
+}
+
+.modal-vaga-footer .apply-btn:hover {
+    background-color: #022a42;
+}
+
+.modal-vaga-footer .applied {
+    background-color: #e9f5ec;
+    color: #28a745;
+    border: 1px solid #a3d9b1;
+    cursor: not-allowed;
+}
+
