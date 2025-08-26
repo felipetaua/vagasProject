@@ -115,5 +115,8 @@ $result = $stmt->get_result();
         $conn->close();
     ?>
     <script src="../js/ultimasVagas.js" defer></script>
+    <script>
+        
+    </script>
 </body>
 </html>
