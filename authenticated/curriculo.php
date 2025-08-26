@@ -1,20 +1,9 @@
 <?php 
 session_start();
 
-// 1. LÓGICA PHP NO TOPO DO ARQUIVO
-// =================================
 
-// Dados de conexão com o banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
 
-// Conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
+require_once __DIR__ . '/db_connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION["user_id"])) {
@@ -99,10 +88,11 @@ if (!$user) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="..\imagens\Logo.svg"/>
+    <link rel="icon" type="image/png" href="/sistemaDeVagas/imagens/Logo.svg"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="/sistemaDeVagas/css/home.css">
+    <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Currículo</title>
     <style>
@@ -173,39 +163,7 @@ if (!$user) {
     </style>
 </head>
 <body>
-    <header style='background:white; margin-top:-10px; padding:5px;'>
-        <ul>
-            <a href='../authenticated/home.php'> <li>
-                <img src='..\imagens\Logo.svg' alt='Conexão RH 2.0' class='logo'> JOBS IN CARIRI
-            </li></a> 
-            <a href='../authenticated/profissionais.php'><li>Profissionais</li></a>
-            <a href='../authenticated/cadastroVagas.php'><li>Cadastrar vaga</li></a>
-            <a href='../authenticated/ultimasVagas.php'><li>Últimas vagas</li></a>
-            <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
-            <div class='dropdown'> 
-                <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
-                    <div style='display:flex; flex-direction:column; align-items:center;'>
-                        <?php if (!empty($user['foto'])): ?>
-                            <img src='uploads/<?php echo htmlspecialchars($user['foto']); ?>' alt="Foto de perfil" style='width:50px; height:50px; border-radius:100%;'>
-                        <?php else: ?>
-                            <img src='https://placehold.co/50x50' alt="Foto de perfil padrão" style='width:50px; height:50px; border-radius:100%;'>
-                        <?php endif; ?>
-                    </div>    
-                    <li class='dropdown-btn'><?php echo htmlspecialchars($user['nome']); ?></li>
-                    <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
-                </div>
-                <ul class='dropdown-menu'>
-                    <a href='perfil.php'><li>Editar perfil</li></a>
-                    <a href='#'> <li>Ranking</li></a>
-                    <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
-                    <a href='#'><li>Contratos</li></a>
-                    <a href='#'> <li>Chat</li></a>
-                    <a href='curriculo.php'> <li>Currículo</li></a>
-                    <a href='./logout.php'><li>Sair</li></a>
-                </ul>
-            </div>
-        </ul>
-    </header>
+    <?php include __DIR__ . '/templates/header.php'; ?>
     <h1>Adicione seu currículo</h1>
     <p>Melhore seu perfil para conseguir sua vaga!</p>
     <form action="curriculo.php" method="post" enctype="multipart/form-data">
