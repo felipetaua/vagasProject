@@ -89,4 +89,5 @@ $conn->close();
         </form>
     </div>
 </body>
+<script src="../js/cadastroVagas.js"></script>
 </html>
