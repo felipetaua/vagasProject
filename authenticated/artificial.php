@@ -337,8 +337,7 @@ $conn->close();
                 </div>
             </div>
     </div>
-
-    <script defer src="/sistemaDeVagas/js/ia.js"></script>
+            <script defer src="/sistemaDeVagas/js/ia.js"></script>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.41/build/spline-viewer.js"></script>
     <script>
         // Adicionando a lógica do dropdown do cabeçalho que estava faltando nesta página.

@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setupModal('resumePromptModal', 'openResumeModalBtn', '.close-resume-btn');
     setupModal('coverLetterModal', 'openCoverLetterModalBtn', '.close-btn-cover-letter');
-    setupModal('promptModal', 'openPromptModalBtn', '.close-btn');
+    setupModal('promptModal', 'generate-questions-btn', '.close-btn');
 
     // --- Lógica para Copiar Texto (Prompts) ---
     function setupCopyButtons(btnClass, feedbackText) {
