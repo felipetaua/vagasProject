@@ -1,5 +1,11 @@
 # Jobs
 Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. O sistema foi projetado para facilitar o processo de recrutamento e seleção de candidatos por empresas. Permite que as empresas publiquem vagas, gerenciem o processo de contratação e que os usuários se inscrevam para as vagas disponíveis, adicionem seus currículos e informações de profissão.
+
+![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/felipetaua/vagasProject)
+![GitHub last commit](https://img.shields.io/github/last-commit/felipetaua/vagasProject)
+![GitHub issues](https://img.shields.io/github/issues/felipetaua/vagasProject)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 # Recursos Principais
 <li>Publicação de Vagas: as empresas podem criar e publicar vagas, inserindo informações como título, descrição, requisitos, benefícios, localização, etc.
 <li>Gerenciamento de Vagas: as empresas podem visualizar, editar e excluir vagas de acordo com as necessidades do processo seletivo.
@@ -12,12 +18,42 @@ Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. 
 <li>Banco de dados MySQL (ou outro compatível com PHP)
 <li>Configurações de acesso ao banco de dados (host, usuário, senha)
 <li>Conexão com a internet para acesso às bibliotecas externas (caso necessário)
+
+**Crie o Banco de Dados:**
+    - Crie um banco de dados vazio em seu servidor MySQL.<br>
+    - Importe a estrutura e os dados iniciais executando o seguinte comando no seu terminal, dentro da pasta do projeto:<br>
+
+      ```bash
+      mysql -u SEU_USUARIO -p NOME_DO_BANCO < database.sql
+      ```
+      *Substitua `SEU_USUARIO` e `NOME_DO_BANCO` pelas suas credenciais. Você precisará digitar a senha quando solicitado.*
+
+    - **Alternativa:** Você também pode importar o arquivo `database.sql` usando uma ferramenta gráfica como o **phpMyAdmin**, **DBeaver** ou **DataGrip**.
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/felipetaua/vagasProject.git
+    ```
+
+2.  **Navegue até o diretório do projeto:**
+    ```bash
+    cd /vagasProject/
+    ```
   <h2>Como Instalar</h2>
 <li>Clone o repositório do sistema de vagas em sua máquina local.
 <li>Configure as informações de acesso ao banco de dados no arquivo config.php.
 <li>Importe o script SQL fornecido no arquivo jobs.sql para criar a estrutura do banco de dados.
 <li>Certifique-se de que o servidor web está configurado corretamente para executar arquivos PHP.
 <li>Abra o sistema de vagas em seu navegador e comece a utilizar para gerenciar o processo de recrutamento!
+Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que você fizer será **muito bem-vinda**.
+
+Se você tem uma sugestão para melhorar este projeto, por favor, faça um fork do repositório e crie um pull request. Você também pode simplesmente abrir uma issue com a tag "melhoria". Não se esqueça de dar uma estrela ao projeto! ⭐
+
+1.  Faça um **Fork** do projeto.
+2.  Crie uma **Branch** para sua feature (`git checkout -b feature/FeatureIncrivel`).
+3.  Faça o **Commit** de suas alterações (`git commit -m 'Adiciona uma Feature Incrível'`).
+4.  Faça o **Push** para a Branch (`git push origin feature/FeatureIncrivel`).
+5.  Abra um **Pull Request**.
   <h2>Tecnologias Utilizadas</h2>
 <li>PHP: linguagem de programação principal para a lógica do sistema.
 <li>HTML/CSS: estrutura e estilização da interface do usuário.
