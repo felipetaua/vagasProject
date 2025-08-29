@@ -126,7 +126,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Criar Currículo - Conexão RH 2.0</title>
     <link rel="stylesheet" href="/sistemaDeVagas/css/criarCurriculo.css">
     <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
-
 </head>
 <body>
 
@@ -231,6 +230,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" class="btn-submit">Salvar Currículo</button>
         </form>
+
+        <?php if (!empty($curriculo_data)): ?>
+            <a href="visualizar_curriculo.php" target="_blank" class="btn-view">Visualizar / Baixar Currículo</a>
+        <?php endif; ?>
+
     </div>
 </main>
 <script>

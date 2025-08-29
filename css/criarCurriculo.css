@@ -224,3 +224,20 @@ main {
     font-weight: bold;
     color: #555;
 }
+
+.btn-view {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #17a2b8;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+.btn-view:hover {
+    background-color: #138496;
+}
