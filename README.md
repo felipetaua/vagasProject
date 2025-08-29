@@ -18,6 +18,17 @@ Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. 
 <li>Banco de dados MySQL (ou outro compatível com PHP)
 <li>Configurações de acesso ao banco de dados (host, usuário, senha)
 <li>Conexão com a internet para acesso às bibliotecas externas (caso necessário)
+
+**Crie o Banco de Dados:**
+    - Crie um banco de dados vazio em seu servidor MySQL.<br>
+    - Importe a estrutura e os dados iniciais executando o seguinte comando no seu terminal, dentro da pasta do projeto:<br>
+
+      ```bash
+      mysql -u SEU_USUARIO -p NOME_DO_BANCO < database.sql
+      ```
+      *Substitua `SEU_USUARIO` e `NOME_DO_BANCO` pelas suas credenciais. Você precisará digitar a senha quando solicitado.*
+
+    - **Alternativa:** Você também pode importar o arquivo `database.sql` usando uma ferramenta gráfica como o **phpMyAdmin**, **DBeaver** ou **DataGrip**.
   <h2>Como Instalar</h2>
 <li>Clone o repositório do sistema de vagas em sua máquina local.
 <li>Configure as informações de acesso ao banco de dados no arquivo config.php.
