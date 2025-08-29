@@ -15,8 +15,227 @@ $user = $stmt->fetch();
 
 // Lógica para processar o formulário quando enviado (método POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Aqui você implementaria a lógica para salvar os dados do currículo no banco de dados.
-    $message = "Currículo salvo com sucesso! (Lógica de salvamento não implementada)";
+    $userId = $_SESSION['user_id'];
+    $pessoal = $_POST['pessoal'] ?? [];
+    $endereco = $_POST['endereco'] ?? [];
+    $resumo = $_POST['resumo'] ?? '';
+    $habilidades = $_POST['habilidades'] ?? '';
+    $experiencias = $_POST['experiencia'] ?? [];
+    $formacoes = $_POST['formacao'] ?? [];
+
+    // Inicia a transação para garantir a integridade dos dados
+    $pdo->beginTransaction();
+
+    try {
+        // 1. VERIFICAR SE O CURRÍCULO JÁ EXISTE (LÓGICA DE UPDATE OU INSERT)
+        $stmt = $pdo->prepare("SELECT id FROM curriculos WHERE id_cadastro = ?");
+        $stmt->execute([$userId]);
+        $curriculo = $stmt->fetch();
+
+        if ($curriculo) {
+            // UPDATE: Currículo já existe, então atualizamos
+            $curriculoId = $curriculo['id'];
+            $sql = "UPDATE curriculos SET nome_completo = ?, email = ?, telefone = ?, idade = ?, estado_civil = ?, nacionalidade = ?, cnh = ?, cep = ?, logradouro = ?, bairro = ?, cidade = ?, estado = ?, resumo = ?, habilidades = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $pessoal['nome_completo'], $pessoal['email'], $pessoal['telefone'], $pessoal['idade'], $pessoal['estado_civil'], $pessoal['nacionalidade'], $pessoal['cnh'],
+                $endereco['cep'], $endereco['logradouro'], $endereco['bairro'], $endereco['cidade'], $endereco['estado'],
+                $resumo, $habilidades, $curriculoId
+            ]);
+        } else {
+            // INSERT: Currículo não existe, então criamos um novo
+            $sql = "INSERT INTO curriculos (id_cadastro, nome_completo, email, telefone, idade, estado_civil, nacionalidade, cnh, cep, logradouro, bairro, cidade, estado, resumo, habilidades) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $userId, $pessoal['nome_completo'], $pessoal['email'], $pessoal['telefone'], $pessoal['idade'], $pessoal['estado_civil'], $pessoal['nacionalidade'], $pessoal['cnh'],
+                $endereco['cep'], $endereco['logradouro'], $endereco['bairro'], $endereco['cidade'], $endereco['estado'],
+                $resumo, $habilidades
+            ]);
+            $curriculoId = $pdo->lastInsertId();
+        }
+
+        // 2. PROCESSAR EXPERIÊNCIAS (APAGAR E REINSERIR)
+        // Primeiro, apaga todas as experiências antigas associadas a este currículo
+        $stmt = $pdo->prepare("DELETE FROM curriculo_experiencia WHERE id_curriculo = ?");
+        $stmt->execute([$curriculoId]);
+
+        // Depois, insere as novas experiências enviadas pelo formulário
+        if (!empty($experiencias)) {
+            $sql = "INSERT INTO curriculo_experiencia (id_curriculo, cargo, empresa, periodo, descricao) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            foreach ($experiencias as $exp) {
+                $stmt->execute([$curriculoId, $exp['cargo'], $exp['empresa'], $exp['periodo'], $exp['descricao']]);
+            }
+        }
+
+        // 3. PROCESSAR FORMAÇÕES (APAGAR E REINSERIR)
+        // Primeiro, apaga todas as formações antigas
+        $stmt = $pdo->prepare("DELETE FROM curriculo_formacao WHERE id_curriculo = ?");
+        $stmt->execute([$curriculoId]);
+
+        // Depois, insere as novas formações
+        if (!empty($formacoes)) {
+            $sql = "INSERT INTO curriculo_formacao (id_curriculo, instituicao, curso, periodo) VALUES (?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            foreach ($formacoes as $form) {
+                $stmt->execute([$curriculoId, $form['instituicao'], $form['curso'], $form['periodo']]);
+            }
+        }
+
+        // Se tudo deu certo, confirma as alterações no banco de dados
+        $pdo->commit();
+        $message = "Currículo salvo com sucesso!";
+    } catch (Exception $e) {
+        // Se algo deu errado, desfaz todas as alterações
+        $pdo->rollBack();
+        $message = "Erro ao salvar o currículo: " . $e->getMessage();
+    }
+    $endereco = $_POST['endereco'] ?? [];
+    $resumo = $_POST['resumo'] ?? '';
+    $habilidades = $_POST['habilidades'] ?? '';
+    $experiencias = $_POST['experiencia'] ?? [];
+    $formacoes = $_POST['formacao'] ?? [];
+
+    // Inicia a transação para garantir a integridade dos dados
+    $pdo->beginTransaction();
+
+    try {
+        // 1. VERIFICAR SE O CURRÍCULO JÁ EXISTE (LÓGICA DE UPDATE OU INSERT)
+        $stmt = $pdo->prepare("SELECT id FROM curriculos WHERE id_cadastro = ?");
+        $stmt->execute([$userId]);
+        $curriculo = $stmt->fetch();
+
+        if ($curriculo) {
+            // UPDATE: Currículo já existe, então atualizamos
+            $curriculoId = $curriculo['id'];
+            $sql = "UPDATE curriculos SET nome_completo = ?, email = ?, telefone = ?, idade = ?, estado_civil = ?, nacionalidade = ?, cnh = ?, cep = ?, logradouro = ?, bairro = ?, cidade = ?, estado = ?, resumo = ?, habilidades = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $pessoal['nome_completo'], $pessoal['email'], $pessoal['telefone'], $pessoal['idade'], $pessoal['estado_civil'], $pessoal['nacionalidade'], $pessoal['cnh'],
+                $endereco['cep'], $endereco['logradouro'], $endereco['bairro'], $endereco['cidade'], $endereco['estado'],
+                $resumo, $habilidades, $curriculoId
+            ]);
+        } else {
+            // INSERT: Currículo não existe, então criamos um novo
+            $sql = "INSERT INTO curriculos (id_cadastro, nome_completo, email, telefone, idade, estado_civil, nacionalidade, cnh, cep, logradouro, bairro, cidade, estado, resumo, habilidades) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $userId, $pessoal['nome_completo'], $pessoal['email'], $pessoal['telefone'], $pessoal['idade'], $pessoal['estado_civil'], $pessoal['nacionalidade'], $pessoal['cnh'],
+                $endereco['cep'], $endereco['logradouro'], $endereco['bairro'], $endereco['cidade'], $endereco['estado'],
+                $resumo, $habilidades
+            ]);
+            $curriculoId = $pdo->lastInsertId();
+        }
+
+        // 2. PROCESSAR EXPERIÊNCIAS (APAGAR E REINSERIR)
+        // Primeiro, apaga todas as experiências antigas associadas a este currículo
+        $stmt = $pdo->prepare("DELETE FROM curriculo_experiencia WHERE id_curriculo = ?");
+        $stmt->execute([$curriculoId]);
+
+        // Depois, insere as novas experiências enviadas pelo formulário
+        if (!empty($experiencias)) {
+            $sql = "INSERT INTO curriculo_experiencia (id_curriculo, cargo, empresa, periodo, descricao) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            foreach ($experiencias as $exp) {
+                $stmt->execute([$curriculoId, $exp['cargo'], $exp['empresa'], $exp['periodo'], $exp['descricao']]);
+            }
+        }
+
+        // 3. PROCESSAR FORMAÇÕES (APAGAR E REINSERIR)
+        // Primeiro, apaga todas as formações antigas
+        $stmt = $pdo->prepare("DELETE FROM curriculo_formacao WHERE id_curriculo = ?");
+        $stmt->execute([$curriculoId]);
+
+        // Depois, insere as novas formações
+        if (!empty($formacoes)) {
+            $sql = "INSERT INTO curriculo_formacao (id_curriculo, instituicao, curso, periodo) VALUES (?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            foreach ($formacoes as $form) {
+                $stmt->execute([$curriculoId, $form['instituicao'], $form['curso'], $form['periodo']]);
+            }
+        }
+
+        // Se tudo deu certo, confirma as alterações no banco de dados
+        $pdo->commit();
+        $message = "Currículo salvo com sucesso!";
+    } catch (Exception $e) {
+        // Se algo deu errado, desfaz todas as alterações
+        $pdo->rollBack();
+        $message = "Erro ao salvar o currículo: " . $e->getMessage();
+    }
+    $endereco = $_POST['endereco'] ?? [];
+    $resumo = $_POST['resumo'] ?? '';
+    $habilidades = $_POST['habilidades'] ?? '';
+    $experiencias = $_POST['experiencia'] ?? [];
+    $formacoes = $_POST['formacao'] ?? [];
+
+    // Inicia a transação para garantir a integridade dos dados
+    $pdo->beginTransaction();
+
+    try {
+        // 1. VERIFICAR SE O CURRÍCULO JÁ EXISTE (LÓGICA DE UPDATE OU INSERT)
+        $stmt = $pdo->prepare("SELECT id FROM curriculos WHERE id_cadastro = ?");
+        $stmt->execute([$userId]);
+        $curriculo = $stmt->fetch();
+
+        if ($curriculo) {
+            // UPDATE: Currículo já existe, então atualizamos
+            $curriculoId = $curriculo['id'];
+            $sql = "UPDATE curriculos SET nome_completo = ?, email = ?, telefone = ?, idade = ?, estado_civil = ?, nacionalidade = ?, cnh = ?, cep = ?, logradouro = ?, bairro = ?, cidade = ?, estado = ?, resumo = ?, habilidades = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $pessoal['nome_completo'], $pessoal['email'], $pessoal['telefone'], $pessoal['idade'], $pessoal['estado_civil'], $pessoal['nacionalidade'], $pessoal['cnh'],
+                $endereco['cep'], $endereco['logradouro'], $endereco['bairro'], $endereco['cidade'], $endereco['estado'],
+                $resumo, $habilidades, $curriculoId
+            ]);
+        } else {
+            // INSERT: Currículo não existe, então criamos um novo
+            $sql = "INSERT INTO curriculos (id_cadastro, nome_completo, email, telefone, idade, estado_civil, nacionalidade, cnh, cep, logradouro, bairro, cidade, estado, resumo, habilidades) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $userId, $pessoal['nome_completo'], $pessoal['email'], $pessoal['telefone'], $pessoal['idade'], $pessoal['estado_civil'], $pessoal['nacionalidade'], $pessoal['cnh'],
+                $endereco['cep'], $endereco['logradouro'], $endereco['bairro'], $endereco['cidade'], $endereco['estado'],
+                $resumo, $habilidades
+            ]);
+            $curriculoId = $pdo->lastInsertId();
+        }
+
+        // 2. PROCESSAR EXPERIÊNCIAS (APAGAR E REINSERIR)
+        // Primeiro, apaga todas as experiências antigas associadas a este currículo
+        $stmt = $pdo->prepare("DELETE FROM curriculo_experiencia WHERE id_curriculo = ?");
+        $stmt->execute([$curriculoId]);
+
+        // Depois, insere as novas experiências enviadas pelo formulário
+        if (!empty($experiencias)) {
+            $sql = "INSERT INTO curriculo_experiencia (id_curriculo, cargo, empresa, periodo, descricao) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            foreach ($experiencias as $exp) {
+                $stmt->execute([$curriculoId, $exp['cargo'], $exp['empresa'], $exp['periodo'], $exp['descricao']]);
+            }
+        }
+
+        // 3. PROCESSAR FORMAÇÕES (APAGAR E REINSERIR)
+        // Primeiro, apaga todas as formações antigas
+        $stmt = $pdo->prepare("DELETE FROM curriculo_formacao WHERE id_curriculo = ?");
+        $stmt->execute([$curriculoId]);
+
+        // Depois, insere as novas formações
+        if (!empty($formacoes)) {
+            $sql = "INSERT INTO curriculo_formacao (id_curriculo, instituicao, curso, periodo) VALUES (?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            foreach ($formacoes as $form) {
+                $stmt->execute([$curriculoId, $form['instituicao'], $form['curso'], $form['periodo']]);
+            }
+        }
+
+        // Se tudo deu certo, confirma as alterações no banco de dados
+        $pdo->commit();
+        $message = "Currículo salvo com sucesso!";
+    } catch (Exception $e) {
+        // Se algo deu errado, desfaz todas as alterações
+        $pdo->rollBack();
+        $message = "Erro ao salvar o currículo: " . $e->getMessage();
+    }
 }
 
 ?>
