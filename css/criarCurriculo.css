@@ -95,6 +95,27 @@
 .search-form button:hover {
     background-color: #2980b9;
 }
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: white;
+}
+.address-fieldset {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+}
+.address-fieldset legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #555;
+}
+
 main {
     display: flex;
     justify-content: center;

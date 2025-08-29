@@ -44,10 +44,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="criar_curriculo.php" method="POST">
             <div class="form-section">
                 <h2>Informações Pessoais</h2>
-                <div class="form-group"><label for="nome_completo">Nome Completo</label><input type="text" id="nome_completo" name="nome_completo" required></div>
-                <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
-                <div class="form-group"><label for="telefone">Telefone</label><input type="tel" id="telefone" name="telefone" required></div>
-                <div class="form-group"><label for="endereco">Endereço (Cidade, Estado)</label><input type="text" id="endereco" name="endereco"></div>
+                <div class="form-group"><label for="nome_completo">Nome Completo</label><input type="text" id="nome_completo" name="pessoal[nome_completo]" required></div>
+                <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="pessoal[email]" required></div>
+                <div class="form-group"><label for="telefone">Telefone</label><input type="tel" id="telefone" name="pessoal[telefone]" required></div>
+                <div class="form-group"><label for="idade">Idade</label><input type="number" id="idade" name="pessoal[idade]"></div>
+                <div class="form-group">
+                    <label for="estado_civil">Estado Civil</label>
+                    <select id="estado_civil" name="pessoal[estado_civil]">
+                        <option value="">Selecione...</option>
+                        <option value="Solteiro(a)">Solteiro(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Divorciado(a)">Divorciado(a)</option>
+                        <option value="Viúvo(a)">Viúvo(a)</option>
+                        <option value="União Estável">União Estável</option>
+                    </select>
+                </div>
+                <div class="form-group"><label for="nacionalidade">Nacionalidade</label><input type="text" id="nacionalidade" name="pessoal[nacionalidade]" value="Brasileiro(a)"></div>
+                <div class="form-group">
+                    <label for="cnh">CNH</label>
+                    <select id="cnh" name="pessoal[cnh]">
+                        <option value="">Selecione...</option>
+                        <option value="Não possuo">Não possuo</option>
+                        <option value="A">Categoria A</option>
+                        <option value="B">Categoria B</option>
+                        <option value="AB">Categoria A+B</option>
+                        <option value="C">Categoria C</option>
+                        <option value="D">Categoria D</option>
+                        <option value="E">Categoria E</option>
+                    </select>
+                </div>
+
+                <fieldset class="address-fieldset">
+                    <legend>Endereço</legend>
+                    <div class="form-group"><label for="cep">CEP</label><input type="text" id="cep" name="endereco[cep]"></div>
+                    <div class="form-group"><label for="endereco_residencial">Endereço Residencial (Rua, Av, Nº)</label><input type="text" id="endereco_residencial" name="endereco[logradouro]"></div>
+                    <div class="form-group"><label for="bairro">Bairro</label><input type="text" id="bairro" name="endereco[bairro]"></div>
+                    <div class="form-group"><label for="cidade">Cidade</label><input type="text" id="cidade" name="endereco[cidade]"></div>
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select id="estado" name="endereco[estado]">
+                            <option value="">Selecione o Estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </fieldset>
             </div>
 
             <div class="form-section">
