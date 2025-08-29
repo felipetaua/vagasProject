@@ -8,7 +8,7 @@
     <meta name="author" content="Tauã Felipe, Nicoly Carvalho ">
     
     <!-- css -->
-    <link rel="stylesheet" href="/assets/css/pages/index/index.css">
+    <link rel="stylesheet" href="assets/css/pages/index/index.css">
 
     <!-- Linking Google fonts for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -22,20 +22,20 @@
 
     <!-- Script principal -->
     <script defer src="https://unpkg.com/scrollreveal"></script>
-    <script defer src="/assets/js/pages/index/index.js"></script>
-    <script defer src="/assets/js/global/main.js"></script>
+    <script defer src="assets/js/pages/index/index.js"></script>
+    <script defer src="assets/js/global/main.js"></script>
 
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     <!-- miniatura -->
-    <link rel="icon" href="/assets/images/global/RHconexao-icone.png" type="image/png">
+    <link rel="icon" href="assets/images/global/RHconexao-icone.png" type="image/png">
     <title>Conexão RH</title>
 </head>
 <body>
     <header class="header">
-        <a href="/" class="logo">
-            <img src="/assets/images/global/RHconexao-logo.svg" alt="Conexão RH - Pagina Inicial" class="logoEmpresa">
+        <a href="index.php" class="logo">
+            <img src="assets/images/global/RHconexao-logo.svg" alt="Conexão RH - Pagina Inicial" class="logoEmpresa">
         </a>
 
         <!-- Botão hamburguer fora da logo -->
@@ -52,26 +52,26 @@
                     <a href="/" class="linkPages curadoriaLink linkPagesActive">Início</a>
                 </li>
                 <li>
-                    <a href="/pages/ferramentas/ferramentas" class="linkPages ferramentasLink ativo">Ferramentas</a>
+                    <a href="pages/ferramentas/ferramentas.html" class="linkPages ferramentasLink ativo">Ferramentas</a>
                 </li>
                 <li>
-                    <a href="/pages/sobre/sobre" class="linkPages">Quem Somos</a>
+                    <a href="pages/sobre/sobre.html" class="linkPages">Quem Somos</a>
                 </li>
                 <li>
-                    <a href="/pages/curadoria/curadoria" class="linkPages">Curadoria</a>
+                    <a href="pages/curadoria/curadoria.html" class="linkPages">Curadoria</a>
                 </li>
                 <li>
-                    <a href="/pages/conect/conect" class="linkPages">Conecte-se</a>
+                    <a href="pages/conect/conect.html" class="linkPages">Conecte-se</a>
                 </li>
             </ul>
-            <a href="/pages/login/login.blade.php" class="loginNav btn-mobile" aria-hidden="true">Entrar</a>
-            <a href="/pages/register/register.blade.php" class="SingninNav btn-mobile" aria-hidden="true">Criar</a>
+            <a href="pages/login/login.php" class="loginNav btn-mobile" aria-hidden="true">Entrar</a>
+            <a href="pages/register/register.php" class="SingninNav btn-mobile" aria-hidden="true">Criar</a>
         </nav>
 
         <!-- Botões de ação -->
         <div class="linkAcount">
-            <a href="/pages/login/login.blade.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="/pages/register/register.blade.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+            <a href="pages/login/login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="pages/register/register.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
         </div>
     </header>
 
@@ -84,60 +84,60 @@
     <section class="heroSection">
         <div class="heroGrid">
             <article class="floating1 cardsFlutuantes" >
-                <img class="cardsHero" src="/assets/images/pages/index/flutuando-1.webp" alt="Funcionalidade de cadastro rápido de perfis profissionais">
+                <img class="cardsHero" src="assets/images/pages/index/flutuando-1.webp" alt="Funcionalidade de cadastro rápido de perfis profissionais">
             </article>
             <article class="floating2 cardsFlutuantes">
-                <img class="cardsHero" src="/assets/images/pages/index/flutuando-2.webp" alt="Como a plataforma é profissional, e segue conceitos de segurança e privaicidade">
+                <img class="cardsHero" src="assets/images/pages/index/flutuando-2.webp" alt="Como a plataforma é profissional, e segue conceitos de segurança e privaicidade">
             </article>
             <article class="floating3 cardsFlutuantes">
-                <img class="cardsHero" src="/assets/images/pages/index/flutuando-3.webp"alt="Como utilizamos tecnologias presentes no mercado para entregar um produto profissional">
+                <img class="cardsHero" src="assets/images/pages/index/flutuando-3.webp"alt="Como utilizamos tecnologias presentes no mercado para entregar um produto profissional">
             </article>
 
             <main class="floatingContent contentHero">
                 <div class="container-mobile">
-                    <img class="mundo-mobile" src="/assets/images/pages/index/word-mobile.png
+                    <img class="mundo-mobile" src="assets/images/pages/index/word-mobile.png
                     " alt="">
                 </div>
                 <h1 class="heroTitle">Bem-Vindo ao Conexão RH <span class="gradient">2.0</span></h1>
                 <p class="heroText">Uma plataforma de talentos e oportunidade!</p>
                 <div class="containerBtn">
                     <button class="link actionButtonHero btn" id="openModalBtn" aria-label="Iniciar sua jornada na plataforma RH Conexão">Inicie sua Jornada 
-                        <div class="circle"><img class="arrow" src="/assets/icons/pages/index/icon-arrow-right.png" alt=""></div>
+                        <div class="circle"><img class="arrow" src="assets/icons/pages/index/icon-arrow-right.png" alt=""></div>
                     </button>
                 </div>
             </main>
             <article class="floating5 cardsFlutuantes">
-                <img class="cardsHero" src="/assets/images/pages/index/flutuando-4.webp" alt="Como uma organização e trabalho em grupo é chave para tudo e nosso trabalho é em conjunto com nossos usuarios">
+                <img class="cardsHero" src="assets/images/pages/index/flutuando-4.webp" alt="Como uma organização e trabalho em grupo é chave para tudo e nosso trabalho é em conjunto com nossos usuarios">
             </article>
             <article class="floating6 cardsFlutuantes">
-                <img class="cardsHero" src="/assets/images/pages/index/flutuando-5.webp" alt="Voltado ao ambiente corporativo para empresas e tambem para colaboradores que procuram uma oportunidade">
+                <img class="cardsHero" src="assets/images/pages/index/flutuando-5.webp" alt="Voltado ao ambiente corporativo para empresas e tambem para colaboradores que procuram uma oportunidade">
             </article>
             <article class="floating7 cardsFlutuantes">
-                <img class="cardsHero" src="/assets/images/pages/index/flutuando-6.webp"alt="Educação, como voce pode aprender dentro da nossa plataforma">
+                <img class="cardsHero" src="assets/images/pages/index/flutuando-6.webp"alt="Educação, como voce pode aprender dentro da nossa plataforma">
             </article>
         </div>
     </section>
 
     <section class="scroll-hero">
-        <a class="scroll-down link" aria-label="Role para baixo e veja mais" href="#center-nav"><img class="scroll-down-image" src="/assets/images/pages/index/scroll-down.svg" alt="Descer para ver mais" /></a>
+        <a class="scroll-down link" aria-label="Role para baixo e veja mais" href="#center-nav"><img class="scroll-down-image" src="assets/images/pages/index/scroll-down.svg" alt="Descer para ver mais" /></a>
     </section>
 
     <section class="heroCell">
         <figure class="cellAlign">
             <div class=" cell1">
-                <img class="cellA1 cellphones-img" src="/assets/images/pages/index/celular-1.png" alt="Engajamento e administração para criação da pagina">
+                <img class="cellA1 cellphones-img" src="assets/images/pages/index/celular-1.png" alt="Engajamento e administração para criação da pagina">
             </div>
             <div class=" cell2">
-                <img class="cellA2 cellphones-img" src="/assets/images/pages/index/celular-2.png"  alt="Equipe responsável pela criação do projeto">
+                <img class="cellA2 cellphones-img" src="assets/images/pages/index/celular-2.png"  alt="Equipe responsável pela criação do projeto">
             </div>
             <div class=" cell3">
-                <img class="cellA3 cellphones-img" src="/assets/images/pages/index/celular-3.png" alt="Tela de busca de vagas na plataforma RH Conexão">
+                <img class="cellA3 cellphones-img" src="assets/images/pages/index/celular-3.png" alt="Tela de busca de vagas na plataforma RH Conexão">
             </div>
             <div class=" cell4">
-                <img class="cellA4 cellphones-img" src="/assets/images/pages/index/celular-4.png" alt="Ideias e sujestões da turma">
+                <img class="cellA4 cellphones-img" src="assets/images/pages/index/celular-4.png" alt="Ideias e sujestões da turma">
             </div>
             <div class=" cell5">
-                <img class="cellA5 cellphones-img" src="/assets/images/pages/index/celular-5.png" alt="Turma de RH do Senac - Nova Londrina">
+                <img class="cellA5 cellphones-img" src="assets/images/pages/index/celular-5.png" alt="Turma de RH do Senac - Nova Londrina">
             </div>
         </figure>
     </section>
@@ -157,21 +157,21 @@
                     <div class="cardColabContent">
                         <ul class="listVantagens">
                             <li class="contentItem">
-                                <i><img src="/assets/icons/pages/index/medal-icon.png" alt="medalha"></i>
+                                <i><img src="assets/icons/pages/index/medal-icon.png" alt="medalha"></i>
                                 <p class="empregadorText">Encontre oportunidades alinhadas ao seu perfil e objetivos.</p>
                             </li>
                             <li class="contentItem">
-                                <i><img src="/assets/icons/pages/index/check-circle-icon.png" alt="vantagens"></i>
+                                <i><img src="assets/icons/pages/index/check-circle-icon.png" alt="vantagens"></i>
                                 <p class="empregadorText">Receba recomendações personalizadas com base no seu potencial.</p>
                             </li>
                             <li class="contentItem">
-                                <i><img src="/assets/icons/pages/index/trending-up-icon.png" alt="crescimento"></i>
+                                <i><img src="assets/icons/pages/index/trending-up-icon.png" alt="crescimento"></i>
                                 <p class="empregadorText">Conecte-se diretamente com recrutadores e empresas inovadoras.</p>
                             </li>
                         </ul>
                         <button class="btn btnUser" aria-label="Criar conta como colaborador">Participe</button>
                     </div>
-                    <img class="imgUser" src="/assets/images/pages/index/pessoa-colaborador.png" alt="Imagem de um colaborador representando os usuários do site">
+                    <img class="imgUser" src="assets/images/pages/index/pessoa-colaborador.png" alt="Imagem de um colaborador representando os usuários do site">
                 </section>
                 <section class="cardsUser empregador">
                     <div class="cardUserIntro">
@@ -180,13 +180,13 @@
                     </div>
                     <div class="cardEmpreContent">
                         <ul class="listVantagens">
-                            <li class="contentItem"><i><img src="/assets/icons/pages/index/medal-icon.png" alt="medalha"></i><p class="empregadorText">Reduza o tempo de contratação com buscas inteligentes.</p></li>
-                            <li class="contentItem"><i><img src="/assets/icons/pages/index/check-circle-icon.png" alt="vantagens"></i><p class="empregadorText">Fortaleça a marca empregadora e atraia os melhores talentos.</p></li>
-                            <li class="contentItem"><i><img src="/assets/icons/pages/index/trending-up-icon.png" alt="crescimento"></i><p class="empregadorText">Acesse uma base qualificada de talentos.</p></li>
+                            <li class="contentItem"><i><img src="assets/icons/pages/index/medal-icon.png" alt="medalha"></i><p class="empregadorText">Reduza o tempo de contratação com buscas inteligentes.</p></li>
+                            <li class="contentItem"><i><img src="assets/icons/pages/index/check-circle-icon.png" alt="vantagens"></i><p class="empregadorText">Fortaleça a marca empregadora e atraia os melhores talentos.</p></li>
+                            <li class="contentItem"><i><img src="assets/icons/pages/index/trending-up-icon.png" alt="crescimento"></i><p class="empregadorText">Acesse uma base qualificada de talentos.</p></li>
                         </ul>
                             <button class="btn btnUser" aria-label="Criar conta como empregador">Participe</button>
                     </div>
-                    <img class="imgUser" src="/assets/images/pages/index/pessoa-empregador.png" alt="empregador representando empresas parceiras">
+                    <img class="imgUser" src="assets/images/pages/index/pessoa-empregador.png" alt="empregador representando empresas parceiras">
                 </section>
             </div>
         </section>
@@ -294,16 +294,16 @@
             <div class="depoimentsSection">
                 <article class="cardsDepoimentos depoimentos1">
                     <div class="avatar">
-                        <img class="avatarPhoto" src="/assets/images/pages/index/depoiments1.png" alt="Foto de Eminem, um dos usuários satisfeitos do RH Conexão">
+                        <img class="avatarPhoto" src="assets/images/pages/index/depoiments1.png" alt="Foto de Eminem, um dos usuários satisfeitos do RH Conexão">
                         <div>
                             <h3 class="depoimentsTitle">Eminem</h3>
                             <figure class="stars">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
                             </figure>
                         </div>
                     </div>
@@ -314,16 +314,16 @@
                 </article>
                 <article class="cardsDepoimentos depoimentos1">
                     <div class="avatar">
-                        <img class="avatarPhoto" src="/assets/images/pages/index/depoiments2.png" alt="foto de um de nossos clientes que gostaram de nosso trabalho">
+                        <img class="avatarPhoto" src="assets/images/pages/index/depoiments2.png" alt="foto de um de nossos clientes que gostaram de nosso trabalho">
                         <div>
                             <h3 class="depoimentsTitle">Ariana Grande</h3>
                             <figure class="stars">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
                             </figure>
                         </div>
                     </div>
@@ -334,16 +334,16 @@
                 </article>
                 <article class="cardsDepoimentos depoimentos1">
                     <div class="avatar">
-                        <img class="avatarPhoto" src="/assets/images/pages/index/depoiments3.png" alt="foto do cliente">
+                        <img class="avatarPhoto" src="assets/images/pages/index/depoiments3.png" alt="foto do cliente">
                         <div>
                             <h3 class="depoimentsTitle">The Weekend</h3>
                             <figure class="stars">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="avaliação de 5 estrelas">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="avaliação de 5 estrelas">
                             </figure>
                         </div>
                     </div>
@@ -354,16 +354,16 @@
                 </article>
                 <article class="cardsDepoimentos depoimentos1">
                     <div class="avatar">
-                        <img class="avatarPhoto" src="/assets/images/pages/index/depoiments4.png" alt="foto de nosso cliente">
+                        <img class="avatarPhoto" src="assets/images/pages/index/depoiments4.png" alt="foto de nosso cliente">
                         <div>
                             <h3 class="depoimentsTitle">LinkPark</h3>
                             <figure class="stars">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
                             </figure>
                         </div>
                     </div>
@@ -374,16 +374,16 @@
                 </article>
                 <article class="cardsDepoimentos depoimentos1">
                     <div class="avatar">
-                        <img class="avatarPhoto" src="/assets/images/pages/index/depoiments5.png" alt="Imagem de nossos clientes">
+                        <img class="avatarPhoto" src="assets/images/pages/index/depoiments5.png" alt="Imagem de nossos clientes">
                         <div>
                             <h3 class="depoimentsTitle">Taylor Swift</h3>
                             <figure class="stars">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="estrela de avaliação">
-                                <img src="/assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="estrela de avaliação">
+                                <img src="assets/icons/pages/index/star.svg" alt="Ícone de estrela representando avaliação de 5 estrelas">
                             </figure>
                         </div>
                     </div>
@@ -407,7 +407,7 @@
             </a>
             </div>
             <div class="imagem">
-                <img class="" src=".././assets/images/pages/ferramentas/formulario-contato.png" alt="Ilustração representando dúvida">
+                <img class="" src="../.assets/images/pages/ferramentas/formulario-contato.png" alt="Ilustração representando dúvida">
             </div>
         </div>
     </section>
@@ -415,7 +415,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-contacts">
-                <img class="footer-logo" src="/assets/images/global/RHconexao-logo.svg" alt="Conexão RH - Rodapé da página">
+                <img class="footer-logo" src="assets/images/global/RHconexao-logo.svg" alt="Conexão RH - Rodapé da página">
                 <h1>RHConexão</h1>
                 <p>Saiba mais sobre o projeto e descubra como podemos contribuir para o seu desenvolvimento profissional!</p>
 
