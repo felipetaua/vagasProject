@@ -1,10 +1,9 @@
 <?php
-// c:/xampp/htdocs/sistemaDeVagas/config/db.php
 
-$host = '127.0.0.1'; // ou 'localhost'
-$db   = 'jobs';      // Nome do banco de dados, conforme seu arquivo .sql
-$user = 'root';      // Usuário padrão do XAMPP
-$pass = '';          // Senha padrão do XAMPP (vazia)
+$host = '127.0.0.1'; 
+$db   = 'jobs';      
+$user = 'root';      
+$pass = '';          
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

@@ -1,0 +1,122 @@
+.circle {
+    display: flex;
+    width: 45px;
+    height: 45px;
+    background-color: var(--white);
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+    margin-left: 0.5rem;
+}
+
+.align-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.section-news {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    text-align: center;
+}
+
+.news-title{
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.news-text {
+    font-size: 1.5rem;
+    color: #6b7280;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: black;
+    color: white;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5rem;
+}
+
+.button-action:hover {
+    background-color: #1f2937;
+}
+
+.card-skill3 {
+    max-width: 350px;
+    margin: 3rem auto 0;
+}
+
+.circle img {
+    width: 16px;
+    height: 16px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    .flex-container {
+        flex-direction: row;
+    }
+}
+
+.card-skill {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    max-width: 350px;
+}
+
+.card-skill3 {
+    margin: 3rem -24px 0;
+}
+
+.card-skill:hover {
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-skill h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.card-skill p {
+    font-size: 1.2rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.mockup {
+    width: 58rem;
+    max-width: 25rem;
+    mix-blend-mode: darken;
+}
+
+@media screen and (max-width: 600px) {
+    .mockup {
+        width: 100%;
+    }
+}

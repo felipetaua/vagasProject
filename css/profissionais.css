@@ -402,6 +402,7 @@ body {
 
 .btn-action.btn-view {
     background-color: #3498db;
+    padding-top: 13px;
 }
 .btn-action.btn-view:hover {
     background-color: #2980b9;

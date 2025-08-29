@@ -1,0 +1,11 @@
+@media screen and(max-width: 992px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+    .sidebar { position: fixed; transform: translateX(-100%); z-index: 1000; /* etc. */ }
+    .hero-section h1 { font-size: 2rem; }
+    .main-content {
+        padding: 2rem 1rem;
+    }
+    .search-input svg {
+        overflow: inherit;
+    }
+}

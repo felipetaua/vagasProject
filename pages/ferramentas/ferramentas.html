@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="../../assets/css/pages/ferramentas/ferramentas.css">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>    
+    
+    <!-- JavaScript -->
+    <script defer src="../../assets/js/pages/ferramentas/ferramentas.js"></script>
+    <script defer src="../../assets/js/global/main.js"></script>
+
+    <!-- miniatura -->
+    <link rel="icon" href="../../assets/images/global/RHconexao-icone.png" type="image/png">
+    <title>Ferramentas - Conexão RH</title>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo link">
+            <img src="../../assets/images/global/RHconexao-logo.svg" alt="Logotipo da RH Conexão" class="logoEmpresa">
+        </a>
+
+        <!-- Botão hamburguer fora da logo -->
+        <div class="hamburger">
+            <div class="linha"></div>
+            <div class="linha"></div>
+            <div class="linha"></div>    
+        </div>
+
+        <!-- Navegação principal -->
+        <nav class="nav-bar">
+            <ul class="linkNav">
+                <li>
+                    <a href="/" class="linkPages curadoriaLink">Início</a>
+                </li>
+                <li>
+                    <a href="#" class="linkPages ferramentasLink ativo linkPagesActive">Ferramentas</a>
+                </li>
+                <li>
+                    <a href="../../pages/sobre/sobre" class="linkPages">Quem Somos</a>
+                </li>
+                <li>
+                    <a href="../../pages/curadoria/curadoria" class="linkPages">Curadoria</a>
+                </li>
+                <li>
+                    <a href="../../pages/conect/conect" class="linkPages">Conecte-se</a>
+                </li>
+            </ul>
+            <a href="../../pages/login/login.blade.php" class="loginNav btn-mobile" >Entrar</a>
+            <a href="../../pages/register/register.blade.php" class="SingninNav btn-mobile">Criar</a>
+        </nav>
+
+        <!-- Botões de ação -->
+        <div class="linkAcount">
+            <a href="../../pages/login/login.blade.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../pages/register/register.blade.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+        </div>
+    </header>
+
+    <!-- Header Hero -->
+    <header class="heroSection">
+        <h1 class="hero-title">
+            Você Conhece Nossa <span class="gradient">IA</span>, Para te Ajudar?
+            <span class="sparkle-video-wrapper">
+                <video class="sparkle-video" autoplay loop muted playsinline aria-label="Animação IA">
+                    <source src="../../assets/images/pages/ferramentas/sparkle-anim.webm" type="video/webm">
+                    Seu navegador não suporta vídeo.
+                </video>
+            </span>
+        </h1>
+        <input class="hero-input" type="text" readonly placeholder="Pergunte a nossa IA, vai te ajudar muito">
+        <button class="hero-btn">Venha conhecer</button>
+    </header>
+
+    <section class="section-news">
+        <h1 class="news-title">Descubra as Soluções do Conexão RH <span class="gradient">2.0</span></h1>
+        <p class="news-text">
+            Conectamos empresas às melhores ferramentas de recrutamento, gestão de talentos, clima organizacional e desenvolvimento humano, impulsionando a performance e o bem-estar no ambiente corporativo.
+        </p>
+
+        <a href="../register/register" class="button-action ">
+            Acessar Plataforma
+            <span class="circle">
+                <img src="../../assets/icons/pages/index/icon-arrow-right.png" alt="">
+            </span>
+        </a>
+
+        <div class="flex-container">
+            <article class="card-skill">
+                <h3>Gestão de Recrutamento</h3>
+                <p>
+                    Soluções inteligentes para atração de talentos, triagem de currículos, entrevistas e acompanhamento de processos seletivos, tudo em um só lugar.
+                </p>
+                <button class="open-modal-btn">Ver detalhes</button>
+            </article>
+
+            <div>
+                <img src="../../assets/images/pages/ferramentas/mockup-iphone.png" alt="App mockup" class="mockup"/>
+            </div>
+
+            <article class="card-skill">
+                <h3>Desenvolvimento de Talentos</h3>
+                <p>
+                    Ferramentas para mapeamento de competências, planos de desenvolvimento, treinamentos e acompanhamento da evolução dos colaboradores.
+                </p>
+                <button class="open-modal-btn" onclick="openModal('talentoModal')">Ver detalhes</button>
+            </article>
+
+        </div>
+
+        <div class="align-card">
+            <article class="card-skill card-skill3">
+                <h3>Clima e Engajamento</h3>
+                <p>
+                    Acompanhe o clima organizacional, aplique pesquisas de satisfação e obtenha insights para fortalecer a cultura e o engajamento da sua equipe.
+                </p>
+                <button class="open-modal-btn" onclick="openModal('climaModal')">Ver detalhes</button>
+            <div/>
+        </article>
+    </section>
+
+
+    <!-- Recursos presente na plataforma -->
+    <section class="section">
+        <h2>Principais <span class="blue">Recursos da Plataforma</span></h2>
+        <div class="logos">
+
+            <div class="recurso-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/procura-de-emprego.gif" alt="Vagas Abertas" title="Vagas Abertas">
+                <h3>Vagas Abertas</h3>
+                <p>Acompanhe as melhores oportunidades de emprego alinhadas ao seu perfil profissional.</p>
+            </div>
+
+            <div class="recurso-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/trabalho-em-equipe.gif" alt="Teste de Perfil" title="Testes de Perfil Comportamental">
+                <h3>Teste de Perfil</h3>
+                <p>Realize avaliações comportamentais para entender seus pontos fortes e áreas de desenvolvimento.</p>
+            </div>
+
+            <div class="recurso-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/recursos-humanos.gif" alt="Conteúdo RH" title="Conteúdo profissional, dicas, artigos e postagens sobre Recursos Humanos">
+                <h3>Conteúdos e Dicas</h3>
+                <p>Acesse artigos, dicas, materiais sobre carreira, recrutamento e tendências de RH.</p>
+            </div>
+
+            <div class="recurso-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/cv.gif" alt="Crie seu Currículo" title="Crie seu Curriculo">
+                <h3>Crie seu Currículo</h3>
+                <p>Monte seu currículo de forma simples, profissional e pronta para enviar às empresas.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="banner-mid">
+        <div class="banner-content">
+            <h2>🚀 Potencialize seu RH com nossa IA!</h2>
+            <p>Economize tempo, tire suas dúvida acerte nas contratações e desenvolva talentos com tecnologia inteligente.</p>
+            <a href="https://chatgpt.com/g/g-6809798f94e48191b2c9216afd9c478e" target="_blank"   rel="noreferrer noopener" class="btn-banner" aria-label="Botão para nossa IA">Experimente Gratuitamente</a>
+        </div>
+    </section>
+
+    <section class="section-solutions">
+        <h2 class="solutions-title">
+            As Melhores Soluções Para <span class="highlight">Gestão de Pessoas</span>
+        </h2>
+        
+        <div class="solutions-content">
+            <div class="solutions-block">
+                <h3>Pequenas Empresas</h3>
+                <p>
+                    Simplifique processos, otimize contratações e desenvolva talentos. Nossa plataforma oferece ferramentas práticas para estruturar sua equipe e impulsionar seu crescimento.
+                </p>
+            </div>
+
+            <div class="solutions-block">
+                <h3>Consultores de RH</h3>
+                <p>
+                    Automatize relatórios, gerencie múltiplos clientes e entregue diagnósticos precisos. Suporte completo para que sua consultoria atue de forma estratégica e escalável.
+                </p>
+            </div>
+
+            <div class="solutions-block">
+                <h3>Integração Simple</h3>
+                <p>
+                    Soluções simplificadas para você usar em poucos passos. Gerencie dados, tudo para facilitar o processo de seleção de candidatos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Benefícios e Resultados -->
+    <section class="section">
+        <h2>Resultados Que Transformam Pessoas e Organizações</h2>
+        <div class="flex-section">
+
+            <div class="flex-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/desempenho.gif" alt="Relatórios de Desempenho">
+                <div class="flex-content">
+                    <h3>Relatórios de Desempenho</h3>
+                    <p>Tenha análises completas dos colaboradores, facilitando a tomada de decisão e o desenvolvimento contínuo.</p>
+                </div>
+            </div>
+
+            <div class="flex-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/feedback.gif" alt="Feedbacks Rápidos">
+                <div class="flex-content">
+                    <h3>Feedbacks Rápidos</h3>
+                    <p>Melhore a comunicação interna com feedbacks instantâneos, promovendo alinhamento e engajamento.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Segurança de Dados -->
+    <section class="section">
+        <h2>Mantenha Dados e Informações <span class="blue">Sempre Seguros</span></h2>
+        <div class="flex-section">
+
+            <div class="flex-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/ciber-seguranca.gif" alt="Segurança Multi-camadas">
+                <div class="flex-content">
+                    <h3>Segurança Multi-camadas</h3>
+                    <p>Proteção avançada com criptografia, autenticação em múltiplos fatores e backups automáticos.</p>
+                </div>
+            </div>
+
+            <div class="flex-item">
+                <img class="icone-gif" src="../../assets/images/pages/ferramentas/dados-pessoais.gif" alt="LGPD Compliance">
+                <div class="flex-content">
+                    <h3>LGPD Compliance</h3>
+                    <p>Atue em total conformidade com a LGPD, garantindo a privacidade e segurança dos dados dos colaboradores.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="duvidas">
+        <div class="container">
+            <div class="texto">
+            <h2>❓ Ficou com alguma dúvida?</h2>
+            <p>Se você ainda tem alguma pergunta ou precisa de ajuda, fale com nossa equipe! Clique no botão abaixo e envie sua dúvida.</p>
+            <a href="https://docs.google.com/forms/d/SEU_ID_DO_FORM" target="_blank" class="botao-duvida" rel="noopener noreferrer">
+                Tirar Dúvida Agora
+            </a>
+            </div>
+            <div class="imagem">
+            <img class="" src="../../assets/images/pages/ferramentas/formulario-contato.png" alt="Ilustração representando dúvida">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contacts">
+                <img class="footer-logo" src="../../assets/images/global/RHconexao-logo.svg" alt="Conexão RH - Rodapé da página">
+                <h1>RHConexão</h1>
+                <p>Saiba mais sobre o projeto e descubra como podemos contribuir para o seu desenvolvimento profissional!</p>
+
+                <div class="footer-social-media">
+                    <a href="https://www.instagram.com/" class="footer-link instagram" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="https://www.facebook.com/?locale=pt_BR" class="footer-link facebook" target="_blank" rel="noreferrer noopener" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://www.whatsapp.com/" class="footer-link whatsapp" target="_blank" rel="noreferrer noopener" aria-label="Whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <nav class="footer-list" aria-label="Links para empresas">
+                <h3>Recursos para empresas</h3>
+                <ul>
+                    <li  class="li">
+                        <a href="#" class="footer-link link">Curadoria</a>
+                    </li>
+                    <li class="li">
+                        <a href="#" class="footer-link link">Proteção de Dados</a>
+                    </li>
+                    <li class="li">
+                        <a href="#" class="footer-link link">Termos de Uso</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <nav class="footer-list"  aria-label="Links para colaboradores">
+                <h3>Soluções para colaboradores</h3>
+                <ul>
+                    <li class="li">
+                        <a href="#" class="footer-link link">Artigos</a>
+                    </li>
+                    <li class="li">
+                        <a href="#" class="footer-link link">Dicas empresariais</a>
+                    </li>
+                    <li class="li">
+                        <a href="#" class="footer-link link">Vagas e Curriculos</a>
+                    </li>
+                </ul>
+            </nav>
+            
+
+            <form action="https://escola.us13.list-manage.com/subscribe/post?u=a6246e182df6b62a3126abeed&amp;id=82e953ff84&amp;f_id=00568eeaf0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self">
+                <h3>Contato</h3>
+                <p>Entre em contato conosco através do campo abaixo:</p>
+                <div class="input-group">
+                    <input type="text" name="MMERGE6" class="text" id="mce-MMERGE6" value="" placeholder="Digite sua sugestão" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="Digite seu e-mail" required>
+                    <button type="submit" name="subscribe" id="mc-embedded-subscribe">
+                        <i class="fa-regular fa-envelope"></i> Enviar
+                    </button>
+                </div>
+                <!-- Campo oculto para evitar spam bots -->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_a6246e182df6b62a3126abeed_82e953ff84" tabindex="-1" value="">
+                </div>
+            </form>
+        </div>
+
+        <div class="footer-copyright">
+            &#169
+            2025 Direitos reservados a RHConexão. Criado por: <a class="copyrightLink" href="https://github.com/felipetaua" target="_blank" rel="noreferrer noopener">felipetauaSystems </a> & <a class="link copyrightLink" href="https://github.com/nico-cbr" target="_blank" rel="noreferrer noopener"> nicoSystems </a> 
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Etapas do Processo Seletivo</h2>
+
+        <div class="timeline">
+        <!-- 1. Diagnóstico -->
+        <div class="timeline-step active">
+            <i class="fas fa-user-circle"></i>
+            <div class="timeline-content">
+            <h3>Diagnóstico</h3>
+            <p>Alinhamento do perfil da vaga, missão, valores, desafios e propósitos da empresa.</p>
+            </div>
+        </div>
+
+        <!-- 2. Comunicação -->
+        <div class="timeline-step active">
+            <i class="fas fa-bullhorn"></i>
+            <div class="timeline-content">
+            <h3>Comunicação</h3>
+            <p>Divulgação em canais online e offline, redes sociais e portais de emprego.</p>
+            </div>
+        </div>
+
+        <!-- 3. Triagem -->
+        <div class="timeline-step">
+            <i class="fas fa-tasks"></i>
+            <div class="timeline-content">
+            <h3>Triagem</h3>
+            <p>Análise de pré-requisitos e hard skills dos candidatos.</p>
+            </div>
+        </div>
+
+        <!-- 4. Seleção -->
+        <div class="timeline-step">
+            <i class="fas fa-filter"></i>
+            <div class="timeline-content">
+            <h3>Seleção</h3>
+            <p>Mapeamento de competências, avaliação de hard e soft skills, fit cultural e alinhamento com o culture code da empresa.</p>
+            </div>
+        </div>
+
+        <!-- 5. Encaminhamento -->
+        <div class="timeline-step">
+            <i class="fas fa-check-circle"></i>
+            <div class="timeline-content">
+            <h3>Encaminhamento</h3>
+            <p>Envio do perfil aderente através de relatório técnico ao cliente.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- clima organizacional modal -->
+    <div class="modal-overlay" id="climaModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('climaModal')">&times;</span>
+            <h2>Clima e Engajamento</h2>
+            <p class="subtitle">
+                Acompanhe o clima organizacional, aplique pesquisas de satisfação e obtenha insights para fortalecer a cultura e o engajamento da sua equipe.
+            </p>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Clima Organizacional</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 82%;">82%</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>Engajamento</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 76%;">76%</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="details-btn">Ver Detalhes</button>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="talentoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('talentoModal')">&times;</span>
+            <h2>Desenvolvimento de Talentos</h2>
+            <p class="modal-description">
+            Potencialize sua equipe com ferramentas que promovem crescimento, evolução e alto desempenho.
+            </p>
+
+            <div class="modal-sections">
+
+            <div class="modal-card">
+                <h3>Mapeamento de Competências</h3>
+                <p>Identifique as habilidades-chave dos colaboradores e alinhe-as com os objetivos da empresa.</p>
+            </div>
+
+            <div class="modal-card">
+                <h3>Planos de Desenvolvimento</h3>
+                <p>Crie trilhas de crescimento personalizadas para que cada profissional evolua em sua carreira.</p>
+            </div>
+
+            <div class="modal-card">
+                <h3>Treinamentos e Capacitações</h3>
+                <p>Implemente programas de capacitação focados nas necessidades reais da equipe.</p>
+            </div>
+
+            <div class="modal-card">
+                <h3>Acompanhamento Contínuo</h3>
+                <p>Monitore o progresso, ofereça feedbacks construtivos e ajuste os planos conforme necessário.</p>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+
+    <!-- Botão flutuante de voltar ao topo -->
+    <button id="backToTopBtn" aria-label="Voltar ao topo">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+</body>
+</html>

@@ -1,0 +1,47 @@
+@import url(../../../../css/global/variables.css);
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 10%;
+    background: linear-gradient(145deg, #fff, #bdc5e6);
+}
+
+.hero-text {
+    width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: var(--blue);
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    color: var(--gray-dark);
+    margin-bottom: 30px;
+}
+
+.hero-text .btns a {
+    margin-right: 15px;
+    border-radius: 32px;
+}
+
+.hero-image {
+    width: 50%;
+}
+
+.btns {
+    display: flex;
+}
+
+@media screen and (max-width: 550px ) {
+    .hero-text h1 {
+        text-align: left;
+    }
+
+    .hero-text p {
+        text-align: left;
+    }
+}

@@ -1,0 +1,23 @@
+
+
+.carrossel {
+    margin-top: 1rem;
+    width: 100%; 
+    overflow: hidden; 
+    border-radius: 16px;
+}
+
+.carrossel-inner {
+    display: flex; 
+    transition: transform 0.8s ease-in-out; 
+}
+
+.gallery-item-group {
+    min-width: 100%; 
+    box-sizing: border-box;
+}
+
+.gallery-item-group img {
+    width: 100%;
+    display: block;
+}

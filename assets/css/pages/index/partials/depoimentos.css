@@ -1,0 +1,161 @@
+.depoimentsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.depoimentsTitleSection {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--black);
+}
+
+.depoimentsSection {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 20px;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.depoimentsSection::-webkit-scrollbar {
+    display: none;
+}
+
+.cardsDepoimentos {
+    width: 500px;
+    height: 280px;
+    background-color: var(--white);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentDepoiments {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.avatar {
+    display: flex;
+    padding: 0 20px 0px 0;
+}
+
+.avatarPhoto {
+    padding: 0 20px 20px 0;
+    width: 90px;
+    height: 90px;
+}
+
+.depoimentsTitle {
+    font-size: 24px;
+}
+
+.horizontalLine {
+    margin: 0 20px 0 20px;
+}
+
+.depoimentsText {
+    width: 400px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+    margin: 0 20px 20px 20px;
+    flex-shrink: 0;
+}
+
+.depoimentsNavBtns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.depoimentsNavBtn {
+    background: linear-gradient(90deg, #5372F0 0%, #6A82FB 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(83,114,240,0.10);
+    transition: background 0.2s, transform 0.15s;
+}
+.depoimentsNavBtn:active,
+.depoimentsNavBtn:focus {
+    background: linear-gradient(90deg, #4663d6 0%, #5372F0 100%);
+    outline: 2px solid #5372F0;
+    transform: scale(0.96);
+}
+.depoimentsNavBtn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+    .cardsDepoimentos {
+        width: 90vw;
+        min-width: 260px;
+        max-width: 98vw;
+        height: auto;
+        padding: 6vw 2vw;
+    }
+    .depoimentsSection {
+        gap: 12px;
+        padding: 10px 0;
+    }
+    .depoimentsText {
+        font-size: 1.1rem;
+        width: 100%;
+        padding: 10px 0 0 0;
+        margin: 0;
+    }
+    .avatarPhoto {
+        width: 64px;
+        height: 64px;
+        padding: 0 10px 10px 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .depoimentsWrapper {
+        margin-top: 60px;
+        padding: 0 2vw;
+    }
+    .depoimentsSection {
+        gap: 8px;
+        padding: 6px 0;
+    }
+    .cardsDepoimentos {
+        width: 90vw;
+        min-width: 375px;
+        max-width: 99vw;
+        height: 250px;
+        padding: 7vw 2vw;
+        border-radius: 18px;
+    }
+    .depoimentsTitleSection {
+        font-size: 1.5rem;
+    }
+    .depoimentsText {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,124 @@
+.modal-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-title-group h2 {
+    margin: 0;
+}
+
+.explanation-btn {
+    background-color: #e5e7eb;
+    color: #4b5563;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.explanation-btn:hover {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.cover-letter-modal-content {
+    background-color: #f9fafb; /* Fundo mais claro */
+    position: relative; /* Necessário para o pop-up de explicação */
+}
+
+.cover-letter-modal-content .modal-body {
+    margin-top: 10px;
+}
+
+.cover-letter-modal-content textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: #fff;
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.cover-letter-modal-content textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.cover-letter-modal-content .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Estilo para botão secundário */
+.btn-secondary {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+.btn-secondary:hover {
+    background-color: #d1d5db;
+}
+
+/* --- Pop-up de Explicação --- */
+.explanation-popup {
+    display: none; /* Começa oculto */
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 15px;
+    z-index: 1010; /* Fica acima do conteúdo do modal */
+}
+
+.explanation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.explanation-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #111827;
+}
+
+.explanation-header span {
+    font-size: 24px;
+    color: #9ca3af;
+    cursor: pointer;
+}
+
+.explanation-popup p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0;
+}

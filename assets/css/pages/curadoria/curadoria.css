@@ -1,0 +1,18 @@
+@import url(../../pages/curadoria/partials/fetures.css);
+@import url(../../pages/curadoria/partials/herosection.css);
+@import url(../../pages/curadoria/partials/latest.css);
+@import url(../../pages/curadoria/partials/sidebar.css);
+@import url(../../pages/curadoria/partials/hr-resources.css);
+@import url(../../pages/curadoria/partials/tabs.css);
+@import url(../../pages/curadoria/partials/mini-curadoria.css);
+@import url(../../pages/curadoria/partials/search.css);
+@import url(../../pages/curadoria/partials/section-podcast-videos.css);
+@import url(../../pages/curadoria/partials/painel-lateral.css);
+
+
+@import url(../../global/variables.css);
+@import url(../../global/normalize.css);
+@import url(../../global/elements.css);
+
+@import url(../../../css/pages/index/partials/header.css);
+@import url(../../../css/pages/index/partials/footer.css);

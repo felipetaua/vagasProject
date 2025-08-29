@@ -1,0 +1,154 @@
+/* Hero */
+.hero {
+    background: linear-gradient(145deg, #fff, #ffedd9);
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    flex: 1 1 500px;
+}
+
+.hero-text h1 {
+    width: 100%;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: var(--blue);
+}
+
+.hero-text span {
+    color: #0077b6;
+}
+
+.hero-text p {
+    width: 100%;
+    font-size: 1.25rem;
+    margin: 15px 0;
+    color: var(--gray-dark);
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.hero-buttons .btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: var(--orange);
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.hero-buttons .btn.dark {
+    background: var(--primary);
+}
+
+.hero-buttons .btn:hover {
+    opacity: 0.9;
+}
+
+/* Controle de imagem */
+.hero-img {
+    flex: 1 1 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-img img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+    .hero .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-text p {
+        font-size: 1.1rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-text {
+        flex: 1 1 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 80px 20px;
+    }
+
+    .hero-text h1 {
+        text-align: left;
+        font-size: 2.5rem;
+    }
+
+    .hero-text p {
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+
+    .hero-img img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-text p {
+        font-size: 1.25rem;
+    }
+
+    .hero-buttons .btn {
+        width: 60%;
+        text-align: center;
+    }
+
+    .hero-img img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-img img {
+        flex: 1 1 0px;
+        width: 100%;
+    }
+
+    .hero {
+        padding-bottom: 0px;
+    }
+}

@@ -103,7 +103,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="professional-actions">
                     <a href="/sistemaDeVagas/authenticated/perfil_publico.php?id=<?= $professional['id'] ?>" class="btn-action btn-view">
-                        <i class="fa-solid fa-eye"></i> Ver Perfil
+                        <i class="fa-solid fa-eye"></i><br> Ver Perfil
                     </a>
                     <a href="/sistemaDeVagas/authenticated/baixar_curriculo.php?id=<?= $professional['id'] ?>" class="btn-action btn-download">
                         <i class="fa-solid fa-download"></i> Baixar CV

@@ -1,0 +1,84 @@
+.ia-card {
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+.ia-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem; 
+}
+
+.ia-subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem; 
+    max-width: 500px;
+}
+
+.waves-container {
+    width: 80%;
+    /* max-width: 550px; */
+    height: 550px;
+    margin-bottom: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.waves-container spline-viewer {
+    border-radius: 32px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ia-button {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    /* Posiciona o botão sobre o spline-viewer */
+    bottom: 30vh;
+    position: relative; 
+    z-index: 10;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ia-button:hover {
+    background-color: #254d9b;
+    transform: translateY(-2px);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .ia-card {
+        justify-content: center;
+    }
+
+    .waves-container {
+        width: 90%;
+        height: 350px; 
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .waves-container {
+        height: 280px; 
+    }
+}

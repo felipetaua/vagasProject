@@ -1,0 +1,287 @@
+@import url('../../../global/variables.css');
+
+.imagensFundo {
+    display: block;
+    position: absolute;
+    z-index: -1;
+}   
+
+.imagensFundo .pessoa,
+.imagensFundo .fumaca {
+    width: 100vw;
+    position: relative;
+}
+
+.imagensFundo .pessoa{
+    width: 99vw;
+    margin-top: -3.5vw;
+    opacity: 25%;
+}
+
+.imagensFundo .fumaca {
+    width: 99vw;
+    margin-top: -25vw;
+}
+
+.mundo-mobile {
+    display: none;
+}
+
+.heroSection {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.cardsHero {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.cardsFlutuantes {
+    display: block;
+    width: 100%;
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    position: relative;
+    align-items: center;
+}
+
+.heroGrid article {
+    position: relative;
+}
+
+.floating1 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.floating2 {
+    margin: 80px 20px 40px 20px;
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+.floating3 {
+    display: flex;
+    justify-content: flex-end;
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+.floatingContent {
+    margin: auto;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: span 3;
+}
+
+.floating5 {
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
+
+.floating6 {
+    display: flex;
+    justify-content: flex-end;
+    grid-column-start: 3;
+    grid-row-start: 2;
+}
+
+.floating7 {
+    grid-column-start: 3;
+    grid-row-start: 3;
+}
+
+.contentHero {
+    padding: 20px;
+    text-align: center;
+}
+
+.heroTitle {
+    color: var(--blue);
+    font-size: 42px;
+    line-height: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.heroTitle span {
+    font-weight: bold;
+}
+
+.gradient {
+    background: linear-gradient(45deg, rgb(163, 5, 5) 0%, rgb(248, 149, 0) 50%, rgb(236, 226, 89) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300%;
+    animation: gradient 2s ease-in-out alternate infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 25%; }
+    50% { background-position: 50% 75%; }
+    100% { background-position: 75% 100%; }
+}
+
+.heroText {
+    color: var(--color-gray);
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.containerBtn {
+    display: flex;
+    justify-content: center;
+}
+
+.actionButtonHero {
+    width: 217px;
+    height: 60px;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: .5s ease;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.actionButtonHero:before {
+    content: '';
+    width: 0;
+    height: 60px;
+    border-radius: 30em;
+    box-shadow: 10px 0 35px var(--orange-hover);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--orange-hover);
+    transition: .5s ease-in;
+    display: block;
+    z-index: -1;
+}
+
+.actionButtonHero:hover:before {
+    width: 100%;
+}
+
+.arrow {
+    transition: .5s;
+}
+
+.arrow:hover {
+    transform: rotate(45deg);
+}
+
+.circle {
+    background-color: var(--white);
+    width: 47px;
+    height: 42px;
+    border-radius: 32px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.fa-arrow-right-long {
+    font-size: 16px;
+    color: var(--black);
+}
+
+.scroll-hero {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vw;
+}
+
+.scroll-down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px gray;
+    border-radius: 24px;
+    padding: 5px;
+    width: 60px;
+    animation: floatingScroll 5s ease-in-out infinite;
+    opacity: .8;
+    transition: .5s;
+}
+
+.scroll-down-image {
+    filter: invert(50%);
+}
+
+.scroll-down-image:hover {
+    filter: invert(80%);
+}
+
+.scroll-down-image:active {
+    filter: invert(100%);
+}
+
+@keyframes floatingScroll {
+    0% {
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(15px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .heroGrid {
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto;
+    }
+
+    .fumaca, .pessoa {
+        display: none;
+    }
+
+    .heroGrid article:not(.floatingContent) {
+        display: none;
+    }
+
+    .floatingContent {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .mundo-mobile {
+        display: block;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    .heroTitle {
+        font-size: 28px; 
+    }
+
+    .heroText {
+        font-size: 1.25rem;
+    }
+
+    .actionButtonHero {
+        font-size: 16px;
+    }
+}
