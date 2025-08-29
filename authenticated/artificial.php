@@ -26,12 +26,13 @@ $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
     <title>Assistente IA - RH Conexão</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
 
     <link rel="stylesheet" href="/sistemaDeVagas/css/ia.css">
     <style>
         /* Estilos para a nova seção de introdução da IA */
-        .ai-intro-section {cla
+        .ai-intro-section {
             background-color: #fdfcff;
             border-radius: 12px;
             padding: 30px 40px;
@@ -72,19 +73,36 @@ $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
             top: 0;
         }
         .ai-intro-section .intro-cta-btn {
-            background-color: #8e44ad;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
             color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
+            padding: 14px 30px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             margin-top: 20px;
-            transition: background-color 0.2s, transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.4);
+            border: none;
+            animation: pulse-animation 2.5s infinite;
         }
         .ai-intro-section .intro-cta-btn:hover {
-            background-color: #732d91;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(142, 68, 173, 0.5);
+            animation-play-state: paused;
+        }
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.04);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -109,7 +127,10 @@ $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
                     <li>Oferece dicas sobre negociação salarial e desenvolvimento de carreira.</li>
                 </ul>
                 <br>
-                <a href="https://chatgpt.com/g/g-6809798f94e48191b2c9216afd9c478e-clara" target="_blank" class="intro-cta-btn">Conversar com a Clara</a>
+                <a href="https://chatgpt.com/g/g-6809798f94e48191b2c9216afd9c478e-clara" target="_blank" class="intro-cta-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Conversar com a Clara</span>
+                </a>
             </section>
 
             <section class="ai-features-grid">
