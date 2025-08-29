@@ -407,7 +407,7 @@
             </a>
             </div>
             <div class="imagem">
-                <img class="" src="../.assets/images/pages/ferramentas/formulario-contato.png" alt="Ilustração representando dúvida">
+                <img class="" src="./assets/images/pages/ferramentas/formulario-contato.png" alt="Ilustração representando dúvida">
             </div>
         </div>
     </section>
