@@ -132,39 +132,10 @@ if (!$user) {
     <title>Perfil</title>
 </head>
 <body>
-    <header style='background:white; margin-top:-10px; padding:5px;'>
-        <ul>
-            <a href='../authenticated/home.php'> <li>
-                <img src='..\imagens\Logo.svg' alt=''class='logo'> Conexão RH 2.0
-            </li></a> 
-            <a href='../authenticated/profissionais.php'><li>Profissionais</li></a>
-            <a href='../authenticated/cadastroVagas.php'><li>Cadastrar vaga</li></a>
-            <a href='../authenticated/ultimasVagas.php'><li>Últimas vagas</li></a>
-            <a href='../authenticated/vagasCriadas.php'><li>Minhas vagas</li></a>
-            <div class='dropdown'> 
-                <div class='perfil-img' style='display:flex; align-items:center; justify-content:center;'>
-                    <div style='display:flex; flex-direction:column; align-items:center;'>
-                        <?php if (!empty($user['foto'])): ?>
-                            <img src='uploads/<?php echo htmlspecialchars($user['foto']); ?>' alt="Foto de perfil" style='width:50px; height:50px; border-radius:100%;'>
-                        <?php else: ?>
-                            <img src='https://placehold.co/50x50' alt="Foto de perfil padrão" style='width:50px; height:50px; border-radius:100%;'>
-                        <?php endif; ?>
-                    </div>    
-                    <li class='dropdown-btn'><?php echo htmlspecialchars($user['nome']); ?></li>
-                    <svg xmlns='http://www.w3.org/2000/svg' style='width:10px; color:green;' viewBox='0 0 320 512'><path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/ ></svg>
-                </div>
-                <ul class='dropdown-menu'>
-                    <a href='perfil.php'><li>Editar perfil</li></a>
-                    <a href='#'> <li>Ranking</li></a>
-                    <a href='../authenticated/profissao.php'> <li>Profissão</li></a>
-                    <a href='#'><li>Contratos</li></a>
-                    <a href='#'> <li>Chat</li></a>
-                    <a href='curriculo.php'> <li>Currículo</li></a>
-                    <a href='./logout.php'><li>Sair</li></a>
-                </ul>
-            </div>
-        </ul>
-    </header>
+    <?php 
+        // Inclui o cabeçalho reutilizável
+        require_once __DIR__ . '/templates/header.php';
+    ?>
 
     <?php if (!empty($updateMessage)): ?>
         <p style="color: white; text-align: center; font-weight: bold;"><?php echo $updateMessage; ?></p>

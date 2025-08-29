@@ -10,13 +10,19 @@ if (!isset($_SESSION['user_id'])) {
   exit;
 }
 
+// Busca os dados do usuário LOGADO para o header, que espera a variável $user.
+$stmt_header_user = $pdo->prepare("SELECT nome, foto FROM cadastro WHERE id = ?");
+$stmt_header_user->execute([$_SESSION['user_id']]);
+$user = $stmt_header_user->fetch(PDO::FETCH_ASSOC);
+
 // Valida o ID do perfil a ser visualizado
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    // Redireciona ou mostra um erro se o ID for inválido
-    header("Location: profissionais.php?error=invalid_id");
-    exit;
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    // Se um ID for fornecido na URL, visualiza o perfil correspondente
+    $profileId = (int)$_GET['id'];
+} else {
+    // Se nenhum ID for fornecido, assume que o usuário quer ver o próprio perfil
+    $profileId = $_SESSION['user_id'];
 }
-$profileId = (int)$_GET['id'];
 
 // --- LÓGICA PARA CARREGAR DADOS DO CURRÍCULO ---
 // Inicializa variáveis
@@ -181,4 +187,5 @@ function formatAddress($c) {
     </main>
 
 </body>
+<script src="/sistemaDeVagas/js/perfilPublico.js"></script>
 </html>

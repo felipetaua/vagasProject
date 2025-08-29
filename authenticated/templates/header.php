@@ -24,12 +24,12 @@
             </div>
             <ul class='dropdown-menu'>
                 <a href='perfil.php'><li>Editar perfil</li></a>
-                <a href='criar_curriculo.php'> <li>Criar Currículo</li></a>
-                <a href='/sistemaDeVagas/authenticated/profissao.php'> <li>Profissão</li></a>
                 <a href='perfil_publico.php'> <li>Perfil Público</li></a>
-                <a href='vagasCriadas.php'><li>Contratos</li></a>
+                <a href='criar_curriculo.php'> <li>Criar Currículo</li></a>
                 <a href='artificial.php'> <li>Inteligencia Artificial</li></a>
                 <a href='curriculo.php'> <li>Currículo</li></a>
+                <a href='/sistemaDeVagas/authenticated/profissao.php'> <li>Profissão</li></a>
+                <a href='vagasCriadas.php'><li>Contratos</li></a>
                 <a href='./logout.php'><li>Sair</li></a>
             </ul>
         </div>
