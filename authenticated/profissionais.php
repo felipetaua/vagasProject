@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/db_connection.php';
+// Use a conexão centralizada com o banco de dados via PDO
+require_once __DIR__ . '/../config/db.php';
 
 // --- VERIFICAÇÃO DE LOGIN ---
 if (!isset($_SESSION["user_id"])) {
@@ -10,40 +11,37 @@ if (!isset($_SESSION["user_id"])) {
 }
 $userId = $_SESSION['user_id'];
 
-// --- LÓGICA DE BUSCA SEGURA ---
+// --- BUSCA DADOS DO USUÁRIO LOGADO PARA O HEADER ---
+$stmt_user = $pdo->prepare("SELECT nome, foto FROM cadastro WHERE id = ?");
+$stmt_user->execute([$userId]);
+$user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+
+// --- LÓGICA DE BUSCA DE PROFISSIONAIS (Refatorado para PDO) ---
 $sql = "SELECT c.id, c.nome, c.sobrenome, c.foto, COALESCE(p.nome, 'Não informada') AS nome_profissao 
         FROM cadastro c 
         LEFT JOIN profissao p ON c.id_profissao = p.id 
-        WHERE c.id != ?";
+        WHERE c.id != :userId";
 
-$params = [$userId];
-$types = "i";
+$params = [':userId' => $userId];
 
 $search_nome = $_GET['nome'] ?? '';
 $search_profissao = $_GET['profissao'] ?? '';
 
 if (!empty($search_nome)) {
-    $sql .= " AND (c.nome LIKE ? OR c.sobrenome LIKE ?)";
-    $searchTerm = "%" . $search_nome . "%";
-    array_push($params, $searchTerm, $searchTerm);
-    $types .= "ss";
+    $sql .= " AND (c.nome LIKE :searchNome OR c.sobrenome LIKE :searchNome)";
+    $params[':searchNome'] = "%" . $search_nome . "%";
 }
 
 if (!empty($search_profissao)) {
-    $sql .= " AND p.nome LIKE ?";
-    $searchTermProf = "%" . $search_profissao . "%";
-    $params[] = $searchTermProf;
-    $types .= "s";
+    $sql .= " AND p.nome LIKE :searchProfissao";
+    $params[':searchProfissao'] = "%" . $search_profissao . "%";
 }
 
 $sql .= " ORDER BY c.nome"; // Adicionado para ordenar os resultados alfabeticamente
 
-$stmt = $conn->prepare($sql);
-if ($stmt) {
-    $stmt->bind_param($types, ...$params);
-    $stmt->execute();
-    $result = $stmt->get_result();
-}
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -88,8 +86,8 @@ if ($stmt) {
     </section>
 
     <main class="professionals-grid">
-    <?php if (isset($result) && $result->num_rows > 0): ?>
-        <?php while ($professional = $result->fetch_assoc()): ?>
+    <?php if (count($professionals) > 0): ?>
+        <?php foreach ($professionals as $professional): ?>
             <div class="professional-card">
                 <?php 
                     $foto = !empty($professional['foto']) 
@@ -112,7 +110,7 @@ if ($stmt) {
                     </a>
                 </div>
             </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     <?php else: ?>
         <div class="not-found">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -122,11 +120,6 @@ if ($stmt) {
     <?php endif; ?>
     </main>
 
-    <?php
-    if (isset($stmt)) {
-        $stmt->close();
-    }
-    $conn->close();
-    ?>
 </body>
+<script src="/sistemaDeVagas/js/profissionais.js"></script>
 </html>
