@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/db_connection.php'; // Verifique se o caminho está correto
+// Alterado para usar a conexão PDO centralizada, melhorando a segurança e consistência do projeto.
+require_once __DIR__ . '/../config/db.php';
 
 // 1. VERIFICAÇÃO DE LOGIN
 if (!isset($_SESSION["user_id"])) {
@@ -11,13 +12,10 @@ if (!isset($_SESSION["user_id"])) {
 $userId = $_SESSION["user_id"];
 
 // 2. BUSCA DADOS DO USUÁRIO LOGADO (para o header)
-$stmtUser = $conn->prepare("SELECT nome, foto FROM `cadastro` WHERE id = ?");
-$stmtUser->bind_param("i", $userId);
-$stmtUser->execute();
-$resultUser = $stmtUser->get_result();
-$user = $resultUser->fetch_assoc();
-$stmtUser->close();
-$conn->close();
+$stmtUser = $pdo->prepare("SELECT nome, foto FROM `cadastro` WHERE id = ?");
+$stmtUser->execute([$userId]);
+$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+// A conexão PDO é gerenciada automaticamente.
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -33,7 +31,7 @@ $conn->close();
     <link rel="stylesheet" href="/sistemaDeVagas/css/ia.css">
     <style>
         /* Estilos para a nova seção de introdução da IA */
-        .ai-intro-section {
+        .ai-intro-section {cla
             background-color: #fdfcff;
             border-radius: 12px;
             padding: 30px 40px;
@@ -73,6 +71,21 @@ $conn->close();
             left: 0;
             top: 0;
         }
+        .ai-intro-section .intro-cta-btn {
+            background-color: #8e44ad;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .ai-intro-section .intro-cta-btn:hover {
+            background-color: #732d91;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -95,6 +108,8 @@ $conn->close();
                     <li>Cria rascunhos de cartas de apresentação personalizadas para cada vaga.</li>
                     <li>Oferece dicas sobre negociação salarial e desenvolvimento de carreira.</li>
                 </ul>
+                <br>
+                <a href="https://chatgpt.com/g/g-6809798f94e48191b2c9216afd9c478e-clara" target="_blank" class="intro-cta-btn">Conversar com a Clara</a>
             </section>
 
             <section class="ai-features-grid">
