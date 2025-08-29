@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/db_connection.php';
+// Use a conexão centralizada com o banco de dados via PDO
+require_once __DIR__ . '/../config/db.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION["user_id"])) {
@@ -9,9 +10,13 @@ if (!isset($_SESSION["user_id"])) {
 }
 $userId = $_SESSION['user_id'];
 
-// --- LÓGICA DE BUSCA DE VAGAS ---
-$params = [];
-$types = "";
+// --- BUSCA DADOS DO USUÁRIO LOGADO PARA O HEADER ---
+// Esta consulta busca o nome e a foto do usuário logado para exibição no cabeçalho.
+$stmt_user = $pdo->prepare("SELECT nome, foto FROM cadastro WHERE id = ?");
+$stmt_user->execute([$userId]);
+$user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+
+// --- LÓGICA DE BUSCA DE VAGAS (Refatorado para PDO) ---
 $sql = "SELECT v.id, v.empresa, v.cargo, v.cidade, v.carga_horaria,
                COUNT(DISTINCT i.id) as total_inscritos,
                COALESCE(SUM(CASE WHEN i.id_usuario = ? THEN 1 ELSE 0 END), 0) as ja_inscrito
@@ -19,24 +24,19 @@ $sql = "SELECT v.id, v.empresa, v.cargo, v.cidade, v.carga_horaria,
         LEFT JOIN inscricoes i ON v.id = i.id_vaga
         WHERE v.usuario_responsavel != ?";
 
-$params[] = $userId;
-$params[] = $userId;
-$types = "ii";
+$params = [$userId, $userId];
 
 $searchTerm = $_GET['vagas'] ?? '';
 if (!empty($searchTerm)) {
     $sql .= " AND v.cargo LIKE ?";
-    $likeTerm = "%" . $searchTerm . "%";
-    $params[] = $likeTerm;
-    $types .= "s";
+    $params[] = "%" . $searchTerm . "%";
 }
 
 $sql .= " GROUP BY v.id ORDER BY v.id DESC"; // Mostra as vagas mais recentes primeiro
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param($types, ...$params);
-$stmt->execute();
-$result = $stmt->get_result();
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$vagas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -70,9 +70,9 @@ $result = $stmt->get_result();
     </header>
     
     <main class="container">
-        <?php if ($result->num_rows > 0): ?>
+        <?php if (count($vagas) > 0): ?>
             <div class="job-grid">
-                <?php while ($vaga = $result->fetch_assoc()): ?>
+                <?php foreach ($vagas as $vaga): ?>
                     <div class="job-card">
                         <div class="job-card-header">
                             <h3 class="job-title"><?= htmlspecialchars($vaga["cargo"]) ?></h3>
@@ -92,7 +92,7 @@ $result = $stmt->get_result();
                             <?php endif; ?>
                         </div>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </div>
         <?php else: ?>
             <div class="not-found">
@@ -110,13 +110,6 @@ $result = $stmt->get_result();
       </div>
     </div>
 
-    <?php
-        $stmt->close();
-        $conn->close();
-    ?>
     <script src="../js/ultimasVagas.js" defer></script>
-    <script>
-        
-    </script>
 </body>
 </html>
