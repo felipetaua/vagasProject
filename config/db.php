@@ -1,10 +1,10 @@
 <?php
 // c:/xampp/htdocs/sistemaDeVagas/config/db.php
 
-$host = '127.0.0.1';
-$db   = 'jobs';
-$user = 'root'; 
-$pass = '';    
+$host = '127.0.0.1'; // ou 'localhost'
+$db   = 'jobs';      // Nome do banco de dados, conforme seu arquivo .sql
+$user = 'root';      // Usuário padrão do XAMPP
+$pass = '';          // Senha padrão do XAMPP (vazia)
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -15,9 +15,9 @@ $options = [
 ];
 
 try {
-    // Esta linha cria a variável $pdo que outros arquivos usarão
+    // Esta linha cria a variável $pdo que será usada em outros arquivos
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    // Em um ambiente de produção, é melhor logar o erro do que exibi-lo.
+    // Em um ambiente de produção, é melhor logar o erro do que exibi-lo na tela.
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
