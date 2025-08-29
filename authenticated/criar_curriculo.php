@@ -1,10 +1,8 @@
 <?php
 session_start();
-// Este require assume que você tem um arquivo db.php na raiz do projeto para conexão com o banco de dados.
-// Ex: $pdo = new PDO("mysql:host=localhost;dbname=jobs;charset=utf8mb4", 'root', '');
-require_once __DIR__ . '/../db.php';
 
-// Verifica se o usuário está logado, redireciona para a página de login caso não esteja.
+require_once __DIR__ . '/db_connection.php';
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: /sistemaDeVagas/login.php');
     exit();
@@ -18,8 +16,6 @@ $user = $stmt->fetch();
 // Lógica para processar o formulário quando enviado (método POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Aqui você implementaria a lógica para salvar os dados do currículo no banco de dados.
-    // Por exemplo, criar uma tabela 'curriculos' e inserir/atualizar os dados.
-    // Como exemplo, apenas exibimos uma mensagem de sucesso.
     $message = "Currículo salvo com sucesso! (Lógica de salvamento não implementada)";
 }
 
@@ -30,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Currículo - Conexão RH 2.0</title>
-    <link rel="stylesheet" href="/sistemaDeVagas/css/style.css"> <!-- Assumindo um CSS global -->
+    <link rel="stylesheet" href="/sistemaDeVagas/css/style.css">
     <style>
         main {
             display: flex;
