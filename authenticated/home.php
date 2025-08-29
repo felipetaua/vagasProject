@@ -12,10 +12,10 @@ $userId = $_SESSION["user_id"];
 
 // 2. BUSCA DADOS DO USUÁRIO LOGADO (para o header)
 // A consulta agora também busca id_profissao para a lógica da hero section.
-$stmtUser = $pdo->prepare("SELECT nome, foto, id_profissao FROM `cadastro` WHERE id = ?");
+$stmtUser = $pdo->prepare("SELECT nome, foto, id_profissao, tipo_usuario FROM `cadastro` WHERE id = ?");
 $stmtUser->execute([$userId]);
 $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
-
+$user['tipo_usuario'] = $user['tipo_usuario'] ?? 'colaborador'; // Define um padrão caso o campo seja nulo
 // 2.5. VERIFICA SE O USUÁRIO JÁ POSSUI CURRÍCULO
 $stmtCurriculo = $pdo->prepare("SELECT id FROM curriculos WHERE id_cadastro = ?");
 $stmtCurriculo->execute([$userId]);
@@ -87,6 +87,45 @@ $resultVagas = $pdo->query($sqlVagas)->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <a href="artificial.php" class="ai-promo-btn">Experimentar Agora</a>
         <button class="close-ai-banner" title="Fechar">&times;</button>
+    </section>
+
+    <section class="quick-access-section">
+        <h2>Acesso Rápido</h2>
+        <div class="quick-access-grid">
+            <?php if ($user['tipo_usuario'] === 'empresa'): ?>
+                <!-- Botões para Empresa -->
+                <a href="criar_vaga.php" class="quick-access-card">
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Publicar Vaga</span>
+                </a>
+                <a href="vagasCriadas.php" class="quick-access-card">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Minhas Vagas</span>
+                </a>
+                <a href="profissionais.php" class="quick-access-card">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Buscar Talentos</span>
+                </a>
+                <a href="artificial.php" class="quick-access-card">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Assistente IA</span>
+                </a>
+            <?php else: // Padrão para Colaborador ?>
+                <!-- Botões para Colaborador -->
+                <a href="criar_curriculo.php" class="quick-access-card">
+                    <i class="fa-solid fa-file-alt"></i>
+                    <span>Meu Currículo</span>
+                </a>
+                <a href="ultimasVagas.php" class="quick-access-card">
+                    <i class="fa-solid fa-search"></i>
+                    <span>Buscar Vagas</span>
+                </a>
+                <a href="artificial.php" class="quick-access-card">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Assistente IA</span>
+                </a>
+            <?php endif; ?>
+        </div>
     </section>
 
     <section class="content-section">

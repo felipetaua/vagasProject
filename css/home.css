@@ -110,6 +110,58 @@
     color: #333;
 }
 
+/* Quick Access Section */
+.quick-access-section {
+    margin-bottom: 40px;
+}
+
+.quick-access-section h2 {
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.quick-access-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #34495e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border: 1px solid #ecf0f1;
+}
+
+.quick-access-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.1);
+    color: #3498db;
+}
+
+.quick-access-card i {
+    font-size: 2.5em;
+    line-height: 1;
+}
+
+.quick-access-card span {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
 /* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
