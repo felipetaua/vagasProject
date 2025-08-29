@@ -1,5 +1,11 @@
 # Jobs
 Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. O sistema foi projetado para facilitar o processo de recrutamento e seleção de candidatos por empresas. Permite que as empresas publiquem vagas, gerenciem o processo de contratação e que os usuários se inscrevam para as vagas disponíveis, adicionem seus currículos e informações de profissão.
+
+![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/felipetaua/vagasProject)
+![GitHub last commit](https://img.shields.io/github/last-commit/felipetaua/vagasProject)
+![GitHub issues](https://img.shields.io/github/issues/felipetaua/vagasProject)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 # Recursos Principais
 <li>Publicação de Vagas: as empresas podem criar e publicar vagas, inserindo informações como título, descrição, requisitos, benefícios, localização, etc.
 <li>Gerenciamento de Vagas: as empresas podem visualizar, editar e excluir vagas de acordo com as necessidades do processo seletivo.
