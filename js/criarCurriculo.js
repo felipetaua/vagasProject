@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let experienciaIndex = 0;
-    let formacaoIndex = 0;
+    let experienciaIndex = typeof initialExperienciaCount !== 'undefined' ? initialExperienciaCount : 0;
+    let formacaoIndex = typeof initialFormacaoCount !== 'undefined' ? initialFormacaoCount : 0;
 
     // Função genérica para adicionar seções dinâmicas
     function addDynamicSection(sectionId, buttonId, templateFn, indexCounter) {
