@@ -1,22 +1,20 @@
 <?php
 session_start();
-require_once __DIR__ . '/db_connection.php';
+// Use a conexão centralizada com o banco de dados via PDO
+require_once __DIR__ . '/../config/db.php';
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: /sistemaDeVagas/login.php");
     exit;
 }
 $userId = $_SESSION["user_id"];
-
-// --- LÓGICA DE BUSCA DE DADOS ---
+// --- LÓGICA DE BUSCA DE DADOS (Refatorado para PDO) ---
 // Busca dados do usuário para o header
-$stmtUser = $conn->prepare("SELECT nome, foto FROM `cadastro` WHERE id = ?");
-$stmtUser->bind_param("i", $userId);
-$stmtUser->execute();
-$resultUser = $stmtUser->get_result();
-$user = $resultUser->fetch_assoc();
-$stmtUser->close();
+$stmtUser = $pdo->prepare("SELECT nome, foto FROM `cadastro` WHERE id = ?");
+$stmtUser->execute([$userId]);
+$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
 
+// Busca as vagas criadas pelo usuário
 $sqlVagas = "
     SELECT v.id, v.empresa, v.cargo, COUNT(i.id_vaga) AS total_inscritos
     FROM vagas v
@@ -25,12 +23,9 @@ $sqlVagas = "
     GROUP BY v.id, v.empresa, v.cargo
     ORDER BY v.id DESC
 ";
-$stmtVagas = $conn->prepare($sqlVagas);
-$stmtVagas->bind_param("i", $userId);
-$stmtVagas->execute();
-$resultVagas = $stmtVagas->get_result();
-
-// O fechamento da conexão foi movido para o final do script
+$stmtVagas = $pdo->prepare($sqlVagas);
+$stmtVagas->execute([$userId]);
+$vagas = $stmtVagas->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,6 +37,7 @@ $resultVagas = $stmtVagas->get_result();
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
     <link rel="stylesheet" href="/sistemaDeVagas/css/vagasCriadas.css">
 </head>
@@ -55,8 +51,8 @@ $resultVagas = $stmtVagas->get_result();
         </header>
 
         <section class="vagas-grid" id="vagas-container">
-            <?php if ($resultVagas->num_rows > 0): ?>
-                <?php while ($vaga = $resultVagas->fetch_assoc()): ?>
+            <?php if (count($vagas) > 0): ?>
+                <?php foreach ($vagas as $vaga): ?>
                     <div class="vaga-card">
                         <div class="card-header">
                             <h2 class="cargo"><?= htmlspecialchars($vaga['cargo']) ?></h2>
@@ -77,16 +73,12 @@ $resultVagas = $stmtVagas->get_result();
                             </button>
                         </div>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <div class="no-results">
                     <p>Você ainda não publicou nenhuma vaga.</p>
                 </div>
             <?php endif; ?>
-            <?php
-                $stmtVagas->close();
-                $conn->close();
-            ?>
         </section>
     </main>
 

@@ -13,6 +13,12 @@
     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+a {
+    color: #00A6ED;
+    text-decoration: none;
+    font-weight: 600;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background-color);
