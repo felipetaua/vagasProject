@@ -31,6 +31,49 @@ $conn->close();
     <link rel="stylesheet" href="/sistemaDeVagas/css/header.css">
 
     <link rel="stylesheet" href="/sistemaDeVagas/css/ia.css">
+    <style>
+        /* Estilos para a nova seção de introdução da IA */
+        .ai-intro-section {
+            background-color: #fdfcff;
+            border-radius: 12px;
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            border: 1px solid #e9d8f2;
+            text-align: center;
+        }
+        .ai-intro-section h2 {
+            font-size: 2em;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .ai-intro-section .intro-subtitle {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+        }
+        .ai-intro-section ul {
+            list-style: none;
+            padding-left: 0;
+            display: inline-block; /* Para centralizar a lista baseada no texto */
+            text-align: left; /* Alinha o texto dentro da lista à esquerda */
+        }
+        .ai-intro-section ul li {
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .ai-intro-section ul li::before {
+            content: '✨'; /* Usando um emoji para um toque mais amigável */
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
 </head>
 <body>
     <?php include __DIR__ . '/templates/header.php'; ?>
@@ -40,6 +83,19 @@ $conn->close();
                 <h1>Seu Assistente de Carreira IA</h1>
                 <p>Use nossa inteligência artificial para otimizar seu currículo, se preparar para entrevistas e encontrar a vaga perfeita.</p>
             </header>
+
+            <section class="ai-intro-section">
+                <h2>Quem é a Clara?</h2>
+                <p class="intro-subtitle">
+                    Clara é sua assistente pessoal de carreira, uma inteligência artificial projetada para ser sua mentora e guia no mercado de trabalho. Ela utiliza tecnologia de ponta para analisar informações, gerar conteúdo e fornecer insights que ajudam você a se destacar.
+                </p>
+                <ul>
+                    <li>Analisa seu currículo e sugere melhorias focadas em resultados.</li>
+                    <li>Simula entrevistas realistas para você praticar e ganhar confiança.</li>
+                    <li>Cria rascunhos de cartas de apresentação personalizadas para cada vaga.</li>
+                    <li>Oferece dicas sobre negociação salarial e desenvolvimento de carreira.</li>
+                </ul>
+            </section>
 
             <section class="ai-features-grid">
                 <article class="ai-feature-card">
