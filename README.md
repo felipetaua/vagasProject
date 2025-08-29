@@ -29,6 +29,16 @@ Este é um sistema de vagas desenvolvido em PHP, HTML, CSS, JavaScript e MySQL. 
       *Substitua `SEU_USUARIO` e `NOME_DO_BANCO` pelas suas credenciais. Você precisará digitar a senha quando solicitado.*
 
     - **Alternativa:** Você também pode importar o arquivo `database.sql` usando uma ferramenta gráfica como o **phpMyAdmin**, **DBeaver** ou **DataGrip**.
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/felipetaua/vagasProject.git
+    ```
+
+2.  **Navegue até o diretório do projeto:**
+    ```bash
+    cd /vagasProject/
+    ```
   <h2>Como Instalar</h2>
 <li>Clone o repositório do sistema de vagas em sua máquina local.
 <li>Configure as informações de acesso ao banco de dados no arquivo config.php.
