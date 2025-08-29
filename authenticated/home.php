@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/db_connection.php';
+require_once __DIR__ . '/../config/db.php'; // Alterado para usar a conexão PDO centralizada
 
 // 1. VERIFICAÇÃO DE LOGIN
 if (!isset($_SESSION["user_id"])) {
@@ -11,27 +11,31 @@ if (!isset($_SESSION["user_id"])) {
 $userId = $_SESSION["user_id"];
 
 // 2. BUSCA DADOS DO USUÁRIO LOGADO (para o header)
-// Usar prepared statements é uma ótima prática de segurança!
-$stmtUser = $conn->prepare("SELECT nome, foto FROM `cadastro` WHERE id = ?");
-$stmtUser->bind_param("i", $userId);
-$stmtUser->execute();
-$resultUser = $stmtUser->get_result();
-$user = $resultUser->fetch_assoc();
-$stmtUser->close();
+// A consulta agora também busca id_profissao para a lógica da hero section.
+$stmtUser = $pdo->prepare("SELECT nome, foto, id_profissao FROM `cadastro` WHERE id = ?");
+$stmtUser->execute([$userId]);
+$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
+// 2.5. VERIFICA SE O USUÁRIO JÁ POSSUI CURRÍCULO
+$stmtCurriculo = $pdo->prepare("SELECT id FROM curriculos WHERE id_cadastro = ?");
+$stmtCurriculo->execute([$userId]);
+$hasCurriculo = $stmtCurriculo->fetch() !== false;
+$hasProfissao = !empty($user['id_profissao']);
 
 // 3. BUSCA OS 5 ÚLTIMOS USUÁRIOS CADASTRADOS (SQL Otimizada)
 $sqlUsuarios = "SELECT c.id, c.foto, c.nome, COALESCE(p.nome, 'Não informado') as profissao
                 FROM `cadastro` c
                 LEFT JOIN `profissao` p ON c.id_profissao = p.id
+                WHERE c.id != ?
                 ORDER BY c.id DESC
                 LIMIT 5";
-$resultUsuarios = $conn->query($sqlUsuarios);
+$stmtUsuarios = $pdo->prepare($sqlUsuarios);
+$stmtUsuarios->execute([$userId]);
+$resultUsuarios = $stmtUsuarios->fetchAll(PDO::FETCH_ASSOC);
 
 // 4. BUSCA AS 5 ÚLTIMAS VAGAS CADASTRADAS (SQL Otimizada)
 $sqlVagas = "SELECT id, empresa, cargo FROM vagas ORDER BY id DESC LIMIT 5";
-$resultVagas = $conn->query($sqlVagas);
-
-$conn->close(); // Fechamos a conexão aqui, pois já buscamos todos os dados.
+$resultVagas = $pdo->query($sqlVagas)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,14 +58,46 @@ $conn->close(); // Fechamos a conexão aqui, pois já buscamos todos os dados.
 <?php include __DIR__ . '/templates/header.php'; ?>
 
 <main class="container">
+
+    <?php if (!$hasCurriculo): ?>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Dê o próximo passo na sua carreira!</h2>
+            <p>Seu perfil está quase pronto. Crie um currículo completo para se destacar e aumentar suas chances de ser encontrado por recrutadores.</p>
+            <a href="criar_curriculo.php" class="hero-cta-btn">Criar meu Currículo Agora</a>
+        </div>
+    </section>
+    <?php elseif (!$hasProfissao): ?>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Defina sua Profissão</h2>
+            <p>Ajude os recrutadores a encontrarem você! Selecione sua área de atuação para aparecer nas buscas e receber ofertas relevantes.</p>
+            <a href="profissao.php" class="hero-cta-btn">Escolher minha Profissão</a>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <section class="ai-promo-section" id="ai-promo-banner">
+        <div class="ai-promo-icon">
+            <i class="fa-solid fa-robot"></i>
+        </div>
+        <div class="ai-promo-content">
+            <h3>Conheça a Clara, sua assistente de IA!</h3>
+            <p>Otimize seu tempo! A Clara pode ajudar a criar descrições de vagas, analisar currículos e muito mais.</p>
+        </div>
+        <a href="artificial.php" class="ai-promo-btn">Experimentar Agora</a>
+        <button class="close-ai-banner" title="Fechar">&times;</button>
+    </section>
+
     <section class="content-section">
         <h1>Últimos Usuários</h1>
         <div class="card-list">
-            <?php if ($resultUsuarios && $resultUsuarios->num_rows > 0): ?>
-                <?php while ($usuario = $resultUsuarios->fetch_assoc()): ?>
+            <?php if ($resultUsuarios && count($resultUsuarios) > 0): ?>
+                <?php foreach ($resultUsuarios as $usuario): ?>
                     <div class="card">
                         <div class="card-info">
-                            <img src="/sistemaDeVagas/authenticated/uploads/<?= htmlspecialchars($usuario['foto']) ?>" alt="Foto de <?= htmlspecialchars($usuario['nome']) ?>" class="user-photo">
+                            <?php $foto = !empty($usuario['foto']) ? '/sistemaDeVagas/authenticated/uploads/' . htmlspecialchars($usuario['foto']) : 'https://placehold.co/80x80'; ?>
+                            <img src="<?= $foto ?>" alt="Foto de <?= htmlspecialchars($usuario['nome']) ?>" class="user-photo">
                             <div class="info-text">
                                 <span class="info-name"><?= htmlspecialchars($usuario['nome']) ?></span>
                                 <span class="info-details"><?= htmlspecialchars($usuario['profissao']) ?></span>
@@ -72,7 +108,7 @@ $conn->close(); // Fechamos a conexão aqui, pois já buscamos todos os dados.
                             <span>Baixar CV</span>
                         </a>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <p class="no-results">Nenhum usuário encontrado.</p>
             <?php endif; ?>
@@ -82,8 +118,8 @@ $conn->close(); // Fechamos a conexão aqui, pois já buscamos todos os dados.
     <section class="content-section">
         <h1>Últimas Vagas</h1>
         <div class="card-list">
-            <?php if ($resultVagas && $resultVagas->num_rows > 0): ?>
-                <?php while ($vaga = $resultVagas->fetch_assoc()): ?>
+            <?php if ($resultVagas && count($resultVagas) > 0): ?>
+                <?php foreach ($resultVagas as $vaga): ?>
                     <div class="card">
                         <div class="card-info">
                             <div class="info-text">
@@ -96,7 +132,7 @@ $conn->close(); // Fechamos a conexão aqui, pois já buscamos todos os dados.
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <p class="no-results">Nenhuma vaga encontrada.</p>
             <?php endif; ?>

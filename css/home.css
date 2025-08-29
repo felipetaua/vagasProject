@@ -1,87 +1,116 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+/* Hero Section Styles */
+.hero-section {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    padding: 50px 30px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-header{
-  border-bottom: 1px solid #033F63 ;
+.hero-content h2 {
+    margin-top: 0;
+    font-size: 2.2em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
-a{text-decoration: none;}
-
-ul{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin:10px;
-  
+.hero-content p {
+    font-size: 1.1em;
+    max-width: 650px;
+    margin: 15px auto 30px auto;
+    opacity: 0.95;
+    line-height: 1.6;
 }
 
-li img{
-  width:40px;
-  
+.hero-cta-btn {
+    background-color: #f1c40f;
+    color: #2c3e50;
+    padding: 14px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+    border-bottom: 3px solid #d8b10e;
 }
 
-li{text-decoration: none;
-list-style: none;
-display: flex;
-align-items: center;
-color:#033F63;
-font-weight: 500;}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
+.hero-cta-btn:hover {
+    background-color: #f39c12;
+    transform: translateY(-3px);
+    border-bottom-color: #c88d11;
 }
 
-.dropdown-btn {
-  border: none;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
+/* AI Promo Banner */
+.ai-promo-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-left: 5px solid #8e44ad; /* Cor roxa para destacar IA */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    position: relative;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #033F63;
-  
-  font-size:13px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 0;
-  max-width:200px;
-  width:100%;
-  display: none;
-  z-index: 1;
+.ai-promo-icon {
+    font-size: 2.5em;
+    color: #8e44ad;
 }
 
-.dropdown-menu li {
-  padding: 20px 20px;
-  color:#fff;
+.ai-promo-content {
+    flex-grow: 1;
 }
 
-.dropdown-menu li:hover {
-  
-  color:#033F63;
-  background-color: #f1f1f1;
+.ai-promo-content h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-size: 1.3em;
 }
 
-.dropdown-menu li a:hover{
-  color:#033F63;
-  
-}
-a{color:white;}
-
-.show {
-  display: block;
+.ai-promo-content p {
+    margin: 0;
+    color: #555;
+    font-size: 1em;
 }
 
+.ai-promo-btn {
+    background-color: #8e44ad;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
 
-/* --- GERAL --- */
+.ai-promo-btn:hover {
+    background-color: #732d91;
+}
+
+.close-ai-banner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-ai-banner:hover {
+    color: #333;
+}
+
+/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f4f7f6;
@@ -89,36 +118,29 @@ body {
     margin: 0;
 }
 
-/* --- LAYOUT PRINCIPAL --- */
 .container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
-    display: flex;
-    gap: 30px;
-    align-items: flex-start; /* Alinha as seções no topo */
 }
 
 .content-section {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
     padding: 25px;
-    width: 100%;
-    flex: 1; /* Faz com que as duas seções ocupem o espaço igualmente */
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .content-section h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #2c3e50;
+    font-size: 1.8em;
     margin-top: 0;
     margin-bottom: 20px;
-    border-bottom: 2px solid #e0e0e0;
+    color: #2c3e50;
+    border-bottom: 2px solid #ecf0f1;
     padding-bottom: 10px;
 }
 
-/* --- LISTA DE CARDS --- */
 .card-list {
     display: flex;
     flex-direction: column;
@@ -127,92 +149,27 @@ body {
 
 .card {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 15px;
-    border: 1px solid #e9ecef;
-    border-radius: 6px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 .card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    border-color: #dde4e6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.card-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.user-photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover; /* Garante que a imagem não fique distorcida */
-    border: 2px solid #ddd;
-}
-
-.info-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.info-name {
-    font-weight: 500;
-    color: #34495e;
-}
-
-.info-details {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-}
-
-/* --- BOTÕES DOS CARDS --- */
-.card-button {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.card-button:hover {
-    background-color: #2980b9;
-}
-
-.card-button.apply-btn {
-    background-color: #2ecc71;
-}
-.card-button.apply-btn:hover {
-    background-color: #27ae60;
-}
-
-
-/* --- MENSAGEM DE "NÃO ENCONTRADO" --- */
-.no-results {
-    color: #95a5a6;
-    text-align: center;
-    padding: 20px;
-    font-style: italic;
-}
-
-
-/* --- RESPONSIVIDADE PARA TELAS MENORES --- */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .content-section {
-        width: auto; /* Ocupa a largura total do container */
-    }
-}
+.card-info { display: flex; align-items: center; }
+.user-photo { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
+.info-text { display: flex; flex-direction: column; }
+.info-name { font-weight: 500; color: #34495e; }
+.info-details { font-size: 0.9em; color: #7f8c8d; }
+.card-button { display: flex; align-items: center; gap: 8px; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9em; transition: background-color 0.2s; }
+.download-btn { background-color: #eaf5fc; color: #3498db; }
+.download-btn:hover { background-color: #d4eaf7; }
+.apply-btn { background-color: #e9f5f1; color: #2ecc71; }
+.apply-btn:hover { background-color: #d4f0e1; }
+.no-results { color: #7f8c8d; }
