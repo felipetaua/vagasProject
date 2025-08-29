@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+/* Estilo para os blocos de experiência e formação adicionados */
+.dynamic-item {
+    background-color: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Estilo para o novo botão de remover */
+.btn-remove {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #d9534f; /* Cor vermelha para ação destrutiva */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.btn-remove:hover {
+    background-color: #c9302c;
+}
 *{
   margin: 0;
   padding: 0;

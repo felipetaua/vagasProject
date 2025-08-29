@@ -1,29 +1,19 @@
-const dropdownBtn = document.querySelector('.dropdown-btn');
-const dropdownMenu = document.querySelector('.dropdown-menu');
-
-if (dropdownBtn && dropdownMenu) {
-    dropdownBtn.addEventListener('click', (event) => {
-        event.stopPropagation(); // Impede que o clique se propague e feche o menu imediatamente.
-        dropdownMenu.classList.toggle('show');
-    });
-
-    window.addEventListener('click', (event) => {
-        if (!dropdownBtn.contains(event.target)) {
-            dropdownMenu.classList.remove('show');
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    function addDynamicField(sectionId, buttonId, template) {
-        let index = 0;
+    let experienciaIndex = 0;
+    let formacaoIndex = 0;
+
+    // Função genérica para adicionar seções dinâmicas
+    function addDynamicSection(sectionId, buttonId, templateFn, indexCounter) {
         document.getElementById(buttonId).addEventListener('click', function() {
             const container = document.getElementById(sectionId);
             const newItem = document.createElement('div');
             newItem.classList.add('dynamic-item');
-            newItem.innerHTML = template(index);
-            this.parentNode.insertBefore(newItem, this);
-            index++;
+
+            // Usa o contador correto para o tipo de seção
+            let index = sectionId.includes('experiencia') ? experienciaIndex++ : formacaoIndex++;
+
+            newItem.innerHTML = templateFn(index);
+            container.insertBefore(newItem, this); // Insere o novo item antes do botão "Adicionar"
         });
     }
 
@@ -32,14 +22,23 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="form-group"><label>Empresa</label><input type="text" name="experiencia[${index}][empresa]"></div>
         <div class="form-group"><label>Período (Ex: Jan 2020 - Dez 2022)</label><input type="text" name="experiencia[${index}][periodo]"></div>
         <div class="form-group"><label>Descrição das atividades</label><textarea name="experiencia[${index}][descricao]"></textarea></div>
+        <button type="button" class="btn-remove">Remover Experiência</button>
     `;
 
     const formacaoTemplate = index => `
         <div class="form-group"><label>Instituição de Ensino</label><input type="text" name="formacao[${index}][instituicao]"></div>
         <div class="form-group"><label>Curso</label><input type="text" name="formacao[${index}][curso]"></div>
         <div class="form-group"><label>Período (Ex: 2018 - 2022)</label><input type="text" name="formacao[${index}][periodo]"></div>
+        <button type="button" class="btn-remove">Remover Formação</button>
     `;
 
-    addDynamicField('experiencia-section', 'add-experiencia', experienciaTemplate);
-    addDynamicField('formacao-section', 'add-formacao', formacaoTemplate);
+    addDynamicSection('experiencia-section', 'add-experiencia', experienciaTemplate);
+    addDynamicSection('formacao-section', 'add-formacao', formacaoTemplate);
+
+    // Usa "event delegation" para capturar cliques nos botões de remover
+    document.querySelector('.curriculo-form').addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('btn-remove')) {
+            e.target.closest('.dynamic-item').remove(); // Remove o bloco pai do botão
+        }
+    });
 });
