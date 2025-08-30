@@ -5,6 +5,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
 
+    const tipoUsuarioToggle = document.getElementById('tipoUsuarioToggle');
+    const tipoUsuarioInput = document.getElementById('tipo_usuario');
+
+    tipoUsuarioToggle.addEventListener('change', function() {
+        if (this.checked) {
+            // Se estiver marcado, o usuário é 'empresa'
+            tipoUsuarioInput.value = 'empresa';
+        } else {
+            // Se não, é 'colaborador'
+            tipoUsuarioInput.value = 'colaborador';
+        }
+        console.log('Tipo de usuário selecionado:', tipoUsuarioInput.value); // Para teste
+    });
+
+     showTab(currentTab);
+
     showTab(currentTab);
 
     function showTab(n) {

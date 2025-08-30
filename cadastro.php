@@ -34,6 +34,15 @@
 
                 <div class="tab-content">
                     <h2>Informações de Acesso</h2>
+                    <div class="input-group-toggle">
+                        <span>Sou Colaborador</span>
+                        <label class="switch">
+                            <input type="checkbox" id="tipoUsuarioToggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Sou Empresa</span>
+                    </div>
+                    <input type="hidden" name="tipo_usuario" id="tipo_usuario" value="colaborador">
                     <div class="input-group">
                         <label for="nome">Nome</label>
                         <input type="text" placeholder="Digite seu nome" name="nome" required>
