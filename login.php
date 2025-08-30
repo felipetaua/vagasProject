@@ -17,6 +17,26 @@
                 <p>Entre com suas credenciais para continuar</p>
             </div>
 
+            <?php
+            if (isset($_GET['error'])) {
+                $error_message = '';
+                switch ($_GET['error']) {
+                    case 'emptyfields':
+                        $error_message = 'Por favor, preencha todos os campos.';
+                        break;
+                    case 'wrongcredentials':
+                        $error_message = 'E-mail ou senha incorretos.';
+                        break;
+                    case 'dberror':
+                        $error_message = 'Ocorreu um erro. Tente novamente mais tarde.';
+                        break;
+                }
+                if ($error_message) {
+                    echo '<p class="error-message">' . htmlspecialchars($error_message) . '</p>';
+                }
+            }
+        ?>
+
             <form id="loginForm" action="validaLogin.php" method="post" novalidate>
                 
                 <div class="input-group">

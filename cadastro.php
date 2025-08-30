@@ -104,7 +104,11 @@
                     <button type="button" id="prevBtn">Anterior</button>
                     <button type="button" id="nextBtn">Próximo</button>
                 </div>
+                <div class="back-to-login">
+                    <p>Já possui uma conta? <a href="login.php">Faça o login</a></p>
+                </div>
             </form>
+            
         </div>
     </div>
 

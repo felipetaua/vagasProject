@@ -293,11 +293,30 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.back-to-login {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 14px;
+}
+
+.back-to-login a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+    color: #0056b3; }
+
 
 /* --- Responsividade --- */
 @media (max-width: 992px) {
     .main-container {
-        grid-template-columns: 1fr; /* Coluna única */
+        grid-template-columns: 1fr; 
     }
     .info-column {
         min-height: 300px;
