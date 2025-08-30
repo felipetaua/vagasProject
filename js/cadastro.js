@@ -74,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputName = document.getElementById('name');
     const labelDoc = document.getElementById('label-doc');
     const inputDoc = document.getElementById('doc');
+    const candidateFields = document.getElementById('candidate-fields');
+    const dtNascimentoInput = document.getElementById('dtNascimento');
 
     function updateUserType() {
         const selectedType = document.querySelector('input[name="userType"]:checked').value;
@@ -81,19 +83,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedType === 'company') {
             labelName.textContent = 'Razão Social';
             inputName.placeholder = 'Digite a razão social';
-            inputName.name = 'razao_social';
             
             labelDoc.textContent = 'CNPJ';
             inputDoc.placeholder = '00.000.000/0000-00';
-            inputDoc.name = 'cnpj';
+
+            // Esconde campos de candidato e remove a obrigatoriedade
+            candidateFields.style.display = 'none';
+            dtNascimentoInput.required = false;
         } else { // candidate
             labelName.textContent = 'Nome Completo';
             inputName.placeholder = 'Digite seu nome completo';
-            inputName.name = 'name';
 
             labelDoc.textContent = 'CPF';
             inputDoc.placeholder = '000.000.000-00';
-            inputDoc.name = 'cpf';
+
+            // Mostra campos de candidato e define a obrigatoriedade
+            candidateFields.style.display = 'block';
+            dtNascimentoInput.required = true;
         }
         // Limpa o valor do campo de documento ao trocar o tipo
         inputDoc.value = '';
@@ -114,4 +120,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define o estado inicial dos campos dinâmicos
     updateUserType();
 });
-

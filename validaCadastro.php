@@ -63,18 +63,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt_usuario->execute();
                 $id_usuario = $conn->insert_id;
 
-                if ($userType === 'candidate') {
-                    $nome_completo = $_POST['name'] ?? null;
-                    $cpf = $_POST['cpf'] ?? null;
+                if ($userType === 'candidate') { // Se for candidato
+                    $nome_completo = $_POST['primary_name'] ?? null;
+                    $cpf = $_POST['primary_doc'] ?? null;
+                    $dtNascimento = $_POST['dtNascimento'] ?? null;
+                    $rg = $_POST['rg'] ?? null;
                     
-                    $sql_candidato = "INSERT INTO candidatos (id_usuario, id_endereco, nome_completo, cpf) VALUES (?, ?, ?, ?)";
+                    $sql_candidato = "INSERT INTO candidatos (id_usuario, id_endereco, nome_completo, cpf, data_nascimento, rg) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt_candidato = $conn->prepare($sql_candidato);
-                    $stmt_candidato->bind_param("iiss", $id_usuario, $id_endereco, $nome_completo, $cpf);
+                    $stmt_candidato->bind_param("iissss", $id_usuario, $id_endereco, $nome_completo, $cpf, $dtNascimento, $rg);
                     $stmt_candidato->execute();
 
-                } elseif ($userType === 'company') {
-                    $razao_social = $_POST['razao_social'] ?? null;
-                    $cnpj = $_POST['cnpj'] ?? null;
+                } elseif ($userType === 'company') { // Se for empresa
+                    $razao_social = $_POST['primary_name'] ?? null;
+                    $cnpj = $_POST['primary_doc'] ?? null;
 
                     $sql_empresa = "INSERT INTO empresas (id_usuario, id_endereco, razao_social, cnpj) VALUES (?, ?, ?, ?)";
                     $stmt_empresa = $conn->prepare($sql_empresa);

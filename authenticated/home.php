@@ -8,25 +8,47 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: /sistemaDeVagas/login.php");
     exit;
 }
+
 $userId = $_SESSION["user_id"];
+$userType = $_SESSION["user_type"];
 
 // 2. BUSCA DADOS DO USUÁRIO LOGADO (para o header)
-// A consulta agora também busca id_profissao para a lógica da hero section.
-$stmtUser = $pdo->prepare("SELECT nome, foto, id_profissao, tipo_usuario FROM `cadastro` WHERE id = ?");
-$stmtUser->execute([$userId]);
-$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
-$user['tipo_usuario'] = $user['tipo_usuario'] ?? 'colaborador'; // Define um padrão caso o campo seja nulo
-// 2.5. VERIFICA SE O USUÁRIO JÁ POSSUI CURRÍCULO
-$stmtCurriculo = $pdo->prepare("SELECT id FROM curriculos WHERE id_cadastro = ?");
-$stmtCurriculo->execute([$userId]);
-$hasCurriculo = $stmtCurriculo->fetch() !== false;
-$hasProfissao = !empty($user['id_profissao']);
+$user = [];
+$hasCurriculo = false;
+$hasProfissao = false;
 
-// 3. BUSCA OS 5 ÚLTIMOS USUÁRIOS CADASTRADOS (SQL Otimizada)
-$sqlUsuarios = "SELECT c.id, c.foto, c.nome, COALESCE(p.nome, 'Não informado') as profissao
-                FROM `cadastro` c
+if ($userType === 'candidato') {
+    $stmtUser = $pdo->prepare(
+        "SELECT c.nome_completo AS nome, c.foto, c.id_profissao, c.curriculo, u.tipo_usuario 
+         FROM candidatos c
+         JOIN usuarios u ON c.id_usuario = u.id
+         WHERE u.id = ?"
+    );
+    $stmtUser->execute([$userId]);
+    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $hasCurriculo = !empty($user['curriculo']);
+        $hasProfissao = !empty($user['id_profissao']);
+    }
+} elseif ($userType === 'empresa') {
+    $stmtUser = $pdo->prepare(
+        "SELECT e.razao_social AS nome, u.tipo_usuario, NULL as foto 
+         FROM empresas e
+         JOIN usuarios u ON e.id_usuario = u.id
+         WHERE u.id = ?"
+    );
+    $stmtUser->execute([$userId]);
+    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+    $hasCurriculo = true; // Banner de currículo não se aplica a empresas
+    $hasProfissao = true; // Banner de profissão não se aplica a empresas
+}
+
+// 3. BUSCA OS 5 ÚLTIMOS CANDIDATOS CADASTRADOS (SQL Otimizada)
+$sqlUsuarios = "SELECT c.id, c.nome_completo as nome, c.foto, COALESCE(p.nome, 'Não informado') as profissao
+                FROM `candidatos` c
                 LEFT JOIN `profissao` p ON c.id_profissao = p.id
-                WHERE c.id != ?
+                WHERE c.id_usuario != ?
                 ORDER BY c.id DESC
                 LIMIT 5";
 $stmtUsuarios = $pdo->prepare($sqlUsuarios);
@@ -36,6 +58,14 @@ $resultUsuarios = $stmtUsuarios->fetchAll(PDO::FETCH_ASSOC);
 // 4. BUSCA AS 5 ÚLTIMAS VAGAS CADASTRADAS (SQL Otimizada)
 $sqlVagas = "SELECT id, empresa, cargo FROM vagas ORDER BY id DESC LIMIT 5";
 $resultVagas = $pdo->query($sqlVagas)->fetchAll(PDO::FETCH_ASSOC);
+
+// Garante que $user não seja falso para evitar erros. Se for, há um problema de dados e o usuário é deslogado.
+if (!$user) {
+    error_log("Falha ao buscar dados para o user_id: $userId com tipo: $userType");
+    session_destroy();
+    header("Location: /sistemaDeVagas/login.php?error=session_error");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -92,7 +122,7 @@ $resultVagas = $pdo->query($sqlVagas)->fetchAll(PDO::FETCH_ASSOC);
     <section class="quick-access-section">
         <h2>Acesso Rápido</h2>
         <div class="quick-access-grid">
-            <?php if ($user['tipo_usuario'] === 'empresa'): ?>
+            <?php if ($userType === 'empresa'): ?>
                 <!-- Botões para Empresa -->
                 <a href="criar_vaga.php" class="quick-access-card">
                     <i class="fa-solid fa-plus-circle"></i>

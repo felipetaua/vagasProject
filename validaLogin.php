@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_type'] = $user['tipo_usuario'];
 
-            header("Location: /authenticated/home.php"); 
+            header("Location: /sistemaDeVagas/authenticated/home.php"); 
             exit();
         }
     }

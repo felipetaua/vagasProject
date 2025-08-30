@@ -46,12 +46,12 @@
                     </div>
                     <div class="input-group">
                         <label for="name" id="label-name">Nome Completo</label>
-                        <input type="text" placeholder="Digite seu nome completo" id="name" name="name" required>
+                        <input type="text" placeholder="Digite seu nome completo" id="name" name="primary_name" required>
                         <span class="error-message"></span>
                     </div>
                     <div class="input-group">
                         <label for="doc" id="label-doc">CPF</label>
-                        <input type="text" placeholder="000.000.000-00" id="doc" name="doc" required>
+                        <input type="text" placeholder="000.000.000-00" id="doc" name="primary_doc" required>
                         <span class="error-message"></span>
                     </div>
                     <div class="input-group">
@@ -78,6 +78,18 @@
                         <input type="tel" placeholder="(00) 90000-0000" name="celular" required>
                         <span class="error-message"></span>
                     </div>
+                     <div id="candidate-fields">
+                         <div class="input-group">
+                             <label for="dtNascimento">Data de Nascimento</label>
+                             <input type="date" name="dtNascimento" id="dtNascimento">
+                             <span class="error-message"></span>
+                         </div>
+                         <div class="input-group">
+                             <label for="rg">RG (Opcional)</label>
+                             <input type="text" placeholder="00.000.000-0" name="rg" id="rg">
+                             <span class="error-message"></span>
+                         </div>
+                     </div>
                     <div class="input-group">
                         <label for="zipcode">CEP</label>
                         <input type="text" id="zipcode" name="zipcode" placeholder="00000-000" required>
