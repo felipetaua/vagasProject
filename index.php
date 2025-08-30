@@ -49,19 +49,19 @@
         <nav class="nav-bar" aria-label="Menu principal">
             <ul class="linkNav">
                 <li>
-                    <a href="/" class="linkPages curadoriaLink linkPagesActive">Início</a>
+                    <a href="#" class="linkPages curadoriaLink linkPagesActive">Início</a>
                 </li>
                 <li>
-                    <a href="pages/ferramentas/ferramentas.html" class="linkPages ferramentasLink ativo">Ferramentas</a>
+                    <a href="pages/ferramentas/ferramentas.php" class="linkPages ferramentasLink ativo">Ferramentas</a>
                 </li>
                 <li>
-                    <a href="pages/sobre/sobre.html" class="linkPages">Quem Somos</a>
+                    <a href="pages/sobre/sobre.php" class="linkPages">Quem Somos</a>
                 </li>
                 <li>
-                    <a href="pages/curadoria/curadoria.html" class="linkPages">Curadoria</a>
+                    <a href="pages/curadoria/curadoria.php" class="linkPages">Curadoria</a>
                 </li>
                 <li>
-                    <a href="pages/conect/conect.html" class="linkPages">Conecte-se</a>
+                    <a href="pages/conect/conect.php" class="linkPages">Conecte-se</a>
                 </li>
             </ul>
             <a href="pages/login/login.php" class="loginNav btn-mobile" aria-hidden="true">Entrar</a>

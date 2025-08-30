@@ -21,7 +21,7 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <a href="/" class="logo link">
+        <a href="../../index.php" class="logo link">
             <img src="../../assets/images/global/RHconexao-logo.svg" alt="Logotipo da RH Conexão" class="logoEmpresa">
         </a>
 
@@ -33,14 +33,14 @@
 
         <nav class="nav-bar">
             <ul class="linkNav">
-                <li><a href="/" class="linkPages">Início</a></li>
-                <li><a href="../../pages/ferramentas/ferramentas" class="linkPages">Ferramentas</a></li>
-                <li><a href="./sobre" class="linkPages linkPagesActive ativo">Quem Somos</a></li>
-                <li><a href="../../pages/curadoria/curadoria" class="linkPages">Curadoria</a></li>
-                <li><a href="../../pages/conect/conect" class="linkPages">Conecte-se</a></li>
+                <li><a href="../../index.php" class="linkPages">Início</a></li>
+                <li><a href="../../pages/ferramentas/ferramentas.php" class="linkPages">Ferramentas</a></li>
+                <li><a href="#" class="linkPages linkPagesActive ativo">Quem Somos</a></li>
+                <li><a href="../../pages/curadoria/curadoria.php" class="linkPages">Curadoria</a></li>
+                <li><a href="../../pages/conect/conect.php" class="linkPages">Conecte-se</a></li>
             </ul>
-            <a href="../../pages/login/login.blade.php" class="loginNav btn-mobile">Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav btn-mobile">Criar Conta</a>
+            <a href="../../pages/login/login.php" class="loginNav btn-mobile">Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav btn-mobile">Criar Conta</a>
         </nav>
 
         <div class="linkAcount">
