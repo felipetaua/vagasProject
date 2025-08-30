@@ -77,7 +77,7 @@
 
 
     <div class="imagensFundo">
-        <img class="pessoa" src="assets/images/pages/index/bg-pessoa.png" alt="" loading="lazy">
+        <img class="pessoa" src="assets/images/pages/index/bg-pol.jpg" alt="" loading="lazy">
         <img class="fumaca" src="assets/images/pages/index/backgorund-fumaca.png" alt="" loading="lazy">
     </div>
 
