@@ -90,15 +90,13 @@
                 </div>
 
                 <div class="tab-content">
-                    <h2>Termos de Uso</h2>
-                    <div class="terms-box">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, illum libero pariatur incidunt culpa, ex mollitia dolore porro ducimus temporibus amet ea corporis ad optio error animi repell at sed aspernatur quod!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, saepe. Amet, reiciendis. Doloremque, molestiae.</p>
-                    </div>
-                    <div class="input-group checkbox-group">
-                        <input type="checkbox" name="termos" id="termos" required>
-                        <label for="termos">Eu li e aceito os termos de uso.</label>
-                        <span class="error-message"></span>
+                    <div class="final-message">
+                        <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="success-icon__circle" cx="26" cy="26" r="25" fill="none"/>
+                            <path class="success-icon__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                        </svg>
+                        <h2>Cadastro quase completo!</h2>
+                        <p>Agradecemos por se juntar à nossa comunidade. Clique em "Finalizar Cadastro" para completar o processo e começar a explorar as oportunidades.</p>
                     </div>
                 </div>
 

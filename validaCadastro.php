@@ -1,134 +1,106 @@
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
 <?php
+// Inicia a sessão para gerenciar mensagens e login
+session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobs";
+// Inclui seu arquivo de conexão que cria a variável $pdo
+require_once 'config/db.php';
 
+// Verifica se o formulário foi enviado (método POST)
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-
-$email = $_POST['email'];
-$sql = "SELECT id FROM cadastro WHERE email = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    echo "<div class='cadastrado'>E-mail já cadastrado!<button class='btn-cadastrado' onclick='window.history.back()'>Voltar</button></div>";
-    echo "";
-} else {
-    
-    $sql = "INSERT INTO cadastro (nome, sobrenome, email, senha, cpf, rg, dtNascimento, endereco, cidade, celular)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-   
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        die("Falha na preparação da declaração: " . $conn->error);
-    }
-
-    $stmt->bind_param("ssssssssss", $nome, $sobrenome, $email, $senha, $cpf, $rg, $dt_nascimento, $endereco, $cidade, $celular);
-
-    
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
+    // 1. Coleta e limpa os dados do formulário (sem alterações aqui)
+    $nome = trim($_POST['nome']);
+    $sobrenome = trim($_POST['sobrenome']);
+    $email = trim($_POST['email']);
     $senha = $_POST['senha'];
-    $cpf = $_POST['cpf'];
-    $rg = $_POST['rg'];
-    $dt_nascimento = $_POST['dtNascimento'];
-    $endereco = $_POST['endereco'];
-    $cidade = $_POST['cidade'];
-    $celular = $_POST['celular'];
+    $confirmaSenha = $_POST['confirmaSenha'];
+    $cpf = trim($_POST['cpf']);
+    $dtNascimento = $_POST['dtNascimento'];
+    $celular = trim($_POST['celular']);
+    $tipo_usuario = $_POST['tipo_usuario'];
+    $erros = []; 
 
- 
-    if ($stmt->execute()) {
-
-        echo "<script>setTimeout(function(){window.location.href='login.php';}, 3000);</script>";
-        echo "<div class='success'>Cadastro realizado com sucesso!</div>";
-        echo "<div class='loader'></div>";
-        echo "<div class='text'>Você será redirecionado para tela de login</div>";
-    } else {
-        echo "Erro ao cadastrar: " . $stmt->error;
+    if (empty($nome) || empty($sobrenome) || empty($email) || empty($senha) || empty($cpf) || empty($dtNascimento) || empty($celular)) {
+        $erros[] = "Todos os campos são obrigatórios.";
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erros[] = "Formato de e-mail inválido.";
+    }
+    if (strlen($senha) < 8) {
+        $erros[] = "A senha deve ter no mínimo 8 caracteres.";
+    }
+    if ($senha !== $confirmaSenha) {
+        $erros[] = "As senhas não coincidem.";
+    }
+    if ($tipo_usuario !== 'colaborador' && $tipo_usuario !== 'empresa') {
+        $erros[] = "Tipo de usuário inválido.";
     }
 
-    $stmt->close();
+    if (empty($erros)) {
+        try {
+            $sql = "SELECT id FROM cadastro WHERE email = :email";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            if ($stmt->fetch()) { // fetch() retorna um registro se encontrar, ou false se não
+                $erros[] = "Este e-mail já está cadastrado.";
+            }
+
+            $sql = "SELECT id FROM cadastro WHERE cpf = :cpf";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['cpf' => $cpf]);
+            if ($stmt->fetch()) {
+                $erros[] = "Este CPF já está cadastrado.";
+            }
+        } catch (PDOException $e) {
+            $erros[] = "Erro ao consultar o banco de dados: " . $e->getMessage();
+        }
+    }
+
+    if (empty($erros)) {
+        
+        // CRIPTOGRAFA A SENHA
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
+        // Prepara o comando SQL com "named placeholders" (ex: :nome)
+        $sql = "INSERT INTO cadastro (nome, sobrenome, email, senha, cpf, dtNascimento, celular, tipo_usuario) 
+                VALUES (:nome, :sobrenome, :email, :senha, :cpf, :dtNascimento, :celular, :tipo_usuario)";
+        
+        try {
+            $stmt = $pdo->prepare($sql);
+
+            // Executa a query passando um array associativo com os valores
+            $stmt->execute([
+                'nome' => $nome,
+                'sobrenome' => $sobrenome,
+                'email' => $email,
+                'senha' => $senha_hash,
+                'cpf' => $cpf,
+                'dtNascimento' => $dtNascimento,
+                'celular' => $celular,
+                'tipo_usuario' => $tipo_usuario
+            ]);
+
+            $_SESSION['mensagem_sucesso'] = "Cadastro realizado com sucesso! Faça o login.";
+            header("Location: login.php"); // Altere para sua página de login
+            exit();
+
+        } catch (PDOException $e) {
+            $erros[] = "Ocorreu um erro ao salvar seu cadastro: " . $e->getMessage();
+        }
+    }
+
+    if (!empty($erros)) {
+        echo "<h1>Erro no Cadastro</h1>";
+        echo "<ul>";
+        foreach ($erros as $erro) {
+            echo "<li>" . htmlspecialchars($erro) . "</li>";
+        }
+        echo "</ul>";
+        echo '<a href="cadastro.php">Voltar para o formulário</a>';
+    }
+
+} else {
+    header("Location: cadastro.php");
+    exit();
 }
-
-
-$conn->close();
 ?>
-
-
-<style>
-    .cadastrado{color:white;
-    font-size:30px;
-text-align:center;
-margin:100px auto;
-display:flex;
-justify-content:center;
-flex-direction:column;
-align-items:center;
-}
-.btn-cadastrado{
-    background:white;
-    height:40px;
-    width:150px;
-    color:black;
-    border:none;
-    border-radius:10px;
-    text-align:center;
-    margin:40px auto;
-    font-weight:600;
-    
-}
-    body{background:black;}
-    .loader {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    margin: 20px auto;
-}
-
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.success {
-    font-size:30px;
-    color: #00A6ED;
-    padding: 10px;
-    margin: 20px 0;
-    text-align: center;
-    margin-top:200px;
-    font-weight:600;
-    font-family:Roboto;
-}
-
-.text{
-    font-size:30px;
-    color: #00A6ED;
-    padding: 10px;
-    margin: 20px 0;
-    text-align: center;
-    margin-top:20px;
-    font-weight:600;
-    font-family:Roboto;
-}
-
-</style>
-
