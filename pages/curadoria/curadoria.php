@@ -19,7 +19,7 @@
 
     <!-- Header -->
     <header class="header">
-        <a href="/" class="logo link">
+        <a href="../../index.php" class="logo link">
             <img src="../../assets/images/global/RHconexao-logo.svg" alt="Logotipo da RH Conexão" class="logoEmpresa">
         </a>
 
@@ -34,29 +34,29 @@
         <nav class="nav-bar">
             <ul class="linkNav">
                 <li>
-                    <a href="/" class="linkPages curadoriaLink">Início</a>
+                    <a href="../../index.php" class="linkPages curadoriaLink">Início</a>
                 </li>
                 <li>
-                    <a href="../ferramentas/ferramentas" class="linkPages ferramentasLink ativo">Ferramentas</a>
+                    <a href="../ferramentas/ferramentas.php" class="linkPages ferramentasLink ativo">Ferramentas</a>
                 </li>
                 <li>
-                    <a href="../sobre/sobre" class="linkPages">Quem Somos</a>
+                    <a href="../sobre/sobre.php" class="linkPages">Quem Somos</a>
                 </li>
                 <li>
-                    <a href="./curadoria" class="linkPages linkPagesActive">Curadoria</a>
+                    <a href="./curadoria.php" class="linkPages linkPagesActive">Curadoria</a>
                 </li>
                 <li>
-                    <a href="../../pages/conect/conect" class="linkPages">Conecte-se</a>
+                    <a href="../../pages/conect/conect.php" class="linkPages">Conecte-se</a>
                 </li>
             </ul>
-            <a href="../../pages/login/login.blade.php" class="loginNav btn-mobile" >Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav btn-mobile">Criar</a>
+            <a href="../../pages/login/login.php" class="loginNav btn-mobile" >Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav btn-mobile">Criar</a>
         </nav>
 
         <!-- Botões de ação -->
         <div class="linkAcount">
-            <a href="../../pages/login/login.blade.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+            <a href="../../pages/login/login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
         </div>
     </header>
 
@@ -67,8 +67,8 @@
                 <h1>Bem-vindo a Sessão de Aprendizado da <span class="gradient">Curadoria</span> <br> do Conexão RH<span class="gradient"> 2.0</span></h1>
                 <p>Dicas, tendências e insights sobre gestão de pessoas, desenvolvimento profissional e futuro do trabalho. Voltado para empresas e colaboradores.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn dark">Saiba Mais</a>
-                    <a href="#" class="btn">Posts</a>
+                    <a href="#videos-podcasts" class="btn dark">PodCast</a>
+                    <a href="#tabs" class="btn">Posts</a>
                 </div>
             </div>
             <div class="hero-img">
@@ -115,7 +115,7 @@
         <div class="container">
             <h2>Em destaque para você:</h2>
             <div class="grid">
-                <a href="./lista-postagens/detalhe-e1" class="card large link">
+                <a href="./lista-postagens/detalhe-e1.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-1.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -133,7 +133,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e2" class="card large link">
+                <a href="./lista-postagens/detalhe-e2.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-2.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -151,7 +151,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e3" class="card large link">
+                <a href="./lista-postagens/detalhe-e3.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-3.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -169,7 +169,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e4" class="card large link">
+                <a href="./lista-postagens/detalhe-e4.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-4.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -187,7 +187,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e5" class="card large link">
+                <a href="./lista-postagens/detalhe-e5.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-5.webp" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -205,7 +205,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e6" class="card large link">
+                <a href="./lista-postagens/detalhe-e6.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-6.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -223,7 +223,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e7" class="card large link">
+                <a href="./lista-postagens/detalhe-e7.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-7.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -241,7 +241,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e8" class="card large link">
+                <a href="./lista-postagens/detalhe-e8.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-8.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -258,7 +258,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e9" class="card large link">
+                <a href="./lista-postagens/detalhe-e9.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-9.webp" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -276,7 +276,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e10" class="card large link">
+                <a href="./lista-postagens/detalhe-e10.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-10.webp" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -294,7 +294,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e11" class="card large link">
+                <a href="./lista-postagens/detalhe-e11.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-11.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -312,7 +312,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e12" class="card large link">
+                <a href="./lista-postagens/detalhe-e12.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-12.jpg" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -330,7 +330,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e13" class="card large link">
+                <a href="./lista-postagens/detalhe-e13.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-13.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -348,7 +348,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e14" class="card large link">
+                <a href="./lista-postagens/detalhe-e14.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-14.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -366,7 +366,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e15" class="card large link">
+                <a href="./lista-postagens/detalhe-e15.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-15.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -384,7 +384,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e16" class="card large link">
+                <a href="./lista-postagens/detalhe-e16.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-16.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -402,7 +402,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e17" class="card large link">
+                <a href="./lista-postagens/detalhe-e17.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-17.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -420,7 +420,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="./lista-postagens/detalhe-e18" class="card large link">
+                <a href="./lista-postagens/detalhe-e18.html" class="card large link">
                     <img src="../../assets/images/pages/curadoria/curadoria-18.png" alt="">
                     <div class="content">
                         <!-- Meta informações -->
@@ -443,7 +443,7 @@
     </section>
 
     <!-- Videos e podcast -->
-    <section class="section-videos-podcasts">
+    <section class="section-videos-podcasts" id="videos-podcasts">
         <div class="container">
             <h2 class="section-title"><i class="fa-solid fa-video"></i> Vídeos & Podcasts</h2>
             <p class="section-desc">Assista e ouça conteúdos exclusivos sobre RH, carreira, liderança e inovação.</p>

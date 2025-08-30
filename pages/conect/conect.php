@@ -20,7 +20,7 @@
 <body>
 
     <header class="header">
-        <a href="/" class="logo">
+        <a href="../../index.php" class="logo">
             <img src="../../assets/images/global/RHconexao-logo.svg" alt="Logotipo da RH Conexão" class="logoEmpresa">
         </a>
 
@@ -33,28 +33,28 @@
         <nav class="nav-bar">
             <ul class="linkNav">
                 <li>
-                    <a href="/" class="linkPages curadoriaLink">Início</a>
+                    <a href="../../index.php" class="linkPages curadoriaLink">Início</a>
                 </li>
                 <li>
-                    <a href="../ferramentas/ferramentas" class="linkPages ferramentasLink">Ferramentas</a>
+                    <a href="../ferramentas/ferramentas.php" class="linkPages ferramentasLink">Ferramentas</a>
                 </li>
                 <li>
-                    <a href="../sobre/sobre" class="linkPages">Quem Somos</a>
+                    <a href="../sobre/sobre.php" class="linkPages">Quem Somos</a>
                 </li>
                 <li>
-                    <a href="../../pages/curadoria/curadoria" class="linkPages">Curadoria</a>
+                    <a href="../../pages/curadoria/curadoria.php" class="linkPages">Curadoria</a>
                 </li>
                 <li>
-                    <a href="./conect" class="linkPages ativo linkPagesActive">Conecte-se</a>
+                    <a href="#" class="linkPages ativo linkPagesActive">Conecte-se</a>
                 </li>
             </ul>
-            <a href="../../pages/login/login.blade.php" class="loginNav btn-mobile" >Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav btn-mobile">Criar</a>
+            <a href="../../pages/login/login.php" class="loginNav btn-mobile" >Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav btn-mobile">Criar</a>
         </nav>
 
         <div class="linkAcount">
-            <a href="../../pages/login/login.blade.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+            <a href="../../pages/login/login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
         </div>
     </header>
 

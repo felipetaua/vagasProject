@@ -40,23 +40,23 @@
                     <a href="#" class="linkPages ferramentasLink ativo linkPagesActive">Ferramentas</a>
                 </li>
                 <li>
-                    <a href="../../pages/sobre/sobre" class="linkPages">Quem Somos</a>
+                    <a href="../../pages/sobre/sobre.php" class="linkPages">Quem Somos</a>
                 </li>
                 <li>
-                    <a href="../../pages/curadoria/curadoria" class="linkPages">Curadoria</a>
+                    <a href="../../pages/curadoria/curadoria.php" class="linkPages">Curadoria</a>
                 </li>
                 <li>
-                    <a href="../../pages/conect/conect" class="linkPages">Conecte-se</a>
+                    <a href="../../pages/conect/conect.php" class="linkPages">Conecte-se</a>
                 </li>
             </ul>
-            <a href="../../pages/login/login.blade.php" class="loginNav btn-mobile" >Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav btn-mobile">Criar</a>
+            <a href="../../pages/login/login.php" class="loginNav btn-mobile" >Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav btn-mobile">Criar</a>
         </nav>
 
         <!-- Botões de ação -->
         <div class="linkAcount">
-            <a href="../../pages/login/login.blade.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+            <a href="../../pages/login/login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../pages/register/register.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
         </div>
     </header>
 
