@@ -136,6 +136,28 @@ body {
     text-decoration: underline;
 }
 
+.home-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.home-link a {
+    color: #6c757d; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.home-link a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.home-link a i {
+    margin-right: 5px;
+}
+
+
 /* --- Responsividade para Celulares --- */
 @media (max-width: 500px) {
     .login-card {

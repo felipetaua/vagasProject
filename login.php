@@ -58,6 +58,9 @@
             <p class="cadastro-link">
                 Não tem uma conta? <a href="cadastro.php">Crie uma aqui!</a>
             </p>
+            <p class="home-link">
+                <a href="index.php"><i class="fas fa-arrow-left"></i> Voltar para a página inicial</a>
+            </p>
         </div>
     </main>
     
