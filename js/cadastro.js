@@ -1,126 +1,117 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let currentTab = 0;
-    const tabs = document.querySelectorAll(".tab-content");
-    const steps = document.querySelectorAll(".step");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+document.addEventListener('DOMContentLoaded', function() {
+    var currentTab = 0; // A aba atual é definida como a primeira (0)
 
-    showTab(currentTab);
+    // --- Lógica para formulário de múltiplos passos ---
 
     function showTab(n) {
-        // Exibe a aba atual e oculta as outras
-        tabs.forEach((tab, index) => {
-            tab.style.display = (index === n) ? "block" : "none";
-        });
+        var x = document.getElementsByClassName("tab-content");
+        if (!x[n]) return;
 
-        // Atualiza o indicador de progresso
-        updateStepIndicator(n);
-
-        // Configura os botões
-        prevBtn.style.display = (n === 0) ? "none" : "inline";
-        nextBtn.innerHTML = (n === tabs.length - 1) ? "Finalizar Cadastro" : "Próximo";
-
-        // Se for a última aba, o botão vira "submit"
-        if (n === tabs.length - 1) {
-            nextBtn.type = "submit";
+        x[n].style.display = "block";
+        
+        document.getElementById("prevBtn").style.display = (n === 0) ? "none" : "inline";
+        
+        if (n === (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Cadastrar";
         } else {
-            nextBtn.type = "button";
+            document.getElementById("nextBtn").innerHTML = "Próximo";
         }
+        
+        fixStepIndicator(n);
     }
 
-    function navigate(n) {
-        // Valida a aba atual antes de prosseguir
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("tab-content");
+        
         if (n === 1 && !validateForm()) return false;
-
-        // Esconde a aba atual e avança
-        tabs[currentTab].style.display = "none";
+        
+        x[currentTab].style.display = "none";
         currentTab = currentTab + n;
-
-        if (currentTab >= tabs.length) {
-            // Se chegou ao fim, submete o formulário
+        
+        if (currentTab >= x.length) {
             document.getElementById("regForm").submit();
             return false;
         }
+        
         showTab(currentTab);
-    }
-    
-    function updateStepIndicator(n) {
-        steps.forEach((step, index) => {
-            if (index < n) {
-                step.classList.add("active"); // Etapas passadas
-            } else if (index === n) {
-                step.classList.add("active"); // Etapa atual
-            } else {
-                step.classList.remove("active"); // Etapas futuras
-            }
-        });
     }
 
     function validateForm() {
-        let valid = true;
-        const currentTabInputs = tabs[currentTab].querySelectorAll("input[required]");
-
-        currentTabInputs.forEach(input => {
-            // Limpa erros anteriores
-            clearError(input);
-
-            // Validação genérica para campos vazios
-            if (input.value.trim() === "" && input.type !== 'checkbox') {
-                showError(input, "Este campo é obrigatório.");
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab-content");
+        y = x[currentTab].getElementsByTagName("input");
+        
+        for (i = 0; i < y.length; i++) {
+            if (y[i].required && y[i].value === "") {
+                y[i].classList.add("invalid");
                 valid = false;
+            } else {
+                y[i].classList.remove("invalid");
             }
-            // Validação para checkbox
-            if (input.type === 'checkbox' && !input.checked) {
-                showError(input, "Você precisa aceitar os termos.");
-                valid = false;
-            }
-            // Validação para email
-            if (input.type === 'email' && input.value.trim() !== "" && !isValidEmail(input.value)) {
-                showError(input, "Por favor, insira um e-mail válido.");
-                valid = false;
-            }
-            // Validação para confirmação de senha
-            if (input.name === 'confirmaSenha') {
-                const senha = document.getElementById('senha').value;
-                if (input.value !== senha) {
-                    showError(input, "As senhas não coincidem.");
-                    valid = false;
-                }
-            }
-        });
-
+        }
+        
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].classList.add("finish");
+        }
+        
         return valid;
     }
 
-    function showError(input, message) {
-        const inputGroup = input.parentElement;
-        const errorSpan = inputGroup.querySelector(".error-message");
-        input.classList.add("invalid");
-        if (errorSpan) {
-            errorSpan.textContent = message;
+    function fixStepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].classList.remove("active");
+        }
+        if (x[n]) {
+            x[n].classList.add("active");
         }
     }
 
-    function clearError(input) {
-        const inputGroup = input.parentElement;
-        const errorSpan = inputGroup.querySelector(".error-message");
-        input.classList.remove("invalid");
-        if (errorSpan) {
-            errorSpan.textContent = "";
+    // --- Lógica para campos dinâmicos (Candidato/Empresa) ---
+
+    const userTypeRadios = document.querySelectorAll('input[name="userType"]');
+    const labelName = document.getElementById('label-name');
+    const inputName = document.getElementById('name');
+    const labelDoc = document.getElementById('label-doc');
+    const inputDoc = document.getElementById('doc');
+
+    function updateUserType() {
+        const selectedType = document.querySelector('input[name="userType"]:checked').value;
+        
+        if (selectedType === 'company') {
+            labelName.textContent = 'Razão Social';
+            inputName.placeholder = 'Digite a razão social';
+            inputName.name = 'razao_social';
+            
+            labelDoc.textContent = 'CNPJ';
+            inputDoc.placeholder = '00.000.000/0000-00';
+            inputDoc.name = 'cnpj';
+        } else { // candidate
+            labelName.textContent = 'Nome Completo';
+            inputName.placeholder = 'Digite seu nome completo';
+            inputName.name = 'name';
+
+            labelDoc.textContent = 'CPF';
+            inputDoc.placeholder = '000.000.000-00';
+            inputDoc.name = 'cpf';
         }
+        // Limpa o valor do campo de documento ao trocar o tipo
+        inputDoc.value = '';
     }
 
-    function isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(String(email).toLowerCase());
-    }
+    // --- Inicialização e Eventos ---
 
-    // Adiciona os eventos aos botões
-    prevBtn.addEventListener("click", () => navigate(-1));
-    nextBtn.addEventListener("click", () => {
-        if (nextBtn.type !== 'submit') {
-            navigate(1);
-        }
-    });
+    // Exibe a primeira aba
+    showTab(currentTab);
 
+    // Adiciona eventos aos botões de navegação
+    document.getElementById('nextBtn').addEventListener('click', () => nextPrev(1));
+    document.getElementById('prevBtn').addEventListener('click', () => nextPrev(-1));
+
+    // Adiciona eventos aos seletores de tipo de usuário
+    userTypeRadios.forEach(radio => radio.addEventListener('change', updateUserType));
+
+    // Define o estado inicial dos campos dinâmicos
+    updateUserType();
 });
+
