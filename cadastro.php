@@ -35,23 +35,13 @@
                 <div class="tab-content">
                     <h2>Informações de Acesso</h2>
                     <div class="input-group">
-                        <label>Você é?</label>
-                        <div class="user-type-group">
-                            <input type="radio" id="type-candidate" name="userType" value="candidate" checked>
-                            <label for="type-candidate">Candidato</label>
-                            
-                            <input type="radio" id="type-company" name="userType" value="company">
-                            <label for="type-company">Empresa</label>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label for="name" id="label-name">Nome Completo</label>
-                        <input type="text" placeholder="Digite seu nome completo" id="name" name="primary_name" required>
+                        <label for="nome">Nome</label>
+                        <input type="text" placeholder="Digite seu nome" name="nome" required>
                         <span class="error-message"></span>
                     </div>
                     <div class="input-group">
-                        <label for="doc" id="label-doc">CPF</label>
-                        <input type="text" placeholder="000.000.000-00" id="doc" name="primary_doc" required>
+                        <label for="sobrenome">Sobrenome</label>
+                        <input type="text" placeholder="Digite seu sobrenome" name="sobrenome" required>
                         <span class="error-message"></span>
                     </div>
                     <div class="input-group">
@@ -61,58 +51,32 @@
                     </div>
                     <div class="input-group">
                         <label for="senha">Senha</label>
-                        <input type="password" placeholder="Crie uma senha forte" name="password" id="password" required>
+                        <input type="password" placeholder="Crie uma senha forte" name="senha" id="senha" required>
                         <span class="error-message"></span>
                     </div>
                     <div class="input-group">
                         <label for="confirmaSenha">Confirmar Senha</label>
-                        <input type="password" placeholder="Confirme sua senha" name="password_confirmation" required>
+                        <input type="password" placeholder="Confirme sua senha" name="confirmaSenha" required>
                         <span class="error-message"></span>
                     </div>
                 </div>
 
                 <div class="tab-content">
-                    <h2>Endereço e Contato</h2>
+                    <h2>Dados Pessoais</h2>
+                    <div class="input-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" placeholder="000.000.000-00" name="cpf" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="dtNascimento">Data de Nascimento</label>
+                        <input type="date" name="dtNascimento" required>
+                        <span class="error-message"></span>
+                    </div>
                     <div class="input-group">
                         <label for="celular">Telefone / Celular</label>
                         <input type="tel" placeholder="(00) 90000-0000" name="celular" required>
                         <span class="error-message"></span>
-                    </div>
-                     <div id="candidate-fields">
-                         <div class="input-group">
-                             <label for="dtNascimento">Data de Nascimento</label>
-                             <input type="date" name="dtNascimento" id="dtNascimento">
-                             <span class="error-message"></span>
-                         </div>
-                         <div class="input-group">
-                             <label for="rg">RG (Opcional)</label>
-                             <input type="text" placeholder="00.000.000-0" name="rg" id="rg">
-                             <span class="error-message"></span>
-                         </div>
-                     </div>
-                    <div class="input-group">
-                        <label for="zipcode">CEP</label>
-                        <input type="text" id="zipcode" name="zipcode" placeholder="00000-000" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="streetName">Rua</label>
-                        <input type="text" id="streetName" name="streetName" placeholder="Rua das Flores" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="streetNumber">Número</label>
-                        <input type="text" id="streetNumber" name="streetNumber" placeholder="123" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="district">Bairro</label>
-                        <input type="text" id="district" name="district" placeholder="Centro" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="city">Cidade</label>
-                        <input type="text" id="city" name="city" placeholder="São Paulo" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="state">Estado</label>
-                        <input type="text" id="state" name="state" placeholder="SP" required>
                     </div>
                 </div>
 

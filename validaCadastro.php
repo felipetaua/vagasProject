@@ -1,139 +1,134 @@
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
 <?php
 
-// 1. Configuração e Conexão
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "jobs";
+
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
-$conn->set_charset("utf8mb4");
 
-$status = 'error';
-$message = 'Ocorreu um erro desconhecido.';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $userType = $_POST['userType'] ?? null;
-    $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
-    $raw_password = $_POST['password'] ?? '';
-    $celular = $_POST['celular'] ?? null;
+$email = $_POST['email'];
+$sql = "SELECT id FROM cadastro WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Campos de endereço
-    $cep = $_POST['zipcode'] ?? null;
-    $rua = $_POST['streetName'] ?? null;
-    $numero = $_POST['streetNumber'] ?? null;
-    $bairro = $_POST['district'] ?? null;
-    $cidade = $_POST['city'] ?? null;
-    $estado = $_POST['state'] ?? null;
-
-    // Validação básica
-    if (empty($userType) || empty($email) || empty($raw_password)) {
-        $message = "Por favor, preencha todos os campos obrigatórios.";
-    } else {
-        // Verifica se o e-mail já existe na tabela 'usuarios'
-        $sql_check_email = "SELECT id FROM usuarios WHERE email = ?";
-        $stmt_check = $conn->prepare($sql_check_email);
-        $stmt_check->bind_param("s", $email);
-        $stmt_check->execute();
-        $result = $stmt_check->get_result();
-
-        if ($result->num_rows > 0) {
-            $status = 'exists';
-            $message = "E-mail já cadastrado!";
-        } else {
-            $conn->begin_transaction();
-
-            try {
-                $hashed_password = password_hash($raw_password, PASSWORD_DEFAULT);
-
-                $sql_endereco = "INSERT INTO enderecos (cep, rua, numero, bairro, cidade, estado) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt_endereco = $conn->prepare($sql_endereco);
-                $stmt_endereco->bind_param("ssssss", $cep, $rua, $numero, $bairro, $cidade, $estado);
-                $stmt_endereco->execute();
-                $id_endereco = $conn->insert_id;
-
-                $sql_usuario = "INSERT INTO usuarios (email, senha, celular, tipo_usuario) VALUES (?, ?, ?, ?)";
-                $stmt_usuario = $conn->prepare($sql_usuario);
-                $stmt_usuario->bind_param("ssss", $email, $hashed_password, $celular, $userType);
-                $stmt_usuario->execute();
-                $id_usuario = $conn->insert_id;
-
-                if ($userType === 'candidate') { // Se for candidato
-                    $nome_completo = $_POST['primary_name'] ?? null;
-                    $cpf = $_POST['primary_doc'] ?? null;
-                    $dtNascimento = $_POST['dtNascimento'] ?? null;
-                    $rg = $_POST['rg'] ?? null;
-                    
-                    $sql_candidato = "INSERT INTO candidatos (id_usuario, id_endereco, nome_completo, cpf, data_nascimento, rg) VALUES (?, ?, ?, ?, ?, ?)";
-                    $stmt_candidato = $conn->prepare($sql_candidato);
-                    $stmt_candidato->bind_param("iissss", $id_usuario, $id_endereco, $nome_completo, $cpf, $dtNascimento, $rg);
-                    $stmt_candidato->execute();
-
-                } elseif ($userType === 'company') { // Se for empresa
-                    $razao_social = $_POST['primary_name'] ?? null;
-                    $cnpj = $_POST['primary_doc'] ?? null;
-
-                    $sql_empresa = "INSERT INTO empresas (id_usuario, id_endereco, razao_social, cnpj) VALUES (?, ?, ?, ?)";
-                    $stmt_empresa = $conn->prepare($sql_empresa);
-                    $stmt_empresa->bind_param("iiss", $id_usuario, $id_endereco, $razao_social, $cnpj);
-                    $stmt_empresa->execute();
-                }
-
-                $conn->commit();
-                $status = 'success';
-                $message = "Cadastro realizado com sucesso!";
-
-            } catch (mysqli_sql_exception $exception) {
-                $conn->rollback();
-                $message = "Erro ao cadastrar: Ocorreu um problema ao salvar seus dados.";
-            }
-        }
-        $stmt_check->close();
-    }
+if ($result->num_rows > 0) {
+    echo "<div class='cadastrado'>E-mail já cadastrado!<button class='btn-cadastrado' onclick='window.history.back()'>Voltar</button></div>";
+    echo "";
 } else {
-    $message = "Método de requisição inválido.";
+    
+    $sql = "INSERT INTO cadastro (nome, sobrenome, email, senha, cpf, rg, dtNascimento, endereco, cidade, celular)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+   
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die("Falha na preparação da declaração: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssssssssss", $nome, $sobrenome, $email, $senha, $cpf, $rg, $dt_nascimento, $endereco, $cidade, $celular);
+
+    
+    $nome = $_POST['nome'];
+    $sobrenome = $_POST['sobrenome'];
+    $senha = $_POST['senha'];
+    $cpf = $_POST['cpf'];
+    $rg = $_POST['rg'];
+    $dt_nascimento = $_POST['dtNascimento'];
+    $endereco = $_POST['endereco'];
+    $cidade = $_POST['cidade'];
+    $celular = $_POST['celular'];
+
+ 
+    if ($stmt->execute()) {
+
+        echo "<script>setTimeout(function(){window.location.href='login.php';}, 3000);</script>";
+        echo "<div class='success'>Cadastro realizado com sucesso!</div>";
+        echo "<div class='loader'></div>";
+        echo "<div class='text'>Você será redirecionado para tela de login</div>";
+    } else {
+        echo "Erro ao cadastrar: " . $stmt->error;
+    }
+
+    $stmt->close();
 }
+
 
 $conn->close();
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Status do Cadastro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body { background: black; color: white; font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { text-align: center; }
-        .message { font-size: 30px; font-weight: 600; margin-bottom: 40px; }
-        .success { color: #00A6ED; }
-        .error { color: #e74c3c; }
-        .exists { color: #f39c12; }
-        .btn { background: white; height: 40px; width: 150px; color: black; border: none; border-radius: 10px; text-align: center; font-weight: 600; cursor: pointer; text-decoration: none; padding: 10px 20px; }
-        .loader { border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 2s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .redirect-text { font-size: 24px; color: #00A6ED; margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <?php if ($status === 'success'): ?>
-            <div class="message success"><?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></div>
-            <div class="loader"></div>
-            <div class="redirect-text">Você será redirecionado para a tela de login.</div>
-            <script>setTimeout(function(){ window.location.href = 'login.php'; }, 3000);</script>
-        <?php elseif ($status === 'exists'): ?>
-            <div class="message exists"><?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></div>
-            <button class="btn" onclick="window.history.back()">Voltar</button>
-        <?php else: ?>
-            <div class="message error"><?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></div>
-            <button class="btn" onclick="window.history.back()">Tentar Novamente</button>
-        <?php endif; ?>
-    </div>
-</body>
-</html>
+
+
+<style>
+    .cadastrado{color:white;
+    font-size:30px;
+text-align:center;
+margin:100px auto;
+display:flex;
+justify-content:center;
+flex-direction:column;
+align-items:center;
+}
+.btn-cadastrado{
+    background:white;
+    height:40px;
+    width:150px;
+    color:black;
+    border:none;
+    border-radius:10px;
+    text-align:center;
+    margin:40px auto;
+    font-weight:600;
+    
+}
+    body{background:black;}
+    .loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.success {
+    font-size:30px;
+    color: #00A6ED;
+    padding: 10px;
+    margin: 20px 0;
+    text-align: center;
+    margin-top:200px;
+    font-weight:600;
+    font-family:Roboto;
+}
+
+.text{
+    font-size:30px;
+    color: #00A6ED;
+    padding: 10px;
+    margin: 20px 0;
+    text-align: center;
+    margin-top:20px;
+    font-weight:600;
+    font-family:Roboto;
+}
+
+</style>
+
