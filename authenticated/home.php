@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/../config/db.php'; // Alterado para usar a conexão PDO centralizada
+require_once __DIR__ . '/../config/db.php'; 
 
-// 1. VERIFICAÇÃO DE LOGIN
+// VERIFICAÇÃO DE LOGIN
 if (!isset($_SESSION["user_id"])) {
     header("Location: /sistemaDeVagas/login.php");
     exit;
@@ -226,7 +226,7 @@ $(document).ready(function() {
     }
 
     $('.download-btn').on('click', function(e) {
-        e.preventDefault(); // Impede o link de navegar
+        e.preventDefault(); 
         var url = $(this).attr('href');
         console.log("Iniciando download de: " + url);
         window.location.href = url;

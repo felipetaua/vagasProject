@@ -25,8 +25,8 @@
 }
 
 .hero-cta-btn {
-    background-color: #f1c40f;
-    color: #2c3e50;
+    background-color: #fc5e00;
+    color: #f0f0f0;
     padding: 14px 30px;
     border-radius: 8px;
     text-decoration: none;
@@ -34,13 +34,13 @@
     font-size: 1.1em;
     display: inline-block;
     transition: background-color 0.3s, transform 0.3s;
-    border-bottom: 3px solid #d8b10e;
+    border-bottom: 3px solid #c43d3d;
 }
 
 .hero-cta-btn:hover {
-    background-color: #f39c12;
+    background-color: #fc3200;
     transform: translateY(-3px);
-    border-bottom-color: #c88d11;
+    border-bottom-color: #C62929;
 }
 
 /* AI Promo Banner */
@@ -50,7 +50,7 @@
     gap: 20px;
     background: #ffffff;
     border: 1px solid #e0e0e0;
-    border-left: 5px solid #8e44ad; /* Cor roxa para destacar IA */
+    border-left: 5px solid #8e44ad;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 40px;
