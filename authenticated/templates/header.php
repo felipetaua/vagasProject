@@ -59,7 +59,7 @@
                                 <a href='artificial.php'> <li>Inteligencia Artificial</li></a>
                                 <a href='curriculo.php'> <li>Currículo</li></a>
                                 <a href='/sistemaDeVagas/authenticated/profissao.php'> <li>Profissão</li></a>
-                                <a href='vagasCriadas.php'><li>Contratos</li></a>
+                                <a href='vagas_aplicadas.php'><li>Vagas Aplicadas</li></a>
                                 <a href='./logout.php'><li>Sair</li></a>
                             </ul>
                         </div>
@@ -82,7 +82,7 @@
                 </script>ref='artificial.php'> <li>Inteligencia Artificial</li></a>
                 <a href='curriculo.php'> <li>Currículo</li></a>
                 <a href='/sistemaDeVagas/authenticated/profissao.php'> <li>Profissão</li></a>
-                <a href='vagasCriadas.php'><li>Contratos</li></a>
+                <a href='vagas_aplicadas.php'><li>Vagas Aplicadas</li></a>
                 <a href='./logout.php'><li>Sair</li></a>
             </ul>
         </div>
