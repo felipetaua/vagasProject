@@ -12,39 +12,36 @@ if (!isset($_SESSION["user_id"])) {
 $userId = $_SESSION["user_id"];
 $userType = $_SESSION["user_type"];
 
-// 2. BUSCA DADOS DO USUÁRIO LOGADO (para o header)
 $user = [];
 $hasCurriculo = false;
 $hasProfissao = false;
 
-if ($userType === 'candidato') {
-    $stmtUser = $pdo->prepare(
-        "SELECT c.nome_completo AS nome, c.foto, c.id_profissao, c.curriculo, u.tipo_usuario 
-         FROM candidatos c
-         JOIN usuarios u ON c.id_usuario = u.id
-         WHERE u.id = ?"
-    );
-    $stmtUser->execute([$userId]);
-    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        $hasCurriculo = !empty($user['curriculo']);
-        $hasProfissao = !empty($user['id_profissao']);
+$stmtUser = $pdo->prepare(
+    "SELECT nome, sobrenome, foto, id_profissao, curriculo, tipo_usuario 
+     FROM cadastro
+     WHERE id = ?"
+);
+$stmtUser->execute([$userId]);
+$dbUser = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
+if ($dbUser) {
+    $user['tipo_usuario'] = $dbUser['tipo_usuario'];
+    $user['foto'] = $dbUser['foto'];
+
+    if ($dbUser['tipo_usuario'] === 'colaborador') {
+        $user['nome'] = trim($dbUser['nome'] . ' ' . $dbUser['sobrenome']);
+        $hasCurriculo = !empty($dbUser['curriculo']);
+        $hasProfissao = !empty($dbUser['id_profissao']);
+        $userType = 'candidato';
+    } elseif ($dbUser['tipo_usuario'] === 'empresa') {
+        $user['nome'] = $dbUser['nome'];
+        $hasCurriculo = true; 
+        $hasProfissao = true;
     }
-} elseif ($userType === 'empresa') {
-    $stmtUser = $pdo->prepare(
-        "SELECT e.razao_social AS nome, u.tipo_usuario, NULL as foto 
-         FROM empresas e
-         JOIN usuarios u ON e.id_usuario = u.id
-         WHERE u.id = ?"
-    );
-    $stmtUser->execute([$userId]);
-    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
-    $hasCurriculo = true; // Banner de currículo não se aplica a empresas
-    $hasProfissao = true; // Banner de profissão não se aplica a empresas
 }
 
-// 3. BUSCA OS 5 ÚLTIMOS CANDIDATOS CADASTRADOS (SQL Otimizada)
+// BUSCA OS 5 ÚLTIMOS CANDIDATOS CADASTRADOS 
 $sqlUsuarios = "SELECT c.id, c.nome_completo as nome, c.foto, COALESCE(p.nome, 'Não informado') as profissao
                 FROM `candidatos` c
                 LEFT JOIN `profissao` p ON c.id_profissao = p.id
@@ -55,7 +52,7 @@ $stmtUsuarios = $pdo->prepare($sqlUsuarios);
 $stmtUsuarios->execute([$userId]);
 $resultUsuarios = $stmtUsuarios->fetchAll(PDO::FETCH_ASSOC);
 
-// 4. BUSCA AS 5 ÚLTIMAS VAGAS CADASTRADAS (SQL Otimizada)
+// BUSCA AS 5 ÚLTIMAS VAGAS CADASTRADAS 
 $sqlVagas = "SELECT id, empresa, cargo FROM vagas ORDER BY id DESC LIMIT 5";
 $resultVagas = $pdo->query($sqlVagas)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -124,7 +121,7 @@ if (!$user) {
         <div class="quick-access-grid">
             <?php if ($userType === 'empresa'): ?>
                 <!-- Botões para Empresa -->
-                <a href="criar_vaga.php" class="quick-access-card">
+                <a href="cadastroVagas.php" class="quick-access-card">
                     <i class="fa-solid fa-plus-circle"></i>
                     <span>Publicar Vaga</span>
                 </a>
