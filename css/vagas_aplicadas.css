@@ -1,0 +1,147 @@
+/* assets/css/pages/vagas_aplicadas.css */
+
+.main-content {
+    padding: 40px 20px;
+    background-color: var(--background-color, #f8f9fa);
+    min-height: calc(100vh - 70px); /* 70px é a altura do header */
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--text-dark, #1e1e1e);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.page-description {
+    font-size: 1.1rem;
+    color: var(--text-light, #7a7a7a);
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Lista de candidaturas */
+.applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.application-card {
+    background-color: var(--white-color, #fff);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--primary-color, #2E62C2);
+}
+
+.application-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color, #e5e5e5);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.job-title {
+    font-size: 1.5rem;
+    color: var(--primary-color, #2E62C2);
+    font-weight: 600;
+    margin: 0;
+}
+
+.application-date {
+    font-size: 0.9rem;
+    color: var(--text-light, #7a7a7a);
+    background-color: var(--background-color, #f8f9fa);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.card-body p {
+    margin: 0 0 10px;
+    color: var(--text-dark, #1e1e1e);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-body p i {
+    color: var(--primary-color, #2E62C2);
+    width: 20px;
+    text-align: center;
+}
+
+.card-footer {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color, #2E62C2);
+    border: 2px solid var(--primary-color, #2E62C2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color, #2E62C2);
+    color: var(--white-color, #fff);
+}
+
+/* Mensagem de "Nenhuma candidatura" */
+.no-applications {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--white-color, #fff);
+    border-radius: 12px;
+    border: 2px dashed var(--border-color, #e5e5e5);
+}
+
+.no-applications-img {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.no-applications h2 {
+    font-size: 1.8rem;
+    color: var(--text-dark, #1e1e1e);
+    margin-bottom: 10px;
+}
+
+.no-applications p {
+    color: var(--text-light, #7a7a7a);
+    margin-bottom: 25px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
