@@ -39,13 +39,13 @@
                 <li><a href="../../pages/curadoria/curadoria.php" class="linkPages">Curadoria</a></li>
                 <li><a href="../../pages/conect/conect.php" class="linkPages">Conecte-se</a></li>
             </ul>
-            <a href="../../pages/login/login.php" class="loginNav btn-mobile">Entrar</a>
-            <a href="../../pages/register/register.php" class="SingninNav btn-mobile">Criar Conta</a>
+            <a href="../../login.php" class="loginNav btn-mobile">Entrar</a>
+            <a href="../../cadastro.php" class="SingninNav btn-mobile">Criar Conta</a>
         </nav>
 
         <div class="linkAcount">
-            <a href="../../pages/login/login.blade.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="../../pages/register/register.blade.php" class="SingninNav actionBtnNav btn">Criar Conta</a>
+            <a href="../../login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../cadastro.php" class="SingninNav actionBtnNav btn">Criar Conta</a>
         </div>
     </header>
 

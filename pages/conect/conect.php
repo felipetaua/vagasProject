@@ -48,13 +48,13 @@
                     <a href="#" class="linkPages ativo linkPagesActive">Conecte-se</a>
                 </li>
             </ul>
-            <a href="../../pages/login/login.php" class="loginNav btn-mobile" >Entrar</a>
-            <a href="../../pages/register/register.php" class="SingninNav btn-mobile">Criar</a>
+            <a href="../../login.php" class="loginNav btn-mobile" >Entrar</a>
+            <a href=".../../cadastro.php" class="SingninNav btn-mobile">Criar</a>
         </nav>
 
         <div class="linkAcount">
-            <a href="../../pages/login/login.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="../../pages/register/register.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+            <a href="../../login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../cadastro.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
         </div>
     </header>
 

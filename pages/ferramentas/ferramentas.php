@@ -55,8 +55,8 @@
 
         <!-- Botões de ação -->
         <div class="linkAcount">
-            <a href="../../pages/login/login.php" class="loginNav actionBtnNav btn">Entrar</a>
-            <a href="../../pages/register/register.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
+            <a href="../../login.php" class="loginNav actionBtnNav btn">Entrar</a>
+            <a href="../../cadastro.php" class="SingninNav actionBtnNav btn">Crie sua Conta</a>
         </div>
     </header>
 
