@@ -265,7 +265,7 @@
                 <p>Saiba mais sobre o projeto e descubra como podemos contribuir para o seu desenvolvimento profissional!</p>
 
                 <div class="footer-social-media">
-                    <a href="https://www.instagram.com/" class="footer-link instagram" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+                    <a href="https://www.instagram.com/rh.conexao.2.0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="footer-link instagram" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
 

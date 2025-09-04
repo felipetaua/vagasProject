@@ -136,6 +136,12 @@
             <div class="gallery-item">
             <img src="../../assets/images/pages/sobre/team/pessoa-6.jpg" alt="Foto da turma 5">
             </div>
+            <div class="gallery-item">
+            <img src="../../assets/images/pages/sobre/team/grupo-1.jpg" alt="Foto da turma 5">
+            </div>
+            <div class="gallery-item">
+            <img src="../../assets/images/pages/sobre/team/grupo-2.jpg" alt="Foto da turma 5">
+            </div>
         </div>
         <div class="gallery-grid">
             <div class="carrossel">
