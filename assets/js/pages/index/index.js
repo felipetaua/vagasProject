@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected) {
             const title = selected.querySelector('h3').innerText.toLowerCase();
             if (title.includes('colaborador')) {
-                window.location.href = '/pages/register/register.blade.php';
+                window.location.href = 'cadastro.php';
             } else if (title.includes('empresa')) {
-                window.location.href = '/pages/register/register.blade.php';
+                window.location.href = 'cadastro.php';
             } else {
                 alert(`Você selecionou: ${selected.querySelector('h3').innerText}`);
             }
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             document.body.classList.add('fade-out');
             setTimeout(() => {
-                window.location.href = 'pages/register.html/register.html';
+                window.location.href = 'cadastro.php';
             }, 500); 
         });
     });
