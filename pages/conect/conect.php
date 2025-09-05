@@ -96,7 +96,7 @@
             <div class="text-content">
                 <h2 class="section-title">Para <span class="gradient-blue">Colaboradores</span></h2>
                 <p class="section-subtitle">Descubra como podemos impulsionar sua carreira e conectar você às melhores oportunidades do mercado.</p>
-                <a href="../../pages/register/register" class="btn-main">Criar Perfil de Talento</a>
+                <a href="../../cadastro.php" class="btn-main">Criar Perfil de Talento</a>
             </div>
             <div class="cards-container">
                 <div class="advantage-card">
@@ -129,7 +129,7 @@
             <div class="text-content">
                 <h2 class="section-title">Para <span class="gradient-blue">Empresas</span></h2>
                 <p class="section-subtitle">Encontre os talentos ideais para sua equipe e otimize seu processo de recrutamento com nossas ferramentas inteligentes.</p>
-                <a href="../../pages/register/register" class="btn-main">Anunciar Vaga</a>
+                <a href="../../cadastro.php" class="btn-main">Anunciar Vaga</a>
             </div>
             <div class="cards-container">
                 <div class="advantage-card">
@@ -257,7 +257,7 @@
 
     <!-- Botão flutuante de voltar ao topo -->
     <button id="backToTopBtn" aria-label="Voltar ao topo">
-        <i class="fa fa-arrow-up"></i>ass="fa fa-arrow-up"></i>
+        <i class="fa fa-arrow-up"></i>
     </button>  
 
 </body>

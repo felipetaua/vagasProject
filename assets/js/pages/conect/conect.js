@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (connectBtn) {
         connectBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.location.href = '../../pages/register.html/register.html';
+            window.location.href = '../../cadastro.php';
         });
     }
 });
